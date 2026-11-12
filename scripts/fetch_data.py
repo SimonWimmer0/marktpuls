@@ -303,6 +303,9 @@ def load_news() -> list[dict]:
                 continue
             if not any(w in title.lower() for w in MARKET_WORDS):
                 continue
+            # Einzelaktien-Meldungen und Analystenkommentare gehören nicht in den Marktüberblick
+            if re.search(r"-aktie|aktie:|aktie [a-zäöü]+:|kursziel|analyse:|-analyse|stuft .* (ein|auf)|bewertet .* mit", title.lower()):
+                continue
             seen.add(key)
             try:
                 when = dt.datetime(*e.published_parsed[:6], tzinfo=dt.timezone.utc).isoformat()
