@@ -179,7 +179,7 @@ def analyse(s: pd.Series) -> dict:
         "3J": pct(last, value_at(s, 365 * 3)) if (s.index[-1] - s.index[0]).days > 365 * 3 - 10 else None,
         "5J": pct(last, value_at(s, 365 * 5)) if (s.index[-1] - s.index[0]).days > 365 * 5 - 10 else None,
     }
-    daily = year.iloc[-260:]
+    daily = s.iloc[-272:]
     weekly = s.resample("W-FRI").last().dropna()
     return {
         "last": r(last, 4),
@@ -375,8 +375,6 @@ def build(prices: dict, fund: dict, news: list[dict], demo=False) -> dict:
         if sym not in prices:
             continue
         a = analyse(prices[sym])
-        a.pop("weekly")
-        a["daily"] = a["daily"][-130:]
         macro[mid] = {"id": mid, "name": name, "symbol": sym, "unit": unit, "dec": dec,
                       "group": group, **a}
     if "us10" in macro and "us3m" in macro:

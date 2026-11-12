@@ -2,14 +2,18 @@
 (async function () {
   "use strict";
   const $ = (s, el = document) => el.querySelector(s);
+  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const LOC = "de-AT";
-  const nf = (d) => new Intl.NumberFormat(LOC, { minimumFractionDigits: d, maximumFractionDigits: d });
+  const nfCache = {};
+  const nf = (d) => (nfCache[d] ||= new Intl.NumberFormat(LOC, { minimumFractionDigits: d, maximumFractionDigits: d }));
   const fmt = (v, d = 2) => (v == null || isNaN(v) ? "–" : nf(d).format(v));
-  const fmtP = (v, d = 1) => (v == null ? "–" : (v > 0 ? "+" : v < 0 ? "−" : "") + nf(d).format(Math.abs(v)) + " %");
+  const fmtP = (v, d = 1) => (v == null || isNaN(v) ? "–" : (v > 0 ? "+" : v < 0 ? "−" : "") + nf(d).format(Math.abs(v)) + " %");
   const cls = (v) => (v == null ? "" : v >= 0 ? "up" : "down");
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const pxDec = (v) => (v >= 1000 ? 0 : v >= 10 ? 2 : 4);
-  const safeStore = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
+  const pxDec = (v) => (Math.abs(v) >= 1000 ? 0 : Math.abs(v) >= 10 ? 2 : 4);
+  const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} } };
+  const dShort = (iso, withYear) => new Date(iso).toLocaleDateString(LOC, { day: "2-digit", month: "short", year: withYear ? "2-digit" : undefined });
+  const dTime = (iso) => new Date(iso).toLocaleString(LOC, { timeZone: "Europe/Vienna", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
 
   let data = window.__DATA__;
   if (!data) {
@@ -18,263 +22,317 @@
   }
   const I = data.indices || [];
   const M = data.macro || {};
-  const byId = Object.fromEntries(I.map((x) => [x.id, x]));
-  const state = { range: safeStore.get("mp-range") || "1J", region: "Alle", sel: safeStore.get("mp-sel") || "atx", sortKey: null, sortDir: -1, secPeriod: "1M" };
-  if (!byId[state.sel]) state.sel = I[0]?.id;
+  const ALL = {};
+  I.forEach((x) => (ALL[x.id] = { ...x, kind: "index", dec: pxDec(x.last) }));
+  Object.values(M).forEach((m) => (ALL[m.id] = { ...m, kind: "macro" }));
+  const RANGES = ["1M", "3M", "6M", "YTD", "1J", "5J"];
+  const state = {
+    range: RANGES.includes(store.get("mp-range")) ? store.get("mp-range") : "1J",
+    dlgRange: "1J", dlgId: null, dlgList: [],
+    sortKey: null, sortDir: -1, tableMode: "Entwicklung", secPeriod: "1M",
+  };
 
   /* ---------- Datenstand ---------- */
   const gen = new Date(data.generated);
-  const ageH = (Date.now() - gen) / 36e5;
-  const genTxt = gen.toLocaleString(LOC, { timeZone: "Europe/Vienna", day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" });
-  $("#stamp-time").textContent = genTxt + " Uhr";
-  $("#foot-stamp").textContent = genTxt + " Uhr (Wien)";
-  if (ageH > 36) $("#stamp-dot").classList.add("stale");
+  const genTxt = gen.toLocaleString(LOC, { timeZone: "Europe/Vienna", day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }) + " Uhr";
+  $("#stamp-time").textContent = genTxt;
+  $("#foot-stamp").textContent = genTxt;
+  if ((Date.now() - gen) / 36e5 > 36) $("#stamp-dot").classList.add("stale");
   if (data.demo) $("#demo-banner").hidden = false;
-  const today = gen.toLocaleDateString(LOC, { timeZone: "Europe/Vienna", weekday: "long", day: "numeric", month: "long", year: "numeric" });
-  $("#hero-date").textContent = today;
+  $("#hero-date").textContent = gen.toLocaleDateString(LOC, { timeZone: "Europe/Vienna", weekday: "long", day: "numeric", month: "long", year: "numeric" });
 
   /* ---------- Serien ---------- */
   function series(x, range) {
     const d = x.daily || [];
-    if (range === "5J") return x.weekly || d;
-    if (range === "1J") return d;
-    if (range === "YTD") { const y = d.length ? d[d.length - 1][0].slice(0, 4) : ""; const s = d.filter((p) => p[0].slice(0, 4) === y); return s.length > 1 ? s : d.slice(-5); }
-    const n = { "1M": 22, "3M": 64, "6M": 128 }[range] || d.length;
-    return d.slice(-n);
+    if (range === "5J") {
+      const w = x.weekly && x.weekly.length > 2 ? x.weekly : d;
+      const from = new Date(w[w.length - 1][0]); from.setFullYear(from.getFullYear() - 5);
+      const iso = from.toISOString().slice(0, 10);
+      return w.filter((p) => p[0] >= iso);
+    }
+    if (!d.length) return d;
+    // Start = letzter Schlusskurs am oder vor dem Stichtag (wie bei den Kennzahlen)
+    let cut;
+    if (range === "YTD") cut = d[d.length - 1][0].slice(0, 4) + "-01-01";
+    else { const t = new Date(d[d.length - 1][0]); t.setDate(t.getDate() - { "1M": 30, "3M": 91, "6M": 182, "1J": 365 }[range]); cut = t.toISOString().slice(0, 10); }
+    let i = 0; while (i < d.length - 1 && d[i + 1][0] <= cut) i++;
+    if (range === "YTD" && d[i][0] >= cut && i > 0) i--;
+    return d.slice(i);
   }
-  const rangePerf = (x, range) => ({ "1M": x.perf["1M"], "3M": x.perf["3M"], "6M": null, YTD: x.perf.YTD, "1J": x.perf["1J"], "5J": x.perf["5J"] }[range]);
-  function seriesPerf(s) { return s.length > 1 ? (s[s.length - 1][1] / s[0][1] - 1) * 100 : null; }
+  const seriesPerf = (s) => (s.length > 1 ? (s[s.length - 1][1] / s[0][1] - 1) * 100 : null);
+  const rangePerf = (x, range, s) => x.perf?.[range] ?? seriesPerf(s);
+  // Bei Angst-Barometern ist ein Anstieg schlecht: Farbe umdrehen
+  const inverse = (x) => x.id === "vix" || x.id === "vstoxx";
+  const chgCls = (x, v) => (v == null ? "" : inverse(x) ? cls(-v) : cls(v));
 
-  /* ---------- Sparkline ---------- */
-  function spark(s, w = 240, h = 46, colorVar) {
-    if (!s || s.length < 2) return `<svg viewBox="0 0 ${w} ${h}"></svg>`;
+  function spark(s, colorVar) {
+    const w = 240, h = 60;
+    if (!s || s.length < 2) return `<svg class="sp" viewBox="0 0 ${w} ${h}"></svg>`;
     const v = s.map((p) => p[1]);
     const mn = Math.min(...v), mx = Math.max(...v), rg = mx - mn || 1;
-    const pts = v.map((y, i) => [(i / (v.length - 1)) * w, h - 3 - ((y - mn) / rg) * (h - 6)]);
+    const pts = v.map((y, i) => [(i / (v.length - 1)) * w, h - 4 - ((y - mn) / rg) * (h - 8)]);
     const line = pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1)).join("");
-    const up = v[v.length - 1] >= v[0];
-    const col = colorVar || (up ? "var(--up)" : "var(--down)");
-    const last = pts[pts.length - 1];
-    return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true">
+    const col = colorVar || (v[v.length - 1] >= v[0] ? "var(--up)" : "var(--down)");
+    return `<svg class="sp" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true">
       <path d="${line}L${w} ${h}L0 ${h}Z" fill="${col}" fill-opacity=".1"/>
-      <path d="${line}" fill="none" stroke="${col}" stroke-width="1.6" vector-effect="non-scaling-stroke"/>
-      <circle cx="${last[0]}" cy="${last[1]}" r="2.4" fill="${col}"/></svg>`;
+      <path d="${line}" fill="none" stroke="${col}" stroke-width="1.8" vector-effect="non-scaling-stroke"/></svg>`;
   }
+  const ZOOM = `<svg class="zoom" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M9.5 2H14v4.5M14 2L9 7M6.5 14H2V9.5M2 14l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
-  /* ---------- Laufband ---------- */
-  (function ticker() {
-    const items = [...I.map((x) => [x.name, x.last, x.perf["1T"]]), ...Object.values(M).filter((m) => m.daily).map((m) => [m.name.replace(/ \(.*\)/, ""), m.last, m.perf["1T"]])];
-    const html = items.map(([n, l, c]) => `<span><b>${esc(n)}</b>${fmt(l, pxDec(l))} <span class="${cls(c)}-t" style="color:${c >= 0 ? "#3fcf8e" : "#ff7a68"}">${fmtP(c, 2)}</span></span>`).join("");
-    $("#ticker").innerHTML = html + html;
-  })();
-
-  /* ---------- Stimmung ---------- */
-  (function hero() {
-    const m = data.mood || { score: 50, label: "Neutral", components: [] };
-    const g = $("#gauge");
-    const W = 300, R = 120, cx = 150, cy = 140;
-    const pt = (s, r = R) => { const a = Math.PI * (1 - s / 100); return [cx + r * Math.cos(a), cy - r * Math.sin(a)]; };
-    const arc = (a, b, col) => { const [x1, y1] = pt(a), [x2, y2] = pt(b); return `<path d="M${x1} ${y1}A${R} ${R} 0 0 1 ${x2} ${y2}" stroke="${col}" stroke-width="20" fill="none"/>`; };
-    const segs = [[0, 20, "#c23a2b"], [20, 40, "#e8833a"], [40, 60, "#a8a69a"], [60, 80, "#7fbf6a"], [80, 100, "#0f9b5f"]];
-    const [nx, ny] = pt(m.score, R - 30);
-    const labels = [["Angst", cx - R], ["Gier", cx + R]].map(([t, x]) => `<text x="${x}" y="${cy + 24}" text-anchor="middle" fill="#c9c7bb" font-size="12">${t}</text>`).join("");
-    g.innerHTML = `<svg viewBox="0 0 ${W} 170" class="gauge" role="img" aria-label="Marktstimmung ${m.score} von 100: ${esc(m.label)}">
-      ${segs.map((s) => arc(s[0] + 0.6, s[1] - 0.6, s[2])).join("")}
-      <line x1="${cx}" y1="${cy}" x2="${nx}" y2="${ny}" stroke="#ffe600" stroke-width="4" stroke-linecap="round"/>
-      <circle cx="${cx}" cy="${cy}" r="8" fill="#ffe600"/>${labels}</svg>
-      <div class="gauge-label"><strong>${m.score}</strong><span>${esc(m.label)}</span></div>`;
-    const h = data.moodHistory || [];
-    const ago = (days) => { const t = new Date(gen); t.setDate(t.getDate() - days); const iso = t.toISOString().slice(0, 10); const c = h.filter((x) => x.date <= iso); return c.length ? c[c.length - 1].mood : null; };
-    const w1 = ago(7), m1 = ago(30);
-    $("#gauge-hist").textContent = [w1 != null ? `Vor 1 Woche: ${w1}` : null, m1 != null ? `Vor 1 Monat: ${m1}` : null].filter(Boolean).join(" · ") || "Verlauf wird ab heute täglich aufgezeichnet";
-    $("#comp").innerHTML = m.components.map((c) => `<div title="${esc(c.text)}"><span>${esc(c.name)}</span><em>${fmt(c.value, 1)}</em><i class="bar"><b style="width:${c.score}%"></b></i></div>`).join("");
-
-    const k = [["spx", "S&P 500"], ["dax", "DAX"], ["atx", "ATX"], ["sx5e", "Euro Stoxx 50"]].filter(([id]) => byId[id]).map(([id, n]) => [n, byId[id].last, byId[id].perf["1T"], 0]);
-    const mk = [["vix", "VIX"], ["eurusd", "EUR/USD"], ["gold", "Gold $"], ["us10", "US 10J %"]].filter(([id]) => M[id]).map(([id, n]) => [n, M[id].last, M[id].perf["1T"], M[id].dec, id === "vix"]);
-    $("#kpis").innerHTML = [...k, ...mk].map(([n, v, c, d, inv]) => `<div class="kpi"><div class="k">${esc(n)}</div><div class="v num">${fmt(v, d || pxDec(v))}</div><div class="c ${cls(inv && c != null ? -c : c)}">${fmtP(c, 2)} heute</div></div>`).join("");
-
-    // Kurzfazit in Worten
-    const up = I.filter((x) => x.perf["1T"] > 0).length;
-    const best = [...I].sort((a, b) => (b.perf.YTD ?? -999) - (a.perf.YTD ?? -999))[0];
-    const topRisk = (data.risks || [])[0];
-    $("#lead").innerHTML = `${up} von ${I.length} Indizes liegen heute im Plus. Stärkster Markt seit Jahresbeginn: <b>${esc(best?.name)}</b> (${fmtP(best?.perf.YTD)}).` +
-      (M.vix ? ` Der VIX steht bei <b>${fmt(M.vix.last, 1)}</b>${M.vix.last < 15 ? " (ruhiges Umfeld)" : M.vix.last < 22 ? " (normales Umfeld)" : M.vix.last < 30 ? " (erhöhte Nervosität)" : " (Stressphase)"}.` : "") +
-      (topRisk && topRisk.count ? ` Meistdiskutiertes Risiko in den Nachrichten: <b>${esc(topRisk.name)}</b>.` : "");
-  })();
-
-  /* ---------- Index-Kacheln ---------- */
-  const regions = ["Alle", ...new Set(I.map((x) => x.region))];
   function segButtons(el, opts, cur, cb) {
     el.innerHTML = opts.map((o) => `<button type="button" aria-pressed="${o === cur}" data-v="${esc(o)}">${esc(o)}</button>`).join("");
     el.onclick = (e) => { const b = e.target.closest("button"); if (!b) return; [...el.children].forEach((c) => c.setAttribute("aria-pressed", c === b)); cb(b.dataset.v); };
   }
-  segButtons($("#seg-region"), regions, state.region, (v) => { state.region = v; renderCards(); });
-  segButtons($("#seg-range"), ["1M", "3M", "6M", "YTD", "1J", "5J"], state.range, (v) => { state.range = v; safeStore.set("mp-range", v); renderCards(); renderDetail(); });
 
-  function renderCards() {
-    const list = I.filter((x) => state.region === "Alle" || x.region === state.region);
-    $("#cards").innerHTML = list.map((x) => {
-      const s = series(x, state.range); const p = seriesPerf(s);
-      return `<button type="button" class="card" data-id="${x.id}" aria-pressed="${x.id === state.sel}">
-        <div class="row"><span class="nm">${x.flag} ${esc(x.name)}</span><span class="rg">${esc(x.region)}</span></div>
-        <div class="row"><span class="px num">${fmt(x.last, pxDec(x.last))}</span><span class="chg ${cls(x.perf["1T"])} num">${fmtP(x.perf["1T"], 2)}</span></div>
-        ${spark(s)}
-        <div class="mini"><span>${state.range} <b class="${cls(p)}-t">${fmtP(p)}</b></span><span>KGV <b>${fmt(x.pe, 1)}</b></span><span>Div. <b>${x.divYield != null ? fmt(x.divYield, 1) + " %" : "–"}</b></span></div>
-      </button>`;
+  /* ---------- Kacheln ---------- */
+  function indexCard(x, range) {
+    const s = series(x, range), p = rangePerf(x, range, s);
+    return `<button type="button" class="card" data-open="${x.id}" aria-label="${esc(x.name)}: Chart groß öffnen">
+      <div class="row"><span class="nm">${x.flag} ${esc(x.name)}</span>${ZOOM}</div>
+      <div class="row"><span class="px num">${fmt(x.last, pxDec(x.last))}</span><span class="chg ${cls(x.perf["1T"])} num">${fmtP(x.perf["1T"], 2)}</span></div>
+      ${spark(s)}
+      <div class="cap">${range === "1J" ? "1 Jahr" : range === "5J" ? "5 Jahre" : range === "YTD" ? "Seit Jahresbeginn" : range.replace("M", " Monat" + (range === "1M" ? "" : "e"))} <b class="${cls(p)}-t num">${fmtP(p)}</b></div>
+    </button>`;
+  }
+  function macroTile(m, withSpark = true) {
+    const note = m.id === "curve" ? (m.last < 0 ? "Invertiert: historisch ein Rezessionssignal" : "Normal (positiv)")
+      : m.id === "vix" ? (m.last < 15 ? "Ruhiges Umfeld" : m.last < 22 ? "Normales Umfeld" : m.last < 30 ? "Erhöhte Nervosität" : "Stressphase") : "";
+    const inner = `<div class="row"><span class="nm">${esc(m.name)}</span>${m.perf?.["1T"] != null ? `<span class="chg ${chgCls(m, m.perf["1T"])} num">${fmtP(m.perf["1T"], 2)}</span>` : ""}</div>
+      <div class="v num">${fmt(m.last, m.dec)} <small>${esc(m.unit)}</small></div>
+      ${withSpark && m.daily ? spark(m.daily.slice(-130), "var(--muted)") : ""}${note ? `<div class="note">${note}</div>` : ""}`;
+    return m.daily ? `<button type="button" class="tile" data-open="${m.id}" aria-label="${esc(m.name)}: Chart groß öffnen">${inner}</button>` : `<div class="tile">${inner}</div>`;
+  }
+  const LT = ["kein Thema", "niedrig", "erhöht", "hoch"];
+  const lvl = (r) => `<span class="lvl-box"><span class="lvl" data-l="${r.level}"><i></i><i></i><i></i></span><span class="lvl-t">${LT[r.level]}</span></span>`;
+
+  /* ---------- Überblick ---------- */
+  (function overview() {
+    const m = data.mood || { score: 50, label: "Neutral", components: [] };
+    const R = 120, cx = 150, cy = 140;
+    const pt = (s, r = R) => { const a = Math.PI * (1 - s / 100); return [cx + r * Math.cos(a), cy - r * Math.sin(a)]; };
+    const arc = (a, b, col) => { const [x1, y1] = pt(a), [x2, y2] = pt(b); return `<path d="M${x1} ${y1}A${R} ${R} 0 0 1 ${x2} ${y2}" stroke="${col}" stroke-width="20" fill="none"/>`; };
+    const segs = [[0, 20, "#c23a2b"], [20, 40, "#e8833a"], [40, 60, "#a8a69a"], [60, 80, "#7fbf6a"], [80, 100, "#0f9b5f"]];
+    const [nx, ny] = pt(m.score, R - 30);
+    $("#gauge").innerHTML = `<svg viewBox="0 0 300 172" class="gauge" role="img" aria-label="Marktstimmung ${m.score} von 100: ${esc(m.label)}">
+      ${segs.map((s) => arc(s[0] + 0.6, s[1] - 0.6, s[2])).join("")}
+      <line x1="${cx}" y1="${cy}" x2="${nx}" y2="${ny}" stroke="#ffe600" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="${cx}" cy="${cy}" r="8" fill="#ffe600"/>
+      <text x="${cx - R}" y="${cy + 24}" text-anchor="middle" fill="#c9c7bb" font-size="12">Angst</text>
+      <text x="${cx + R}" y="${cy + 24}" text-anchor="middle" fill="#c9c7bb" font-size="12">Gier</text></svg>
+      <div class="gauge-label"><strong>${m.score}</strong><span>${esc(m.label)}</span></div>`;
+    const h = data.moodHistory || [];
+    const ago = (days) => { const t = new Date(gen); t.setDate(t.getDate() - days); const iso = t.toISOString().slice(0, 10); const c = h.filter((x) => x.date <= iso); return c.length ? c[c.length - 1].mood : null; };
+    const w1 = ago(7), m1 = ago(30);
+    $("#gauge-hist").textContent = [w1 != null ? `Vor 1 Woche: ${w1}` : null, m1 != null ? `Vor 1 Monat: ${m1}` : null].filter(Boolean).join(" · ");
+    $("#comp").innerHTML = m.components.map((c) => `<div title="${esc(c.text)}"><span>${esc(c.name)}</span><em class="num">${fmt(c.value, 1)}</em><i class="bar"><b style="width:${c.score}%"></b></i></div>`).join("");
+
+    const up = I.filter((x) => x.perf["1T"] > 0).length;
+    const best = [...I].sort((a, b) => (b.perf.YTD ?? -999) - (a.perf.YTD ?? -999))[0];
+    const topRisk = (data.risks || [])[0];
+    $("#hero-title").textContent = up > I.length * 0.65 ? "Die Märkte liegen heute überwiegend im Plus" : up < I.length * 0.35 ? "Die Märkte liegen heute überwiegend im Minus" : "Die Märkte zeigen heute ein gemischtes Bild";
+    $("#lead").innerHTML = `${up} von ${I.length} Indizes notieren im Plus. Stärkster Markt seit Jahresbeginn ist <b>${esc(best?.name)}</b> mit ${fmtP(best?.perf.YTD)}.` +
+      (topRisk && topRisk.count ? ` In den Nachrichten dominiert das Thema <b>${esc(topRisk.name)}</b>.` : "");
+
+    const key = ["atx", "dax", "sx5e", "spx", "ndx", "nikkei"].filter((id) => ALL[id]);
+    $("#key-cards").innerHTML = key.map((id) => indexCard(ALL[id], "1J")).join("");
+    $("#key-cards").dataset.list = key.join(",");
+    const km = ["vix", "us10", "eurusd", "gold", "brent", "btc"].filter((id) => M[id]);
+    $("#key-macro").innerHTML = km.map((id) => macroTile(M[id], false)).join("");
+    $("#key-macro").dataset.list = km.join(",");
+    $("#key-risks").innerHTML = (data.risks || []).filter((r) => r.count).slice(0, 3).map((r) =>
+      `<div class="toprisk"><div class="row"><b>${esc(r.name)}</b>${lvl(r)}</div>${r.headlines[0] ? `<p>${esc(r.headlines[0].title)}</p>` : ""}</div>`).join("") || `<p class="foot-note">Derzeit keine auffälligen Risikothemen in den Schlagzeilen.</p>`;
+  })();
+
+  /* ---------- Indizes ---------- */
+  segButtons($("#seg-range"), RANGES, state.range, (v) => { state.range = v; store.set("mp-range", v); renderIndices(); });
+  function renderIndices() {
+    const regions = [...new Set(I.map((x) => x.region))];
+    $("#index-groups").innerHTML = regions.map((rg) => {
+      const list = I.filter((x) => x.region === rg);
+      return `<h3 class="group-title">${esc(rg)}</h3><div class="cards" data-list="${list.map((x) => x.id).join(",")}">${list.map((x) => indexCard(x, state.range)).join("")}</div>`;
     }).join("");
   }
-  $("#cards").addEventListener("click", (e) => {
-    const c = e.target.closest(".card"); if (!c) return;
-    state.sel = c.dataset.id; safeStore.set("mp-sel", state.sel);
-    [...$("#cards").children].forEach((k) => k.setAttribute("aria-pressed", k === c));
-    renderDetail();
-  });
 
-  /* ---------- Detail-Chart ---------- */
-  function bigChart(svg, s, tipEl) {
-    const W = 800, H = 300, L = 8, Rr = 62, T = 12, B = 26;
-    if (!s || s.length < 2) { svg.innerHTML = ""; return; }
-    const v = s.map((p) => p[1]);
-    let mn = Math.min(...v), mx = Math.max(...v); const pad = (mx - mn) * 0.08 || 1; mn -= pad; mx += pad;
-    const X = (i) => L + (i / (s.length - 1)) * (W - L - Rr), Y = (y) => T + (1 - (y - mn) / (mx - mn)) * (H - T - B);
-    const line = s.map((p, i) => (i ? "L" : "M") + X(i).toFixed(1) + " " + Y(p[1]).toFixed(1)).join("");
-    // Achsen: 5 runde Ticks
-    const step = niceStep((mx - mn) / 4); const ticks = []; for (let t = Math.ceil(mn / step) * step; t <= mx; t += step) ticks.push(t);
-    const d = step >= 1 ? 0 : step >= 0.1 ? 1 : step >= 0.01 ? 2 : 4;
-    const grid = ticks.map((t) => `<line x1="${L}" x2="${W - Rr}" y1="${Y(t)}" y2="${Y(t)}" stroke="var(--grid)"/><text x="${W - Rr + 8}" y="${Y(t) + 4}" fill="var(--muted)" font-size="11">${fmt(t, d)}</text>`).join("");
-    const nX = 5; const xl = []; for (let k = 0; k < nX; k++) { const i = Math.round((k / (nX - 1)) * (s.length - 1)); const dt = new Date(s[i][0]); xl.push(`<text x="${X(i)}" y="${H - 6}" fill="var(--muted)" font-size="11" text-anchor="${k === 0 ? "start" : k === nX - 1 ? "end" : "middle"}">${dt.toLocaleDateString(LOC, { day: "2-digit", month: "short", year: s.length > 200 || state.range === "5J" ? "2-digit" : undefined })}</text>`); }
-    const lx = X(s.length - 1), ly = Y(v[v.length - 1]);
-    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
-    svg.innerHTML = `${grid}<path d="${line}L${X(s.length - 1)} ${H - B}L${L} ${H - B}Z" fill="var(--chart-fill)"/>
-      <path d="${line}" fill="none" stroke="var(--chart)" stroke-width="2" stroke-linejoin="round"/>
-      <circle cx="${lx}" cy="${ly}" r="4.5" fill="var(--chart)" stroke="var(--surface)" stroke-width="2"/>
-      ${xl.join("")}<line id="hov" x1="0" x2="0" y1="${T}" y2="${H - B}" stroke="var(--muted)" stroke-dasharray="3 3" visibility="hidden"/>
-      <circle id="hovd" r="4" fill="var(--chart)" visibility="hidden"/>`;
-    const hov = svg.querySelector("#hov"), hovd = svg.querySelector("#hovd");
-    svg.onpointermove = (e) => {
-      const r = svg.getBoundingClientRect(); const fx = ((e.clientX - r.left) / r.width) * W;
-      const i = Math.max(0, Math.min(s.length - 1, Math.round(((fx - L) / (W - L - Rr)) * (s.length - 1))));
-      const x = X(i), y = Y(s[i][1]);
-      hov.setAttribute("x1", x); hov.setAttribute("x2", x); hov.setAttribute("visibility", "visible");
-      hovd.setAttribute("cx", x); hovd.setAttribute("cy", y); hovd.setAttribute("visibility", "visible");
-      const ch = (s[i][1] / s[0][1] - 1) * 100;
-      tipEl.hidden = false; tipEl.style.left = (x / W) * r.width + "px"; tipEl.style.top = (y / H) * r.height + "px";
-      tipEl.textContent = `${new Date(s[i][0]).toLocaleDateString(LOC)} · ${fmt(s[i][1], pxDec(s[i][1]))} · ${fmtP(ch)}`;
-    };
-    svg.onpointerleave = () => { hov.setAttribute("visibility", "hidden"); hovd.setAttribute("visibility", "hidden"); tipEl.hidden = true; };
+  /* ---------- Vergleich ---------- */
+  const scaleOf = { "1T": 2, "1W": 4, "1M": 8, "3M": 12, YTD: 20, "1J": 25, "3J": 50, "5J": 80 };
+  const heatBg = (v, scale) => (v == null ? "" : `background:color-mix(in srgb, var(${v >= 0 ? "--up" : "--down"}) ${(Math.min(1, Math.abs(v) / scale) * 40 + 5).toFixed(0)}%, var(--surface));`);
+  const TABLE = {
+    Entwicklung: [["name", "Index"], ["last", "Stand"], ["1T", "1 Tag"], ["1W", "1 Woche"], ["1M", "1 Monat"], ["YTD", "Seit 1.1."], ["1J", "1 Jahr"], ["5J", "5 Jahre"]],
+    Kennzahlen: [["name", "Index"], ["pe", "KGV"], ["divYield", "Dividende"], ["pb", "KBV"], ["vol30", "Volatilität"], ["rsi14", "RSI"], ["vsSma200", "zur 200-Tage-Linie"], ["range", "52-Wochen-Spanne"]],
+  };
+  const NOTES = {
+    Entwicklung: "Grün steht für Gewinne, Rot für Verluste, je kräftiger die Farbe, desto größer die Bewegung.",
+    Kennzahlen: "KGV, Dividendenrendite und KBV stammen aus einem ETF auf den jeweiligen Markt. Volatilität: Schwankung der letzten 30 Handelstage, aufs Jahr gerechnet. RSI über 70 gilt als überkauft, unter 30 als überverkauft.",
+  };
+  const rangePos = (x) => (x.high52 > x.low52 ? ((x.last - x.low52) / (x.high52 - x.low52)) * 100 : 50);
+  const val = (x, k) => (k in x.perf ? x.perf[k] : k === "range" ? rangePos(x) : x[k]);
+  function cell(x, k) {
+    if (k === "name") return `<td>${x.flag} <b>${esc(x.name)}</b></td>`;
+    if (k === "last") return `<td class="num">${fmt(x.last, pxDec(x.last))}</td>`;
+    if (k in scaleOf) return `<td class="num heat" style="${heatBg(x.perf[k], scaleOf[k])}">${fmtP(x.perf[k])}</td>`;
+    if (k === "pe") return `<td class="num">${fmt(x.pe, 1)}</td>`;
+    if (k === "divYield") return `<td class="num">${x.divYield != null ? fmt(x.divYield, 2) + " %" : "–"}</td>`;
+    if (k === "pb") return `<td class="num">${fmt(x.pb, 2)}</td>`;
+    if (k === "vol30") return `<td class="num">${x.vol30 != null ? fmt(x.vol30, 1) + " %" : "–"}</td>`;
+    if (k === "rsi14") return `<td class="num">${fmt(x.rsi14, 0)}${x.rsi14 >= 70 ? " · überkauft" : x.rsi14 <= 30 ? " · überverkauft" : ""}</td>`;
+    if (k === "vsSma200") return `<td class="num ${cls(x.vsSma200)}-t">${fmtP(x.vsSma200)}</td>`;
+    if (k === "range") return `<td><span class="mrange" title="${fmt(x.low52, 0)} bis ${fmt(x.high52, 0)}"><i style="left:calc(${Math.max(0, Math.min(100, rangePos(x))).toFixed(0)}% - 1px)"></i></span></td>`;
+    return "<td></td>";
   }
-  function niceStep(x) { const p = Math.pow(10, Math.floor(Math.log10(x))); const f = x / p; return (f < 1.5 ? 1 : f < 3 ? 2 : f < 7 ? 5 : 10) * p; }
-
-  function renderDetail() {
-    const x = byId[state.sel]; if (!x) return;
-    const s = series(x, state.range), p = seriesPerf(s);
-    $("#d-name").textContent = `${x.flag} ${x.name}`;
-    $("#d-sub").textContent = `${x.region} · Symbol ${x.symbol} · Stand ${new Date(x.date).toLocaleDateString(LOC)}`;
-    $("#d-px").innerHTML = `<strong class="num">${fmt(x.last, pxDec(x.last))}</strong><span class="chg ${cls(x.perf["1T"])}">${fmtP(x.perf["1T"], 2)} heute</span><span class="chg ${cls(p)}">${fmtP(p)} im Zeitraum ${state.range}</span>`;
-    bigChart($("#d-chart"), s, $("#d-tip"));
-    const pos = x.high52 > x.low52 ? ((x.last - x.low52) / (x.high52 - x.low52)) * 100 : 50;
-    const rsiTxt = x.rsi14 == null ? "" : x.rsi14 >= 70 ? " überkauft" : x.rsi14 <= 30 ? " überverkauft" : "";
-    $("#d-facts").innerHTML = `
-      <div><span>KGV (trailing)</span><b>${fmt(x.pe, 1)}</b></div>
-      <div><span>Dividendenrendite</span><b>${x.divYield != null ? fmt(x.divYield, 2) + " %" : "–"}</b></div>
-      <div><span>Kurs-Buchwert (KBV)</span><b>${fmt(x.pb, 2)}</b></div>
-      <div><span>Volatilität 30 T (p. a.)</span><b>${x.vol30 != null ? fmt(x.vol30, 1) + " %" : "–"}</b></div>
-      <div><span>RSI 14</span><b>${fmt(x.rsi14, 0)}${rsiTxt}</b></div>
-      <div><span>Abstand 200-Tage-Linie</span><b class="${cls(x.vsSma200)}-t">${fmtP(x.vsSma200)}</b></div>
-      <div><span>Abstand 52-W-Hoch</span><b class="${cls(x.distHigh52)}-t">${fmtP(x.distHigh52)}</b></div>
-      <div><span>Max. Rückgang 1 J</span><b class="down-t">${fmtP(x.maxDD1J)}</b></div>
-      <div style="display:block"><span>52-Wochen-Spanne</span>
-        <div class="range"><i style="left:${pos.toFixed(1)}%"></i></div>
-        <div class="range-l num"><span>${fmt(x.low52, pxDec(x.low52))}</span><span>${fmt(x.high52, pxDec(x.high52))}</span></div></div>
-      <div><span>Bewertung via ETF</span><b><span class="tag">${esc(x.proxy)}</span></b></div>`;
-  }
-
-  /* ---------- Vergleichstabelle ---------- */
-  const COLS = [
-    ["name", "Index"], ["last", "Stand"], ["1T", "1 T"], ["1W", "1 W"], ["1M", "1 M"], ["YTD", "YTD"], ["1J", "1 J"], ["5J", "5 J"],
-    ["pe", "KGV"], ["divYield", "Div. %"], ["vol30", "Vola 30T"], ["rsi14", "RSI"], ["vsSma200", "vs. 200T"], ["range", "52-W-Spanne"],
-  ];
-  const val = (x, k) => (k in x.perf ? x.perf[k] : k === "range" ? (x.last - x.low52) / (x.high52 - x.low52 || 1) : x[k]);
-  function heatBg(v, scale) {
-    if (v == null) return "";
-    const a = Math.min(1, Math.abs(v) / scale) * 42 + 6;
-    return `background:color-mix(in srgb, var(${v >= 0 ? "--up" : "--down"}) ${a.toFixed(0)}%, var(--surface));`;
-  }
-  const scaleOf = { "1T": 2, "1W": 4, "1M": 8, YTD: 20, "1J": 25, "5J": 80, "3M": 12, "3J": 50 };
+  segButtons($("#seg-table"), Object.keys(TABLE), state.tableMode, (v) => { state.tableMode = v; state.sortKey = null; renderTable(); });
   function renderTable() {
+    const cols = TABLE[state.tableMode];
     const rows = [...I];
-    if (state.sortKey) rows.sort((a, b) => { const va = val(a, state.sortKey), vb = val(b, state.sortKey); if (typeof va === "string") return va.localeCompare(vb) * state.sortDir; return ((va ?? -1e9) - (vb ?? -1e9)) * state.sortDir; });
-    $("#tbl thead").innerHTML = "<tr>" + COLS.map(([k, n]) => `<th scope="col" data-k="${k}" ${state.sortKey === k ? `aria-sort="${state.sortDir > 0 ? "ascending" : "descending"}"` : ""}>${n}</th>`).join("") + "</tr>";
-    $("#tbl tbody").innerHTML = rows.map((x) => {
-      const pos = ((x.last - x.low52) / (x.high52 - x.low52 || 1)) * 100;
-      return `<tr><td>${x.flag} <b>${esc(x.name)}</b></td><td class="num">${fmt(x.last, pxDec(x.last))}</td>` +
-        ["1T", "1W", "1M", "YTD", "1J", "5J"].map((k) => `<td class="num heat" style="${heatBg(x.perf[k], scaleOf[k])}">${fmtP(x.perf[k])}</td>`).join("") +
-        `<td class="num">${fmt(x.pe, 1)}</td><td class="num">${fmt(x.divYield, 2)}</td><td class="num">${x.vol30 != null ? fmt(x.vol30, 1) + " %" : "–"}</td>` +
-        `<td class="num ${x.rsi14 >= 70 ? "down-t" : x.rsi14 <= 30 ? "up-t" : ""}">${fmt(x.rsi14, 0)}</td><td class="num ${cls(x.vsSma200)}-t">${fmtP(x.vsSma200)}</td>` +
-        `<td><span class="mrange" title="${fmt(x.low52, 0)} – ${fmt(x.high52, 0)}"><i style="left:calc(${Math.max(0, Math.min(100, pos)).toFixed(0)}% - 1px)"></i></span></td></tr>`;
-    }).join("");
+    if (state.sortKey) rows.sort((a, b) => { const va = val(a, state.sortKey), vb = val(b, state.sortKey); return typeof va === "string" ? va.localeCompare(vb) * state.sortDir : ((va ?? -1e9) - (vb ?? -1e9)) * state.sortDir; });
+    $("#tbl thead").innerHTML = "<tr>" + cols.map(([k, n]) => `<th scope="col" data-k="${k}" ${state.sortKey === k ? `aria-sort="${state.sortDir > 0 ? "ascending" : "descending"}"` : ""}>${n}</th>`).join("") + "</tr>";
+    $("#tbl tbody").innerHTML = rows.map((x) => `<tr data-open="${x.id}">${cols.map(([k]) => cell(x, k)).join("")}</tr>`).join("");
+    $("#tbl tbody").dataset.list = rows.map((x) => x.id).join(",");
+    $("#tbl-note").textContent = NOTES[state.tableMode];
   }
   $("#tbl thead").addEventListener("click", (e) => {
     const th = e.target.closest("th"); if (!th) return;
     const k = th.dataset.k; if (state.sortKey === k) state.sortDir *= -1; else { state.sortKey = k; state.sortDir = k === "name" ? 1 : -1; }
     renderTable();
   });
-
-  /* ---------- Heatmap ---------- */
-  (function heatmap() {
-    const P = ["1T", "1W", "1M", "3M", "YTD", "1J", "3J", "5J"];
-    let h = `<div class="hm-grid"><div class="h"></div>${P.map((p) => `<div class="h">${p}</div>`).join("")}`;
-    for (const x of I) h += `<div class="n">${x.flag} ${esc(x.name)}</div>` + P.map((p) => `<div class="num" style="${heatBg(x.perf[p], scaleOf[p])}">${fmtP(x.perf[p])}</div>`).join("");
-    $("#heatmap").innerHTML = h + "</div>";
-  })();
-
-  /* ---------- Sektoren ---------- */
   segButtons($("#seg-sec"), ["1T", "1W", "1M", "YTD", "1J"], state.secPeriod, (v) => { state.secPeriod = v; renderSectors(); });
   function renderSectors() {
     const p = state.secPeriod; const S = [...(data.sectors || [])].sort((a, b) => (b.perf[p] ?? 0) - (a.perf[p] ?? 0));
-    $("#sectors").innerHTML = S.map((s) => `<div class="sector" style="${heatBg(s.perf[p], scaleOf[p])}"><b>${esc(s.name)}</b><span class="num">${fmtP(s.perf[p])}</span></div>`).join("") || "<p>Keine Sektordaten.</p>";
+    $("#sectors").innerHTML = S.map((s) => `<div class="sector" style="${heatBg(s.perf[p], scaleOf[p])}"><b>${esc(s.name)}</b><span class="num">${fmtP(s.perf[p])}</span></div>`).join("");
   }
 
-  /* ---------- Makro ---------- */
+  /* ---------- Umfeld ---------- */
   (function macro() {
-    const order = ["Volatilität", "Zinsen", "Währungen", "Rohstoffe", "Krypto"];
-    const list = Object.values(M).sort((a, b) => order.indexOf(a.group) - order.indexOf(b.group));
-    $("#macro").innerHTML = list.map((m) => {
-      const note = m.id === "curve" ? (m.last < 0 ? "Invertiert: historisch ein Rezessionssignal" : "Normal (positiv)") : m.id === "vix" ? (m.last < 15 ? "Ruhig" : m.last < 22 ? "Normal" : m.last < 30 ? "Erhöht" : "Stress") : `1 M ${fmtP(m.perf?.["1M"])} · YTD ${fmtP(m.perf?.YTD)}`;
-      const inv = m.id === "vix" || m.id === "vstoxx";
-      return `<div class="mc"><div class="g">${esc(m.group)}</div><div class="row"><span class="nm">${esc(m.name)}</span>${m.perf?.["1T"] != null ? `<span class="chg ${inv ? (m.perf["1T"] >= 0 ? "down" : "up") : cls(m.perf["1T"])}">${fmtP(m.perf["1T"], 2)}</span>` : ""}</div>
-        <div class="v num">${fmt(m.last, m.dec)} <small style="font-size:12px;color:var(--muted)">${esc(m.unit)}</small></div>
-        ${m.daily ? spark(m.daily, 200, 34, "var(--muted)") : ""}<div class="note">${note}</div></div>`;
+    const groups = ["Volatilität", "Zinsen", "Währungen", "Rohstoffe", "Krypto"];
+    $("#macro-groups").innerHTML = groups.map((g) => {
+      const list = Object.values(M).filter((m) => m.group === g); if (!list.length) return "";
+      return `<h3 class="group-title">${esc(g)}</h3><div class="tiles" data-list="${list.filter((m) => m.daily).map((m) => m.id).join(",")}">${list.map((m) => macroTile(m)).join("")}</div>`;
     }).join("");
   })();
 
-  /* ---------- Risiko-Radar ---------- */
+  /* ---------- Risiken ---------- */
   (function risks() {
     const R = data.risks || [];
-    const LT = ["kein Thema", "niedrig", "erhöht", "hoch"];
-    $("#risks").innerHTML = R.map((r, i) => `<details class="risk" ${i < 2 ? "open" : ""}><summary><span class="t">${esc(r.name)}</span><span class="cnt">${r.count} ${r.count === 1 ? "Meldung" : "Meldungen"}</span>
-      <span style="display:flex;align-items:center;gap:8px"><span class="lvl" data-l="${r.level}"><i></i><i></i><i></i></span><span class="lvl-t">${LT[r.level]}</span></span></summary>
-      ${r.headlines.length ? `<ul>${r.headlines.map((h) => `<li><a href="${esc(h.link)}" target="_blank" rel="noopener">${esc(h.title)}</a><small>${esc(h.source)}${h.date ? " · " + new Date(h.date).toLocaleString(LOC, { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }) : ""}</small></li>`).join("")}</ul>` : `<ul><li><small>Derzeit keine relevanten Schlagzeilen.</small></li></ul>`}</details>`).join("");
-    // Radar
+    $("#risks").innerHTML = R.map((r, i) => `<details class="risk" ${i === 0 ? "open" : ""}><summary><span class="t">${esc(r.name)}</span><span class="cnt">${r.count} ${r.count === 1 ? "Meldung" : "Meldungen"}</span>${lvl(r)}</summary>
+      <ul>${r.headlines.length ? r.headlines.map((h) => `<li><a href="${esc(h.link)}" target="_blank" rel="noopener">${esc(h.title)}</a><small>${esc(h.source)}${h.date ? " · " + dTime(h.date) : ""}</small></li>`).join("") : "<li><small>Derzeit keine relevanten Schlagzeilen.</small></li>"}</ul></details>`).join("");
     const n = R.length; if (n < 3) return;
     const cx = 170, cy = 165, rad = 112, mx = Math.max(...R.map((r) => r.score || 0), 1);
     const P = (i, f) => { const a = -Math.PI / 2 + (i / n) * 2 * Math.PI; return [cx + Math.cos(a) * rad * f, cy + Math.sin(a) * rad * f]; };
     let g = "";
     for (const f of [0.25, 0.5, 0.75, 1]) g += `<polygon points="${R.map((_, i) => P(i, f).join(",")).join(" ")}" fill="none" stroke="var(--line)"/>`;
-    R.forEach((r, i) => { const [x, y] = P(i, 1); g += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="var(--line)"/>`; const [lx, ly] = P(i, 1.2); g += `<text x="${lx}" y="${ly + 4}" text-anchor="${Math.abs(lx - cx) < 10 ? "middle" : lx < cx ? "end" : "start"}" font-size="11" fill="var(--muted)">${esc(r.name.split(" ")[0])}</text>`; });
+    R.forEach((r, i) => { const [x, y] = P(i, 1); g += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="var(--line)"/>`; const [lx, ly] = P(i, 1.2); g += `<text x="${lx}" y="${ly + 4}" text-anchor="${Math.abs(lx - cx) < 10 ? "middle" : lx < cx ? "end" : "start"}" font-size="12" fill="var(--muted)">${esc(r.name.split(" ")[0])}</text>`; });
     const poly = R.map((r, i) => P(i, 0.08 + 0.92 * ((r.score || 0) / mx)).join(",")).join(" ");
-    $("#radar").innerHTML = `<svg viewBox="-35 0 410 330" class="radar" role="img" aria-label="Risiko-Radar">${g}<polygon points="${poly}" fill="var(--yellow)" fill-opacity=".55" stroke="var(--fg)" stroke-width="1.5"/></svg>`;
+    $("#radar").innerHTML = `<svg viewBox="-45 0 430 330" class="radar" role="img" aria-label="Risiko-Radar">${g}<polygon points="${poly}" fill="var(--yellow)" fill-opacity=".55" stroke="var(--fg)" stroke-width="1.5"/></svg>`;
+    const N = (data.news || []).slice(0, 12);
+    $("#news").innerHTML = N.map((h) => `<a href="${esc(h.link)}" target="_blank" rel="noopener"><b>${esc(h.title)}</b><small>${esc(h.source)}${h.date ? " · " + dTime(h.date) : ""}</small></a>`).join("");
   })();
 
-  /* ---------- Schlagzeilen ---------- */
-  (function news() {
-    const N = (data.news || []).slice(0, 24);
-    $("#news").innerHTML = N.map((h) => `<a href="${esc(h.link)}" target="_blank" rel="noopener"><b>${esc(h.title)}</b><small>${esc(h.source)}${h.date ? " · " + new Date(h.date).toLocaleString(LOC, { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }) : ""}</small></a>`).join("") || "<p>Keine Schlagzeilen verfügbar.</p>";
-  })();
+  /* ---------- Großer Chart (Dialog) ---------- */
+  const dlg = $("#dlg"), chart = $("#dlg-chart"), tip = $("#dlg-tip");
+  function niceStep(x) { const p = Math.pow(10, Math.floor(Math.log10(x))); const f = x / p; return (f < 1.5 ? 1 : f < 3 ? 2 : f < 7 ? 5 : 10) * p; }
+  function drawChart(x, s) {
+    const W = Math.max(300, chart.clientWidth), H = Math.max(200, chart.clientHeight);
+    const narrow = W < 520, L = 4, Rm = narrow ? 52 : 68, T = 26, B = 30;
+    chart.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    if (!s || s.length < 2) { chart.innerHTML = ""; return; }
+    const v = s.map((p) => p[1]);
+    let mn = Math.min(...v), mx = Math.max(...v); const pad = (mx - mn) * 0.1 || Math.abs(mx) * 0.01 || 1; mn -= pad; mx += pad;
+    const X = (i) => L + (i / (s.length - 1)) * (W - L - Rm), Y = (y) => T + (1 - (y - mn) / (mx - mn)) * (H - T - B);
+    const line = s.map((p, i) => (i ? "L" : "M") + X(i).toFixed(1) + " " + Y(p[1]).toFixed(1)).join("");
+    const step = niceStep((mx - mn) / (H < 300 ? 3 : 5)); const ticks = []; for (let t = Math.ceil(mn / step) * step; t <= mx; t += step) ticks.push(t);
+    const d = step >= 1 ? 0 : step >= 0.1 ? 1 : step >= 0.01 ? 2 : 4;
+    const grid = ticks.map((t) => `<line x1="${L}" x2="${W - Rm}" y1="${Y(t)}" y2="${Y(t)}" stroke="var(--grid)"/><text x="${W - Rm + 10}" y="${Y(t) + 4}" fill="var(--muted)" font-size="12">${fmt(t, d)}</text>`).join("");
+    const nX = narrow ? 3 : 6, long = (new Date(s[s.length - 1][0]) - new Date(s[0][0])) / 864e5 > 300; let xl = "";
+    for (let k = 0; k < nX; k++) { const i = Math.round((k / (nX - 1)) * (s.length - 1)); xl += `<text x="${X(i)}" y="${H - 8}" fill="var(--muted)" font-size="12" text-anchor="${k === 0 ? "start" : k === nX - 1 ? "end" : "middle"}">${dShort(s[i][0], long)}</text>`; }
+    // Startwert als Bezugslinie, Hoch und Tief im Zeitraum markieren
+    const iHi = v.indexOf(Math.max(...v)), iLo = v.indexOf(Math.min(...v));
+    const dec = x.dec ?? pxDec(v[v.length - 1]);
+    const markD = (i, label, dy) => { const mxp = X(i); const anchor = mxp < 70 ? "start" : mxp > W - Rm - 70 ? "end" : "middle"; return `<circle cx="${mxp}" cy="${Y(v[i])}" r="3.5" fill="var(--surface)" stroke="var(--chart)" stroke-width="1.5"/><text x="${mxp}" y="${Y(v[i]) + dy}" text-anchor="${anchor}" font-size="12" font-weight="600" fill="var(--fg)">${label} ${fmt(v[i], dec)}</text>`; };
+    const lx = X(s.length - 1), ly = Y(v[v.length - 1]);
+    chart.innerHTML = `${grid}
+      <line x1="${L}" x2="${W - Rm}" y1="${Y(v[0])}" y2="${Y(v[0])}" stroke="var(--muted)" stroke-dasharray="2 5"/>
+      <path d="${line}L${lx} ${H - B}L${L} ${H - B}Z" fill="var(--chart-fill)"/>
+      <path d="${line}" fill="none" stroke="var(--chart)" stroke-width="2.2" stroke-linejoin="round"/>
+      ${markD(iHi, "Hoch", -10)}${markD(iLo, "Tief", 19)}
+      <circle cx="${lx}" cy="${ly}" r="5" fill="var(--chart)" stroke="var(--surface)" stroke-width="2"/>
+      ${xl}<line id="hov" y1="${T}" y2="${H - B}" stroke="var(--muted)" stroke-dasharray="3 3" visibility="hidden"/>
+      <circle id="hovd" r="5" fill="var(--chart)" stroke="var(--surface)" stroke-width="2" visibility="hidden"/>`;
+    const hov = $("#hov", chart), hovd = $("#hovd", chart);
+    chart.onpointermove = (e) => {
+      const r = chart.getBoundingClientRect(); const fx = e.clientX - r.left;
+      const i = Math.max(0, Math.min(s.length - 1, Math.round(((fx - L) / (W - L - Rm)) * (s.length - 1))));
+      const px = X(i), py = Y(s[i][1]);
+      hov.setAttribute("x1", px); hov.setAttribute("x2", px); hov.setAttribute("visibility", "visible");
+      hovd.setAttribute("cx", px); hovd.setAttribute("cy", py); hovd.setAttribute("visibility", "visible");
+      tip.hidden = false; tip.style.left = Math.max(90, Math.min(W - 90, px)) + "px"; tip.style.top = Math.max(44, py) + "px";
+      tip.textContent = `${new Date(s[i][0]).toLocaleDateString(LOC)} · ${fmt(s[i][1], dec)} · ${fmtP((s[i][1] / s[0][1] - 1) * 100)}`;
+    };
+    chart.onpointerleave = () => { hov.setAttribute("visibility", "hidden"); hovd.setAttribute("visibility", "hidden"); tip.hidden = true; };
+  }
+
+  const RL = { "1M": "1 Monat", "3M": "3 Monaten", "6M": "6 Monaten", YTD: "Jahresbeginn", "1J": "1 Jahr", "5J": "5 Jahren" };
+  function renderDialog() {
+    const x = ALL[state.dlgId]; if (!x) return;
+    const ranges = RANGES.filter((r) => r !== "5J" || (x.weekly && x.weekly.length > 60));
+    if (!ranges.includes(state.dlgRange)) state.dlgRange = "1J";
+    const s = series(x, state.dlgRange), p = rangePerf(x, state.dlgRange, s);
+    $("#dlg-name").textContent = `${x.flag ? x.flag + " " : ""}${x.name}`;
+    $("#dlg-sub").textContent = `${x.kind === "index" ? x.region : x.group} · Stand ${new Date(x.date).toLocaleDateString(LOC)}`;
+    $("#dlg-px").innerHTML = `<strong class="num">${fmt(x.last, x.dec)}${x.unit ? ` <small style="font-size:16px;color:var(--muted)">${esc(x.unit)}</small>` : ""}</strong>
+      <span class="chg ${chgCls(x, x.perf["1T"])} num">${fmtP(x.perf["1T"], 2)} heute</span><span class="chg ${chgCls(x, p)} num">${fmtP(p)} seit ${RL[state.dlgRange]}</span>`;
+    segButtons($("#dlg-range"), ranges, state.dlgRange, (v) => { state.dlgRange = v; renderDialog(); });
+    drawChart(x, s);
+    const f = (label, value, c = "") => `<div><span>${label}</span><b class="num ${c}">${value}</b></div>`;
+    const perfRow = (k, label) => f(label, fmtP(x.perf[k]), x.perf[k] == null ? "" : chgCls(x, x.perf[k]) + "-t");
+    const common = perfRow("1W", "1 Woche") + perfRow("1M", "1 Monat") + perfRow("YTD", "Seit Jahresbeginn") + perfRow("1J", "1 Jahr");
+    $("#dlg-facts").innerHTML = x.kind === "index"
+      ? f("KGV", fmt(x.pe, 1)) + f("Dividendenrendite", x.divYield != null ? fmt(x.divYield, 2) + " %" : "–") + f("Kurs-Buchwert", fmt(x.pb, 2)) + f("Volatilität (30 Tage)", x.vol30 != null ? fmt(x.vol30, 1) + " %" : "–")
+        + common
+        + f("52-Wochen-Hoch", fmt(x.high52, x.dec)) + f("52-Wochen-Tief", fmt(x.low52, x.dec)) + f("Abstand 200-Tage-Linie", fmtP(x.vsSma200), cls(x.vsSma200) + "-t") + f("RSI (14 Tage)", fmt(x.rsi14, 0) + (x.rsi14 >= 70 ? " · überkauft" : x.rsi14 <= 30 ? " · überverkauft" : ""))
+      : common + f("52-Wochen-Hoch", fmt(x.high52, x.dec)) + f("52-Wochen-Tief", fmt(x.low52, x.dec)) + perfRow("5J", "5 Jahre") + f("Volatilität (30 Tage)", x.vol30 != null ? fmt(x.vol30, 1) + " %" : "–");
+    const multi = state.dlgList.length > 1;
+    $("#dlg-prev").hidden = $("#dlg-next").hidden = !multi;
+  }
+  function openDialog(id, list) {
+    if (!ALL[id] || !ALL[id].daily) return;
+    state.dlgId = id; state.dlgList = list && list.length ? list : [id]; state.dlgRange = state.range;
+    if (!dlg.open) dlg.showModal();
+    renderDialog();
+  }
+  function stepDialog(dir) {
+    const L = state.dlgList, i = L.indexOf(state.dlgId); if (L.length < 2) return;
+    state.dlgId = L[(i + dir + L.length) % L.length]; renderDialog();
+  }
+  document.addEventListener("click", (e) => {
+    const el = e.target.closest("[data-open]"); if (!el) return;
+    const holder = el.closest("[data-list]");
+    openDialog(el.dataset.open, holder ? holder.dataset.list.split(",").filter(Boolean) : null);
+  });
+  $("#dlg-close").onclick = () => dlg.close();
+  $("#dlg-prev").onclick = () => stepDialog(-1);
+  $("#dlg-next").onclick = () => stepDialog(1);
+  $("#dlg-max").onclick = () => { const on = dlg.classList.toggle("max"); $("#dlg-max").setAttribute("aria-pressed", on); renderDialog(); };
+  dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
+  dlg.addEventListener("keydown", (e) => { if (e.key === "ArrowLeft") stepDialog(-1); if (e.key === "ArrowRight") stepDialog(1); });
+  dlg.addEventListener("close", () => { dlg.classList.remove("max"); $("#dlg-max").setAttribute("aria-pressed", false); });
+  let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => dlg.open && renderDialog(), 120); });
+
+  /* ---------- Reiter ---------- */
+  const VIEWS = $$(".view").map((v) => v.dataset.view);
+  function showView() {
+    const want = location.hash.replace("#", ""); const cur = VIEWS.includes(want) ? want : VIEWS[0];
+    $$(".view").forEach((v) => (v.hidden = v.dataset.view !== cur));
+    $$("#tabs a").forEach((a) => { if (a.getAttribute("href") === "#" + cur) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+    scrollTo(0, 0);
+  }
+  addEventListener("hashchange", showView);
 
   /* ---------- Präsentationsmodus & Theme ---------- */
-  $("#btn-present").onclick = () => { document.body.classList.toggle("present"); const on = document.body.classList.contains("present"); $("#btn-present").setAttribute("aria-pressed", on); if (on && document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(() => {}); else if (!on && document.fullscreenElement) document.exitFullscreen().catch(() => {}); };
+  $("#btn-present").onclick = () => {
+    const on = document.body.classList.toggle("present"); $("#btn-present").setAttribute("aria-pressed", on);
+    const de = document.documentElement;
+    if (on && de.requestFullscreen) de.requestFullscreen().catch(() => {}); else if (!on && document.fullscreenElement) document.exitFullscreen().catch(() => {});
+  };
   $("#btn-theme").onclick = () => { const r = document.documentElement; const dark = r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; r.dataset.theme = dark ? "light" : "dark"; };
 
-  renderCards(); renderDetail(); renderTable(); renderSectors();
+  renderIndices(); renderTable(); renderSectors(); showView();
 })();

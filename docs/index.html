@@ -14,112 +14,159 @@
 </head>
 <body>
 <!--BODY-->
-<div id="demo-banner" class="demo-banner" hidden>Vorschau mit Beispieldaten – die Zahlen sind noch nicht echt. Echte Kurse erscheinen nach der ersten automatischen Aktualisierung.</div>
+<div id="demo-banner" class="demo-banner" hidden>Vorschau mit Beispieldaten – die Zahlen sind noch nicht echt.</div>
 
 <header class="top">
-  <div class="wrap">
-    <a class="brand" href="#top" aria-label="MarktPuls Startseite">
+  <div class="wrap top-row">
+    <a class="brand" href="#ueberblick" aria-label="MarktPuls Überblick">
       <span class="mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 18h6l3-10 6 17 3-10h8" fill="none" stroke="#1d1d1b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       <b>Markt<span>Puls</span></b>
     </a>
-    <nav class="nav" aria-label="Abschnitte">
-      <a href="#indizes">Indizes</a><a href="#vergleich">Vergleich</a><a href="#zeitraeume">Zeiträume</a><a href="#sektoren">Sektoren</a><a href="#makro">Zinsen &amp; Rohstoffe</a><a href="#risiken">Risiken</a>
-    </nav>
     <div class="stamp">
       <span class="dot" id="stamp-dot"></span><span><span class="lbl">Datenstand </span><span id="stamp-time">…</span></span>
       <button class="iconbtn" id="btn-present" type="button" aria-pressed="false" title="Große Darstellung für den Bildschirm im Gespräch">Präsentation</button>
       <button class="iconbtn" id="btn-theme" type="button" title="Hell/Dunkel umschalten" aria-label="Hell/Dunkel umschalten"><svg viewBox="0 0 16 16" width="13" height="13" style="display:block"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg></button>
     </div>
   </div>
-  <div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
+  <div class="tabs-scroll"><nav class="wrap tabs" id="tabs" aria-label="Bereiche">
+    <a href="#ueberblick">Überblick</a>
+    <a href="#indizes">Indizes</a>
+    <a href="#vergleich">Vergleich</a>
+    <a href="#umfeld">Zinsen &amp; Rohstoffe</a>
+    <a href="#risiken">Risiken</a>
+  </nav></div>
 </header>
 
-<div id="top" class="hero">
-  <div class="wrap">
-    <div class="gauge-box">
-      <h3>Marktstimmung</h3>
-      <div id="gauge"></div>
-      <div class="gauge-hist" id="gauge-hist"></div>
-    </div>
-    <div class="hero-right">
-      <div>
-        <h1>Die Märkte am <span id="hero-date">…</span></h1>
-        <p class="lead" id="lead"></p>
+<p id="app-error" class="wrap" hidden>Die Daten konnten nicht geladen werden. Bitte Seite neu laden.</p>
+
+<!-- ============ Überblick ============ -->
+<div class="view" data-view="ueberblick">
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div class="gauge-box">
+        <h3>Marktstimmung</h3>
+        <div id="gauge"></div>
+        <div class="gauge-hist" id="gauge-hist"></div>
       </div>
-      <div class="kpis" id="kpis"></div>
-      <div class="comp" id="comp" aria-label="Bausteine der Marktstimmung, Balken von Angst (leer) bis Gier (voll)"></div>
+      <div class="hero-text">
+        <div class="eyebrow" id="hero-date">…</div>
+        <h1 id="hero-title">Die Märkte heute</h1>
+        <p class="lead" id="lead"></p>
+        <details class="mood-details">
+          <summary>So setzt sich die Marktstimmung zusammen</summary>
+          <div class="comp" id="comp"></div>
+        </details>
+      </div>
     </div>
   </div>
+  <main class="wrap">
+    <section>
+      <div class="sec-head"><h2>Die wichtigsten Märkte</h2><p>Kachel anklicken, um den Chart groß zu öffnen.</p><a class="more" href="#indizes">Alle Indizes</a></div>
+      <div class="cards big" id="key-cards"></div>
+    </section>
+    <section class="split">
+      <div>
+        <div class="sec-head"><h2>Umfeld</h2><a class="more" href="#umfeld">Mehr</a></div>
+        <div class="tiles" id="key-macro"></div>
+      </div>
+      <div>
+        <div class="sec-head"><h2>Größte Risiken</h2><a class="more" href="#risiken">Alle Risiken</a></div>
+        <div class="toprisks" id="key-risks"></div>
+      </div>
+    </section>
+  </main>
 </div>
 
-<main class="wrap">
-  <p id="app-error" hidden>Die Daten konnten nicht geladen werden. Bitte Seite neu laden.</p>
-
-  <section id="indizes">
-    <div class="sec-head">
-      <h2>Indizes weltweit</h2>
-      <p>Kachel anklicken für Chart und Kennzahlen.</p>
-      <div class="tools"><div class="seg" id="seg-region" role="group" aria-label="Region"></div><div class="seg" id="seg-range" role="group" aria-label="Zeitraum"></div></div>
-    </div>
-    <div class="cards" id="cards"></div>
-    <div class="detail">
-      <div class="chartbox">
-        <h3 id="d-name"></h3><div class="sub" id="d-sub"></div>
-        <div class="bigpx" id="d-px"></div>
-        <div style="position:relative"><svg id="d-chart" class="bigchart" preserveAspectRatio="none" role="img" aria-label="Kursverlauf"></svg><div class="tip" id="d-tip" hidden></div></div>
+<!-- ============ Indizes ============ -->
+<div class="view" data-view="indizes" hidden>
+  <main class="wrap">
+    <section>
+      <div class="sec-head">
+        <h2>Indizes weltweit</h2><p>Kachel anklicken, um den Chart groß zu öffnen.</p>
+        <div class="tools"><span class="tools-l">Zeitraum</span><div class="seg" id="seg-range" role="group" aria-label="Zeitraum"></div></div>
       </div>
-      <div class="facts" id="d-facts"></div>
-    </div>
-  </section>
+      <div id="index-groups"></div>
+    </section>
+  </main>
+</div>
 
-  <section id="vergleich">
-    <div class="sec-head"><h2>Kennzahlen im Vergleich</h2><p>Spaltenkopf anklicken zum Sortieren. KGV, Dividendenrendite und KBV stammen aus einem ETF auf den jeweiligen Markt.</p></div>
-    <div class="tablewrap"><table id="tbl"><thead></thead><tbody></tbody></table></div>
-  </section>
+<!-- ============ Vergleich ============ -->
+<div class="view" data-view="vergleich" hidden>
+  <main class="wrap">
+    <section>
+      <div class="sec-head">
+        <h2>Vergleich</h2><p>Spaltenkopf anklicken zum Sortieren, Zeile anklicken für den Chart.</p>
+        <div class="tools"><div class="seg" id="seg-table" role="group" aria-label="Ansicht"></div></div>
+      </div>
+      <div class="tablewrap"><table id="tbl"><thead></thead><tbody></tbody></table></div>
+      <p class="foot-note" id="tbl-note"></p>
+    </section>
+    <section>
+      <div class="sec-head"><h2>Branchen</h2><p>Sektoren des S&amp;P 500, sortiert nach Wertentwicklung.</p><div class="tools"><div class="seg" id="seg-sec" role="group" aria-label="Zeitraum Branchen"></div></div></div>
+      <div class="sectors" id="sectors"></div>
+    </section>
+  </main>
+</div>
 
-  <section id="zeitraeume">
-    <div class="sec-head"><h2>Entwicklung über alle Zeiträume</h2><p>Von einem Tag bis fünf Jahre. Grün steht für Gewinne, Rot für Verluste, je kräftiger desto größer.</p></div>
-    <div class="panel"><div class="heatmap" id="heatmap"></div></div>
-  </section>
+<!-- ============ Umfeld ============ -->
+<div class="view" data-view="umfeld" hidden>
+  <main class="wrap">
+    <section>
+      <div class="sec-head"><h2>Zinsen, Währungen &amp; Rohstoffe</h2><p>Kachel anklicken, um den Chart groß zu öffnen.</p></div>
+      <div id="macro-groups"></div>
+    </section>
+  </main>
+</div>
 
-  <section id="sektoren">
-    <div class="sec-head"><h2>Branchen</h2><p>Sektoren des S&amp;P 500, sortiert nach Wertentwicklung.</p><div class="tools"><div class="seg" id="seg-sec" role="group" aria-label="Zeitraum Sektoren"></div></div></div>
-    <div class="sectors" id="sectors"></div>
-  </section>
-
-  <section id="makro">
-    <div class="sec-head"><h2>Zinsen, Währungen &amp; Rohstoffe</h2><p>Das Umfeld für Aktien: Schwankungsbarometer, Renditen, Euro, Gold, Öl.</p></div>
-    <div class="macro" id="macro"></div>
-  </section>
-
-  <section id="risiken">
-    <div class="sec-head"><h2>Risiko-Radar</h2><p>Aktuelle Schlagzeilen der letzten drei Tage, automatisch nach Risikothemen sortiert. Je mehr und je schärfer die Meldungen, desto höher die Stufe.</p></div>
-    <div class="risk-layout">
-      <div class="panel"><h3>Themen im Überblick</h3><div id="radar"></div></div>
-      <div class="risks" id="risks"></div>
-    </div>
-  </section>
-
-  <section id="nachrichten">
-    <div class="sec-head"><h2>Aktuelle Schlagzeilen</h2></div>
-    <div class="panel"><div class="news" id="news"></div></div>
-  </section>
-</main>
+<!-- ============ Risiken ============ -->
+<div class="view" data-view="risiken" hidden>
+  <main class="wrap">
+    <section>
+      <div class="sec-head"><h2>Risiko-Radar</h2><p>Schlagzeilen der letzten drei Tage, automatisch nach Themen sortiert. Je mehr und je schärfer die Meldungen, desto höher die Stufe.</p></div>
+      <div class="risk-layout">
+        <div class="panel"><div id="radar"></div></div>
+        <div class="risks" id="risks"></div>
+      </div>
+    </section>
+    <section>
+      <div class="sec-head"><h2>Aktuelle Schlagzeilen</h2></div>
+      <div class="news" id="news"></div>
+    </section>
+  </main>
+</div>
 
 <footer>
   <div class="wrap">
-    <div>
-      <h4>Datenquellen &amp; Methodik</h4>
+    <details>
+      <summary>Datenquellen &amp; Methodik</summary>
       <p>Kurse: Yahoo Finance (Schlusskurse, teils zeitverzögert). KGV, Dividendenrendite und KBV: börsengehandelte Fonds auf den jeweiligen Markt. Volatilität: annualisierte Schwankung der letzten 30 Handelstage. Schlagzeilen: Google News.</p>
       <p>Die Marktstimmung (0 = extreme Angst, 100 = extreme Gier) ist ein eigener Mischindikator aus VIX, Trend, Marktbreite, Momentum, RSI und dem Verhältnis Aktien zu Gold.</p>
-    </div>
-    <div>
-      <h4>Datenstand</h4>
-      <p id="foot-stamp">…</p>
-      <p>Aktualisierung automatisch an jedem Werktag, morgens und abends.</p>
-    </div>
+    </details>
+    <span>Datenstand <span id="foot-stamp">…</span> · Aktualisierung werktags morgens und abends</span>
   </div>
 </footer>
+
+<!-- ============ Großer Chart ============ -->
+<dialog id="dlg" aria-labelledby="dlg-name">
+  <div class="dlg-head">
+    <div>
+      <h3 id="dlg-name"></h3>
+      <div class="sub" id="dlg-sub"></div>
+    </div>
+    <div class="dlg-actions">
+      <button type="button" class="ghost" id="dlg-prev" aria-label="Vorheriger Wert">‹</button>
+      <button type="button" class="ghost" id="dlg-next" aria-label="Nächster Wert">›</button>
+      <button type="button" class="ghost" id="dlg-max" aria-pressed="false">Vollbild</button>
+      <button type="button" class="ghost" id="dlg-close" aria-label="Schließen">✕</button>
+    </div>
+  </div>
+  <div class="dlg-px">
+    <div class="bigpx" id="dlg-px"></div>
+    <div class="seg" id="dlg-range" role="group" aria-label="Zeitraum"></div>
+  </div>
+  <div class="chartwrap"><svg id="dlg-chart" role="img" aria-label="Kursverlauf"></svg><div class="tip" id="dlg-tip" hidden></div></div>
+  <div class="facts" id="dlg-facts"></div>
+</dialog>
 <!--/BODY-->
 <script src="app.js"></script>
 </body>
