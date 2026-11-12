@@ -42,21 +42,10 @@
 <!-- ============ Überblick ============ -->
 <div class="view" data-view="ueberblick">
   <div class="hero">
-    <div class="wrap hero-grid">
-      <div class="gauge-box">
-        <h3>Marktstimmung</h3>
-        <div id="gauge"></div>
-        <div class="gauge-hist" id="gauge-hist"></div>
-      </div>
-      <div class="hero-text">
-        <div class="eyebrow" id="hero-date">…</div>
-        <h1 id="hero-title">Die Märkte heute</h1>
-        <p class="lead" id="lead"></p>
-        <details class="mood-details">
-          <summary>So setzt sich die Marktstimmung zusammen</summary>
-          <div class="comp" id="comp"></div>
-        </details>
-      </div>
+    <div class="wrap hero-text">
+      <div class="eyebrow" id="hero-date">…</div>
+      <h1 id="hero-title">Die Märkte heute</h1>
+      <p class="lead" id="lead"></p>
     </div>
   </div>
   <main class="wrap">
@@ -72,6 +61,16 @@
       <div>
         <div class="sec-head"><h2>Größte Risiken</h2><a class="more" href="#risiken">Alle Risiken</a></div>
         <div class="toprisks" id="key-risks"></div>
+      </div>
+    </section>
+    <section>
+      <div class="sec-head"><h2>Marktstimmung</h2><p>Mischindikator aus sechs Bausteinen, von 0 (Zurückhaltung) bis 100 (Zuversicht).</p></div>
+      <div class="panel mood">
+        <div class="mood-gauge">
+          <div id="gauge"></div>
+          <div class="gauge-hist" id="gauge-hist"></div>
+        </div>
+        <div class="comp" id="comp"></div>
       </div>
     </section>
   </main>
@@ -140,7 +139,7 @@
     <details>
       <summary>Datenquellen &amp; Methodik</summary>
       <p>Kurse: Yahoo Finance (Schlusskurse, teils zeitverzögert). KGV und Dividendenrendite: börsengehandelte Fonds auf den jeweiligen Markt. Volatilität: annualisierte Schwankung der letzten 30 Handelstage. Schlagzeilen: Google News.</p>
-      <p>Die Marktstimmung (0 = extreme Angst, 100 = extreme Gier) ist ein eigener Mischindikator aus VIX, Trend, Marktbreite, Momentum, RSI und dem Verhältnis Aktien zu Gold.</p>
+      <p>Die Marktstimmung (0 = sehr verhalten, 100 = sehr zuversichtlich) ist ein eigener Mischindikator aus VIX, Trend, Marktbreite, Momentum, RSI und dem Verhältnis Aktien zu Gold.</p>
     </details>
     <span>Datenstand <span id="foot-stamp">…</span> · Aktualisierung werktags morgens und abends</span>
   </div>

@@ -81,25 +81,22 @@ button { font: inherit; color: inherit; }
 
 /* ---------- Gelbes Band (Überblick) ---------- */
 .hero { background: var(--yellow); color: var(--yellow-ink); }
-.hero-grid { display: grid; grid-template-columns: 340px 1fr; gap: 48px; padding-block: 40px; align-items: center; }
-.gauge-box { background: var(--yellow-ink); color: #f6f5f0; border-radius: 16px; padding: 22px 22px 20px; }
-.gauge-box h3 { margin: 0; font: 600 12px/1 var(--f-text); text-transform: uppercase; letter-spacing: .1em; color: #c9c7bb; }
-.gauge { display: block; width: 100%; max-width: 300px; margin: 8px auto 0; }
+.mood { display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: center; padding: 26px 32px; }
+.gauge { display: block; width: 100%; max-width: 260px; margin: 0 auto; }
 .gauge-label { text-align: center; margin-top: -4px; }
 .gauge-label strong { display: block; font: 700 46px/1 var(--f-display); }
-.gauge-label span { font-size: 15px; color: var(--yellow); font-weight: 600; }
-.gauge-hist { font-size: 12px; color: #c9c7bb; text-align: center; margin-top: 8px; }
-.hero-text { min-width: 0; }
+.gauge-label span { font-size: 15px; color: var(--muted); font-weight: 600; }
+.gauge-hist { font-size: 12.5px; color: var(--muted); text-align: center; margin-top: 8px; }
+.hero-text { padding-block: 44px 48px; }
 .eyebrow { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; opacity: .7; margin-bottom: 6px; }
 .hero h1 { font: 700 clamp(32px, 4vw, 48px)/1.05 var(--f-display); margin: 0 0 14px; text-wrap: balance; }
 .hero p.lead { margin: 0; max-width: 58ch; font-size: 17px; line-height: 1.55; }
-.mood-details { margin-top: 20px; max-width: 560px; font-size: 13.5px; }
-.mood-details summary { cursor: pointer; font-weight: 600; width: fit-content; }
-.comp { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 28px; margin-top: 14px; }
+.comp { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 36px; font-size: 13.5px; }
 .comp div { display: grid; grid-template-columns: 1fr auto; gap: 4px 8px; align-items: baseline; }
 .comp em { font-style: normal; font-weight: 600; }
-.comp .bar { grid-column: 1 / -1; height: 4px; border-radius: 2px; background: rgba(29, 29, 27, .16); display: block; }
-.comp .bar b { display: block; height: 100%; border-radius: 2px; background: var(--yellow-ink); }
+.comp span { color: var(--muted); }
+.comp .bar { grid-column: 1 / -1; height: 5px; border-radius: 3px; background: var(--surface-2); display: block; }
+.comp .bar b { display: block; height: 100%; border-radius: 3px; background: var(--fg); }
 
 /* ---------- Abschnitte ---------- */
 main { padding-block: 12px 64px; }
@@ -236,8 +233,8 @@ dialog.max #dlg-chart { height: max(260px, calc(100dvh - 340px)); }
 
 /* ---------- Schmal ---------- */
 @media (max-width: 900px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 28px; padding-block: 28px; }
-  .gauge-box { max-width: 420px; }
+  .hero-text { padding-block: 30px 34px; }
+  .mood { grid-template-columns: 1fr; gap: 24px; padding: 22px 20px; }
   .cards.big { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .split, .risk-layout { grid-template-columns: 1fr; gap: 0; }
   .risk-layout { gap: 16px; }

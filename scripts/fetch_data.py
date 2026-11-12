@@ -50,7 +50,7 @@ INDICES = [
 
 MACRO = [
     # id, Name, Symbol, Einheit, Dezimalstellen, Gruppe
-    ("vix", "VIX (Angstbarometer)", "^VIX", "Pkt", 2, "Volatilität"),
+    ("vix", "VIX (Volatilität)", "^VIX", "Pkt", 2, "Volatilität"),
     ("us10", "US-Rendite 10J", "^TNX", "%", 2, "Zinsen"),
     ("us3m", "US-Rendite 3M", "^IRX", "%", 2, "Zinsen"),
     ("eurusd", "EUR/USD", "EURUSD=X", "", 4, "Währungen"),
@@ -364,7 +364,7 @@ def classify_news(news: list[dict]):
 
 
 def market_mood(idx: list[dict], macro: dict) -> dict:
-    """Einfacher Angst-Gier-Index (0 = extreme Angst, 100 = extreme Gier)."""
+    """Einfacher Stimmungsindex (0 = sehr verhalten, 100 = sehr zuversichtlich)."""
     comps = []
 
     def add(name, value, score, text):
@@ -375,7 +375,7 @@ def market_mood(idx: list[dict], macro: dict) -> dict:
     vix = macro.get("vix", {}).get("last")
     if vix:
         add("Volatilität (VIX)", r(vix, 1), 100 - (vix - 12) / (35 - 12) * 100,
-            "niedrig = Sorglosigkeit, hoch = Angst")
+            "niedrig = ruhiger Markt, hoch = nervöser Markt")
     spx = next((i for i in idx if i["id"] == "spx"), None)
     if spx and spx.get("vsSma200") is not None:
         add("S&P 500 vs. 200-Tage-Linie", spx["vsSma200"], 50 + spx["vsSma200"] * 5,
@@ -395,10 +395,10 @@ def market_mood(idx: list[dict], macro: dict) -> dict:
     gold = macro.get("gold", {}).get("perf", {}).get("1M")
     if gold is not None and spx and spx["perf"].get("1M") is not None:
         diff = spx["perf"]["1M"] - gold
-        add("Aktien vs. Gold (1M)", r(diff, 1), 50 + diff * 6, "Flucht in sichere Häfen?")
+        add("Aktien vs. Gold (1M)", r(diff, 1), 50 + diff * 6, "Aktien im Vergleich zum sicheren Hafen Gold")
     score = int(round(np.mean([c["score"] for c in comps]))) if comps else 50
-    label = ("Extreme Angst" if score < 20 else "Angst" if score < 40 else "Neutral" if score < 60
-             else "Gier" if score < 80 else "Extreme Gier")
+    label = ("Sehr verhalten" if score < 20 else "Verhalten" if score < 40 else "Neutral" if score < 60
+             else "Zuversichtlich" if score < 80 else "Sehr zuversichtlich")
     return {"score": score, "label": label, "components": comps}
 
 

@@ -117,14 +117,15 @@
     const R = 120, cx = 150, cy = 140;
     const pt = (s, r = R) => { const a = Math.PI * (1 - s / 100); return [cx + r * Math.cos(a), cy - r * Math.sin(a)]; };
     const arc = (a, b, col) => { const [x1, y1] = pt(a), [x2, y2] = pt(b); return `<path d="M${x1} ${y1}A${R} ${R} 0 0 1 ${x2} ${y2}" stroke="${col}" stroke-width="20" fill="none"/>`; };
-    const segs = [[0, 20, "#c23a2b"], [20, 40, "#e8833a"], [40, 60, "#a8a69a"], [60, 80, "#7fbf6a"], [80, 100, "#0f9b5f"]];
+    const segs = [[0, 20, "var(--surface-2)"], [20, 40, "var(--surface-2)"], [40, 60, "var(--surface-2)"], [60, 80, "var(--surface-2)"], [80, 100, "var(--surface-2)"]];
     const [nx, ny] = pt(m.score, R - 30);
     $("#gauge").innerHTML = `<svg viewBox="0 0 300 172" class="gauge" role="img" aria-label="Marktstimmung ${m.score} von 100: ${esc(m.label)}">
       ${segs.map((s) => arc(s[0] + 0.6, s[1] - 0.6, s[2])).join("")}
-      <line x1="${cx}" y1="${cy}" x2="${nx}" y2="${ny}" stroke="#ffe600" stroke-width="4" stroke-linecap="round"/>
-      <circle cx="${cx}" cy="${cy}" r="8" fill="#ffe600"/>
-      <text x="${cx - R}" y="${cy + 24}" text-anchor="middle" fill="#c9c7bb" font-size="12">Angst</text>
-      <text x="${cx + R}" y="${cy + 24}" text-anchor="middle" fill="#c9c7bb" font-size="12">Gier</text></svg>
+      ${(() => { const [ax, ay] = pt(0), [bx, by] = pt(m.score); return `<path d="M${ax} ${ay}A${R} ${R} 0 0 1 ${bx} ${by}" stroke="var(--yellow)" stroke-width="20" fill="none"/>`; })()}
+      <line x1="${cx}" y1="${cy}" x2="${nx}" y2="${ny}" stroke="var(--fg)" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="${cx}" cy="${cy}" r="8" fill="var(--fg)"/>
+      <text x="${cx - R}" y="${cy + 24}" text-anchor="middle" fill="var(--muted)" font-size="12">0</text>
+      <text x="${cx + R}" y="${cy + 24}" text-anchor="middle" fill="var(--muted)" font-size="12">100</text></svg>
       <div class="gauge-label"><strong>${m.score}</strong><span>${esc(m.label)}</span></div>`;
     const h = data.moodHistory || [];
     const ago = (days) => { const t = new Date(gen); t.setDate(t.getDate() - days); const iso = t.toISOString().slice(0, 10); const c = h.filter((x) => x.date <= iso); return c.length ? c[c.length - 1].mood : null; };
