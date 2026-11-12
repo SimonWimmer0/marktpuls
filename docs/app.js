@@ -25,7 +25,10 @@
   const ALL = {};
   I.forEach((x) => (ALL[x.id] = { ...x, kind: "index", dec: pxDec(x.last) }));
   Object.values(M).forEach((m) => (ALL[m.id] = { ...m, kind: "macro" }));
-  const RANGES = ["1M", "3M", "6M", "YTD", "1J", "5J"];
+  const RANGES = ["1M", "3M", "6M", "YTD", "1J", "5J", "10J", "Max"];
+  const RANGE_BTN = { Max: "Seit Beginn" };
+  const RANGE_CAP = { "1M": "1 Monat", "3M": "3 Monate", "6M": "6 Monate", YTD: "Seit Jahresbeginn", "1J": "1 Jahr", "5J": "5 Jahre", "10J": "10 Jahre", Max: "Seit Beginn" };
+  const hasRange = (x, r) => (r === "5J" || r === "10J" ? x.perf?.[r] != null : r === "Max" ? (x.monthly || []).length > 2 : true);
   const state = {
     range: RANGES.includes(store.get("mp-range")) ? store.get("mp-range") : "1J",
     dlgRange: "1J", dlgId: null, dlgList: [],
@@ -44,6 +47,8 @@
   /* ---------- Serien ---------- */
   function series(x, range) {
     const d = x.daily || [];
+    if (range === "Max") return x.monthly && x.monthly.length > 2 ? x.monthly : d;
+    if (range === "10J") return x.weekly && x.weekly.length > 2 ? x.weekly : d;
     if (range === "5J") {
       const w = x.weekly && x.weekly.length > 2 ? x.weekly : d;
       const from = new Date(w[w.length - 1][0]); from.setFullYear(from.getFullYear() - 5);
@@ -79,19 +84,20 @@
   }
   const ZOOM = `<svg class="zoom" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M9.5 2H14v4.5M14 2L9 7M6.5 14H2V9.5M2 14l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
-  function segButtons(el, opts, cur, cb) {
-    el.innerHTML = opts.map((o) => `<button type="button" aria-pressed="${o === cur}" data-v="${esc(o)}">${esc(o)}</button>`).join("");
+  function segButtons(el, opts, cur, cb, labels = {}) {
+    el.innerHTML = opts.map((o) => `<button type="button" aria-pressed="${o === cur}" data-v="${esc(o)}">${esc(labels[o] || o)}</button>`).join("");
     el.onclick = (e) => { const b = e.target.closest("button"); if (!b) return; [...el.children].forEach((c) => c.setAttribute("aria-pressed", c === b)); cb(b.dataset.v); };
   }
 
   /* ---------- Kacheln ---------- */
   function indexCard(x, range) {
+    if (!hasRange(x, range)) range = "Max";
     const s = series(x, range), p = rangePerf(x, range, s);
     return `<button type="button" class="card" data-open="${x.id}" aria-label="${esc(x.name)}: Chart groß öffnen">
       <div class="row"><span class="nm">${x.flag} ${esc(x.name)}</span>${ZOOM}</div>
       <div class="row"><span class="px num">${fmt(x.last, pxDec(x.last))}</span><span class="chg ${cls(x.perf["1T"])} num">${fmtP(x.perf["1T"], 2)}</span></div>
       ${spark(s)}
-      <div class="cap">${range === "1J" ? "1 Jahr" : range === "5J" ? "5 Jahre" : range === "YTD" ? "Seit Jahresbeginn" : range.replace("M", " Monat" + (range === "1M" ? "" : "e"))} <b class="${cls(p)}-t num">${fmtP(p)}</b></div>
+      <div class="cap">${RANGE_CAP[range]} <b class="${cls(p)}-t num">${fmtP(p)}</b></div>
     </button>`;
   }
   function macroTile(m, withSpark = true) {
@@ -129,8 +135,8 @@
     const up = I.filter((x) => x.perf["1T"] > 0).length;
     const best = [...I].sort((a, b) => (b.perf.YTD ?? -999) - (a.perf.YTD ?? -999))[0];
     const topRisk = (data.risks || [])[0];
-    $("#hero-title").textContent = up > I.length * 0.65 ? "Die Märkte liegen heute überwiegend im Plus" : up < I.length * 0.35 ? "Die Märkte liegen heute überwiegend im Minus" : "Die Märkte zeigen heute ein gemischtes Bild";
-    $("#lead").innerHTML = `${up} von ${I.length} Indizes notieren im Plus. Stärkster Markt seit Jahresbeginn ist <b>${esc(best?.name)}</b> mit ${fmtP(best?.perf.YTD)}.` +
+    $("#hero-title").textContent = up > I.length * 0.65 ? "Die Märkte liegen überwiegend im Plus" : up < I.length * 0.35 ? "Die Märkte liegen überwiegend im Minus" : "Die Märkte zeigen ein gemischtes Bild";
+    $("#lead").innerHTML = `${up} von ${I.length} Indizes notieren gegenüber dem Vortag im Plus. Stärkster Markt seit Jahresbeginn ist <b>${esc(best?.name)}</b> mit ${fmtP(best?.perf.YTD)}.` +
       (topRisk && topRisk.count ? ` In den Nachrichten dominiert das Thema <b>${esc(topRisk.name)}</b>.` : "");
 
     const key = ["atx", "dax", "sx5e", "spx", "ndx", "nikkei"].filter((id) => ALL[id]);
@@ -144,7 +150,7 @@
   })();
 
   /* ---------- Indizes ---------- */
-  segButtons($("#seg-range"), RANGES, state.range, (v) => { state.range = v; store.set("mp-range", v); renderIndices(); });
+  segButtons($("#seg-range"), RANGES, state.range, (v) => { state.range = v; store.set("mp-range", v); renderIndices(); }, RANGE_BTN);
   function renderIndices() {
     const regions = [...new Set(I.map((x) => x.region))];
     $("#index-groups").innerHTML = regions.map((rg) => {
@@ -154,15 +160,15 @@
   }
 
   /* ---------- Vergleich ---------- */
-  const scaleOf = { "1T": 2, "1W": 4, "1M": 8, "3M": 12, YTD: 20, "1J": 25, "3J": 50, "5J": 80 };
+  const scaleOf = { "1T": 2, "1W": 4, "1M": 8, "3M": 12, YTD: 20, "1J": 25, "3J": 50, "5J": 80, "10J": 200 };
   const heatBg = (v, scale) => (v == null ? "" : `background:color-mix(in srgb, var(${v >= 0 ? "--up" : "--down"}) ${(Math.min(1, Math.abs(v) / scale) * 40 + 5).toFixed(0)}%, var(--surface));`);
   const TABLE = {
-    Entwicklung: [["name", "Index"], ["last", "Stand"], ["1T", "1 Tag"], ["1W", "1 Woche"], ["1M", "1 Monat"], ["YTD", "Seit 1.1."], ["1J", "1 Jahr"], ["5J", "5 Jahre"]],
-    Kennzahlen: [["name", "Index"], ["pe", "KGV"], ["divYield", "Dividende"], ["pb", "KBV"], ["vol30", "Volatilität"], ["rsi14", "RSI"], ["vsSma200", "zur 200-Tage-Linie"], ["range", "52-Wochen-Spanne"]],
+    Entwicklung: [["name", "Index"], ["last", "Stand"], ["1T", "1 Tag"], ["1W", "1 Woche"], ["1M", "1 Monat"], ["YTD", "Seit 1.1."], ["1J", "1 Jahr"], ["5J", "5 Jahre"], ["10J", "10 Jahre"]],
+    Kennzahlen: [["name", "Index"], ["pe", "KGV"], ["divYield", "Dividende"], ["vol30", "Volatilität"], ["rsi14", "RSI"], ["vsSma200", "zur 200-Tage-Linie"], ["range", "52-Wochen-Spanne"]],
   };
   const NOTES = {
     Entwicklung: "Grün steht für Gewinne, Rot für Verluste, je kräftiger die Farbe, desto größer die Bewegung.",
-    Kennzahlen: "KGV, Dividendenrendite und KBV stammen aus einem ETF auf den jeweiligen Markt. Volatilität: Schwankung der letzten 30 Handelstage, aufs Jahr gerechnet. RSI über 70 gilt als überkauft, unter 30 als überverkauft.",
+    Kennzahlen: "KGV und Dividendenrendite stammen aus einem ETF auf den jeweiligen Markt. Volatilität: Schwankung der letzten 30 Handelstage, aufs Jahr gerechnet. RSI über 70 gilt als überkauft, unter 30 als überverkauft.",
   };
   const rangePos = (x) => (x.high52 > x.low52 ? ((x.last - x.low52) / (x.high52 - x.low52)) * 100 : 50);
   const val = (x, k) => (k in x.perf ? x.perf[k] : k === "range" ? rangePos(x) : x[k]);
@@ -238,11 +244,13 @@
     let mn = Math.min(...v), mx = Math.max(...v); const pad = (mx - mn) * 0.1 || Math.abs(mx) * 0.01 || 1; mn -= pad; mx += pad;
     const X = (i) => L + (i / (s.length - 1)) * (W - L - Rm), Y = (y) => T + (1 - (y - mn) / (mx - mn)) * (H - T - B);
     const line = s.map((p, i) => (i ? "L" : "M") + X(i).toFixed(1) + " " + Y(p[1]).toFixed(1)).join("");
-    const step = niceStep((mx - mn) / (H < 300 ? 3 : 5)); const ticks = []; for (let t = Math.ceil(mn / step) * step; t <= mx; t += step) ticks.push(t);
+    const step = niceStep((mx - mn) / (H < 300 ? 3 : 5)); const ticks = []; for (let t = Math.ceil(mn / step) * step; t <= mx; t += step) ticks.push(Math.abs(t) < step / 1e6 ? 0 : t);
     const d = step >= 1 ? 0 : step >= 0.1 ? 1 : step >= 0.01 ? 2 : 4;
     const grid = ticks.map((t) => `<line x1="${L}" x2="${W - Rm}" y1="${Y(t)}" y2="${Y(t)}" stroke="var(--grid)"/><text x="${W - Rm + 10}" y="${Y(t) + 4}" fill="var(--muted)" font-size="12">${fmt(t, d)}</text>`).join("");
-    const nX = narrow ? 3 : 6, long = (new Date(s[s.length - 1][0]) - new Date(s[0][0])) / 864e5 > 300; let xl = "";
-    for (let k = 0; k < nX; k++) { const i = Math.round((k / (nX - 1)) * (s.length - 1)); xl += `<text x="${X(i)}" y="${H - 8}" fill="var(--muted)" font-size="12" text-anchor="${k === 0 ? "start" : k === nX - 1 ? "end" : "middle"}">${dShort(s[i][0], long)}</text>`; }
+    const span = (new Date(s[s.length - 1][0]) - new Date(s[0][0])) / 864e5;
+    const nX = narrow ? 3 : 6; let xl = "";
+    const xLabel = (iso) => (span > 1500 ? iso.slice(0, 4) : span > 300 ? new Date(iso).toLocaleDateString(LOC, { month: "short", year: "2-digit" }) : dShort(iso, false));
+    for (let k = 0; k < nX; k++) { const i = Math.round((k / (nX - 1)) * (s.length - 1)); xl += `<text x="${X(i)}" y="${H - 8}" fill="var(--muted)" font-size="12" text-anchor="${k === 0 ? "start" : k === nX - 1 ? "end" : "middle"}">${xLabel(s[i][0])}</text>`; }
     // Startwert als Bezugslinie, Hoch und Tief im Zeitraum markieren
     const iHi = v.indexOf(Math.max(...v)), iLo = v.indexOf(Math.min(...v));
     const dec = x.dec ?? pxDec(v[v.length - 1]);
@@ -269,26 +277,27 @@
     chart.onpointerleave = () => { hov.setAttribute("visibility", "hidden"); hovd.setAttribute("visibility", "hidden"); tip.hidden = true; };
   }
 
-  const RL = { "1M": "1 Monat", "3M": "3 Monaten", "6M": "6 Monaten", YTD: "Jahresbeginn", "1J": "1 Jahr", "5J": "5 Jahren" };
+  const RL = { "1M": "1 Monat", "3M": "3 Monaten", "6M": "6 Monaten", YTD: "Jahresbeginn", "1J": "1 Jahr", "5J": "5 Jahren", "10J": "10 Jahren" };
   function renderDialog() {
     const x = ALL[state.dlgId]; if (!x) return;
-    const ranges = RANGES.filter((r) => r !== "5J" || (x.weekly && x.weekly.length > 60));
-    if (!ranges.includes(state.dlgRange)) state.dlgRange = "1J";
+    const ranges = RANGES.filter((r) => hasRange(x, r));
+    if (!ranges.includes(state.dlgRange)) state.dlgRange = "Max";
+    const since = state.dlgRange === "Max" ? "Beginn der Daten (" + new Date(x.since || x.monthly[0][0]).toLocaleDateString(LOC, { month: "short", year: "numeric" }) + ")" : RL[state.dlgRange];
     const s = series(x, state.dlgRange), p = rangePerf(x, state.dlgRange, s);
     $("#dlg-name").textContent = `${x.flag ? x.flag + " " : ""}${x.name}`;
     $("#dlg-sub").textContent = `${x.kind === "index" ? x.region : x.group} · Stand ${new Date(x.date).toLocaleDateString(LOC)}`;
     $("#dlg-px").innerHTML = `<strong class="num">${fmt(x.last, x.dec)}${x.unit ? ` <small style="font-size:16px;color:var(--muted)">${esc(x.unit)}</small>` : ""}</strong>
-      <span class="chg ${chgCls(x, x.perf["1T"])} num">${fmtP(x.perf["1T"], 2)} heute</span><span class="chg ${chgCls(x, p)} num">${fmtP(p)} seit ${RL[state.dlgRange]}</span>`;
-    segButtons($("#dlg-range"), ranges, state.dlgRange, (v) => { state.dlgRange = v; renderDialog(); });
+      <span class="chg ${chgCls(x, x.perf["1T"])} num">${fmtP(x.perf["1T"], 2)} zum Vortag</span><span class="chg ${chgCls(x, p)} num">${fmtP(p, Math.abs(p) >= 1000 ? 0 : 1)} seit ${since}</span>`;
+    segButtons($("#dlg-range"), ranges, state.dlgRange, (v) => { state.dlgRange = v; renderDialog(); }, RANGE_BTN);
     drawChart(x, s);
     const f = (label, value, c = "") => `<div><span>${label}</span><b class="num ${c}">${value}</b></div>`;
     const perfRow = (k, label) => f(label, fmtP(x.perf[k]), x.perf[k] == null ? "" : chgCls(x, x.perf[k]) + "-t");
+    const long52 = perfRow("5J", "5 Jahre") + perfRow("10J", "10 Jahre") + f("52-Wochen-Hoch", fmt(x.high52, x.dec)) + f("52-Wochen-Tief", fmt(x.low52, x.dec));
     const common = perfRow("1W", "1 Woche") + perfRow("1M", "1 Monat") + perfRow("YTD", "Seit Jahresbeginn") + perfRow("1J", "1 Jahr");
     $("#dlg-facts").innerHTML = x.kind === "index"
-      ? f("KGV", fmt(x.pe, 1)) + f("Dividendenrendite", x.divYield != null ? fmt(x.divYield, 2) + " %" : "–") + f("Kurs-Buchwert", fmt(x.pb, 2)) + f("Volatilität (30 Tage)", x.vol30 != null ? fmt(x.vol30, 1) + " %" : "–")
-        + common
-        + f("52-Wochen-Hoch", fmt(x.high52, x.dec)) + f("52-Wochen-Tief", fmt(x.low52, x.dec)) + f("Abstand 200-Tage-Linie", fmtP(x.vsSma200), cls(x.vsSma200) + "-t") + f("RSI (14 Tage)", fmt(x.rsi14, 0) + (x.rsi14 >= 70 ? " · überkauft" : x.rsi14 <= 30 ? " · überverkauft" : ""))
-      : common + f("52-Wochen-Hoch", fmt(x.high52, x.dec)) + f("52-Wochen-Tief", fmt(x.low52, x.dec)) + perfRow("5J", "5 Jahre") + f("Volatilität (30 Tage)", x.vol30 != null ? fmt(x.vol30, 1) + " %" : "–");
+      ? f("KGV", fmt(x.pe, 1)) + f("Dividendenrendite", x.divYield != null ? fmt(x.divYield, 2) + " %" : "–") + f("Volatilität (30 Tage)", x.vol30 != null ? fmt(x.vol30, 1) + " %" : "–") + f("RSI (14 Tage)", fmt(x.rsi14, 0) + (x.rsi14 >= 70 ? " · überkauft" : x.rsi14 <= 30 ? " · überverkauft" : ""))
+        + common + long52
+      : common + long52;
     const multi = state.dlgList.length > 1;
     $("#dlg-prev").hidden = $("#dlg-next").hidden = !multi;
   }

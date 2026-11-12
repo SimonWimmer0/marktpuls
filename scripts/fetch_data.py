@@ -51,7 +51,6 @@ INDICES = [
 MACRO = [
     # id, Name, Symbol, Einheit, Dezimalstellen, Gruppe
     ("vix", "VIX (Angstbarometer)", "^VIX", "Pkt", 2, "Volatilität"),
-    ("vstoxx", "VSTOXX", "^V2TX", "Pkt", 2, "Volatilität"),
     ("us10", "US-Rendite 10J", "^TNX", "%", 2, "Zinsen"),
     ("us3m", "US-Rendite 3M", "^IRX", "%", 2, "Zinsen"),
     ("eurusd", "EUR/USD", "EURUSD=X", "", 4, "Währungen"),
@@ -85,18 +84,18 @@ RISKS = [
      ["krieg", "ukraine", "russland", "israel", "iran", "nahost", "taiwan", "konflikt",
       "sanktion", "angriff", "militär", "war ", "missile", "geopolit"]),
     ("trade", "Handel & Zölle", "🚢",
-     ["zoll", "zölle", "handelsstreit", "handelskrieg", "tariff", "trade war", "export",
-      "lieferkette", "supply chain"]),
+     ["zoll", "zölle", "handelsstreit", "handelskrieg", "strafz", "exportverbot", "exportbeschr",
+      "lieferkette"]),
     ("energy", "Energie & Rohstoffe", "🛢️",
      ["ölpreis", "opec", "gaspreis", "energiepreis", "öl ", "erdgas", "oil price", "rohstoff"]),
     ("banks", "Banken & Kredit", "💳",
      ["bankenkrise", "pleite", "insolvenz", "kreditausfall", "zahlungsunfähig", "default",
-      "schulden", "verschuldung", "downgrade", "herabgestuft", "rating", "credit"]),
+      "schulden", "verschuldung", "herabgestuft", "herabstufung", "bankenbeben"]),
     ("valuation", "Bewertung & Blasen", "🫧",
      ["blase", "überbewertet", "bubble", "überhitz", "ki-hype", "ai bubble", "korrektur",
       "crash", "ausverkauf", "selloff", "sell-off", "einbruch"]),
     ("politics", "Politik & Wahlen", "🗳️",
-     ["wahl", "regierung", "shutdown", "haushalt", "trump", "election", "koalition", "budget"]),
+     ["wahl", "regierung", "shutdown", "haushalt", "trump", "koalition", "neuwahl"]),
 ]
 
 NEGATIVE = ["crash", "einbruch", "absturz", "verlust", "sorge", "angst", "risiko", "warn",
@@ -105,15 +104,23 @@ NEGATIVE = ["crash", "einbruch", "absturz", "verlust", "sorge", "angst", "risiko
             "tumble", "warning", "worry", "concern"]
 
 NEWS_QUERIES = [
-    ("de", "AT", "Börse Aktien Risiko"),
-    ("de", "AT", "Aktienmarkt"),
-    ("de", "DE", "DAX Börse"),
+    ("de", "AT", "Börse Aktien"),
+    ("de", "AT", "Aktienmarkt Risiko"),
+    ("de", "DE", "DAX Börse heute"),
     ("de", "AT", "Wiener Börse ATX"),
-    ("de", "DE", "EZB Fed Zinsen"),
-    ("de", "DE", "Inflation Konjunktur"),
-    ("en", "US", "stock market risk"),
-    ("en", "US", "Wall Street stocks"),
+    ("de", "DE", "Wall Street Börse"),
+    ("de", "DE", "EZB Fed Zinsen Börse"),
+    ("de", "DE", "Inflation Konjunktur Börse"),
+    ("de", "DE", "Ölpreis Gold Märkte"),
+    ("de", "DE", "Zölle Handelsstreit Börse"),
+    ("de", "DE", "Geopolitik Börse Anleger"),
 ]
+
+# Schlagzeile muss erkennbar mit Märkten/Wirtschaft zu tun haben
+MARKET_WORDS = ["börse", "aktie", "dax", "atx", "wall street", "anleger", "markt", "märkte", "kurs",
+                "zins", "inflation", "konjunktur", "wirtschaft", "ezb", "fed", "notenbank", "ölpreis",
+                "gold", "euro", "dollar", "rendite", "anleihe", "rezession", "zoll", "zölle", "nasdaq",
+                "s&p", "dow", "nikkei", "investor", "bank", "preis", "handel", "export", "bip"]
 
 
 # ---------------------------------------------------------------- Helfer
@@ -164,7 +171,7 @@ def analyse(s: pd.Series) -> dict:
     last = float(s.iloc[-1])
     prev = float(s.iloc[-2]) if len(s) > 1 else None
     year = s[s.index > s.index[-1] - pd.Timedelta(days=365)]
-    ret = np.log(s).diff().dropna()
+    ret = s.pct_change().dropna()
     sma200 = float(s.iloc[-200:].mean()) if len(s) >= 200 else None
     sma50 = float(s.iloc[-50:].mean()) if len(s) >= 50 else None
     peak = s.cummax()
@@ -178,9 +185,23 @@ def analyse(s: pd.Series) -> dict:
         "1J": pct(last, value_at(s, 365)),
         "3J": pct(last, value_at(s, 365 * 3)) if (s.index[-1] - s.index[0]).days > 365 * 3 - 10 else None,
         "5J": pct(last, value_at(s, 365 * 5)) if (s.index[-1] - s.index[0]).days > 365 * 5 - 10 else None,
+        "10J": pct(last, value_at(s, 3652)) if (s.index[-1] - s.index[0]).days > 3652 - 10 else None,
+        "Max": pct(last, float(s.iloc[0])),
     }
     daily = s.iloc[-272:]
-    weekly = s.resample("W-FRI").last().dropna()
+    def resampled(series, rule):
+        out = series.resample(rule).last().dropna()
+        idx = out.index.tolist()
+        idx[-1] = series.index[-1]  # letzter Punkt trägt das echte Datum, nicht das Periodenende
+        out.index = pd.DatetimeIndex(idx)
+        return out
+
+    w_src = s[s.index >= s.index[-1] - pd.Timedelta(days=3652 + 7)]
+    weekly = resampled(w_src, "W-FRI")
+    # Seit Beginn: Monatswerte, der erste Kurs bleibt als Startpunkt erhalten
+    monthly = resampled(s, "ME")
+    if monthly.index[0] != s.index[0]:
+        monthly = pd.concat([s.iloc[:1], monthly])
     return {
         "last": r(last, 4),
         "prev": r(prev, 4),
@@ -197,6 +218,8 @@ def analyse(s: pd.Series) -> dict:
         "maxDD1J": r(dd[dd.index > s.index[-1] - pd.Timedelta(days=365)].min(), 1),
         "daily": [[d.strftime("%Y-%m-%d"), r(v, 4)] for d, v in daily.items()],
         "weekly": [[d.strftime("%Y-%m-%d"), r(v, 4)] for d, v in weekly.items()],
+        "monthly": [[d.strftime("%Y-%m-%d"), r(v, 4)] for d, v in monthly.items()],
+        "since": s.index[0].strftime("%Y-%m-%d"),
     }
 
 
@@ -210,8 +233,7 @@ def load_prices(symbols: list[str]) -> dict[str, pd.Series]:
         if not missing:
             break
         try:
-            start = (dt.date.today() - dt.timedelta(days=366 * 6)).isoformat()
-            df = yf.download(missing, start=start, interval="1d", auto_adjust=False,
+            df = yf.download(missing, period="max", interval="1d", auto_adjust=False,
                              group_by="ticker", threads=True, progress=False)
         except Exception as e:  # noqa: BLE001
             print("download error", e, file=sys.stderr)
@@ -279,6 +301,8 @@ def load_news() -> list[dict]:
             key = re.sub(r"\W+", "", title.lower())[:80]
             if not title or key in seen:
                 continue
+            if not any(w in title.lower() for w in MARKET_WORDS):
+                continue
             seen.add(key)
             try:
                 when = dt.datetime(*e.published_parsed[:6], tzinfo=dt.timezone.utc).isoformat()
@@ -292,6 +316,20 @@ def load_news() -> list[dict]:
 
 
 # ---------------------------------------------------------------- Auswertung
+def pick_headlines(items: list[dict], n=5, per_source=2) -> list[dict]:
+    """Die wichtigsten Schlagzeilen, höchstens zwei je Quelle."""
+    out, count = [], {}
+    for h in items:
+        src = h.get("source") or ""
+        if count.get(src, 0) >= per_source:
+            continue
+        count[src] = count.get(src, 0) + 1
+        out.append(h)
+        if len(out) == n:
+            break
+    return out
+
+
 def classify_news(news: list[dict]):
     now = dt.datetime.now(dt.timezone.utc)
     risks = []
@@ -299,7 +337,8 @@ def classify_news(news: list[dict]):
         hits = []
         for n in news:
             t = " " + n["title"].lower() + " "
-            if any(k in t for k in kws):
+            # Treffer nur am Wortanfang ("Wahl", nicht "Auswahl")
+            if any(re.search(r"(?<![a-zäöüß])" + re.escape(k), t) for k in kws):
                 neg = sum(1 for w in NEGATIVE if w in t)
                 age_h = 48
                 if n.get("date"):
@@ -310,7 +349,7 @@ def classify_news(news: list[dict]):
         score = sum(w for w, _ in hits)
         risks.append({"id": rid, "name": name, "icon": icon, "count": len(hits),
                       "score": r(score, 1),
-                      "headlines": [h for _, h in hits[:5]]})
+                      "headlines": pick_headlines([h for _, h in hits])})
         for _, n in hits:
             n.setdefault("tags", []).append(rid)
     mx = max([x["score"] or 0 for x in risks] + [1])
@@ -421,7 +460,7 @@ def build(prices: dict, fund: dict, news: list[dict], demo=False) -> dict:
 def demo_data():
     rng = np.random.default_rng(42)
     end = pd.Timestamp(dt.date.today())
-    idx = pd.bdate_range(end - pd.Timedelta(days=365 * 6), end)
+    idx = pd.bdate_range(end - pd.Timedelta(days=365 * 14), end)
     starts = {"^ATX": 3000, "^GDAXI": 13000, "^STOXX50E": 3600, "^STOXX": 410, "^SSMI": 10800,
               "^FTSE": 7000, "^FCHI": 5800, "^GSPC": 3600, "^NDX": 12000, "^DJI": 30000,
               "^RUT": 1900, "^N225": 26000, "^HSI": 26000, "000001.SS": 3300, "^NSEI": 13500,
