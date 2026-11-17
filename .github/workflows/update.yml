@@ -2,11 +2,13 @@ name: Daten aktualisieren und veröffentlichen
 
 on:
   schedule:
-    # Werktags 07:30 und 22:30 Uhr Wiener Winterzeit (06:30 / 21:30 UTC)
-    - cron: "30 6 * * 1-5"
-    - cron: "30 21 * * 1-5"
-    # Samstag früh: Wochenschluss
-    - cron: "30 6 * * 6"
+    # Wiener Zeit werktags 7:30, 9:30, 14:30, 18:30, 22:30 und samstags 7:30.
+    # GitHub plant in UTC, daher je ein Satz für Winterzeit (UTC+1) und Sommerzeit (UTC+2);
+    # der Schritt "Zeitfenster prüfen" lässt nur den passenden Satz laufen.
+    - cron: "30 6,8,13,17,21 * * 1-5"   # Winterzeit
+    - cron: "30 6 * * 6"                # Winterzeit, Samstag
+    - cron: "30 5,7,12,16,20 * * 1-5"   # Sommerzeit
+    - cron: "30 5 * * 6"                # Sommerzeit, Samstag
   workflow_dispatch:
   push:
     branches: [main]
@@ -21,7 +23,32 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.win.outputs.run }}
+    steps:
+      - id: win
+        name: Zeitfenster prüfen
+        env:
+          EVENT: ${{ github.event_name }}
+          CRON: ${{ github.event.schedule }}
+        run: |
+          run=true
+          if [ "$EVENT" = "schedule" ]; then
+            off=$(TZ=Europe/Vienna date +%z)
+            case "$CRON" in
+              "30 6,8,13,17,21 * * 1-5"|"30 6 * * 6") want=+0100 ;;
+              *) want=+0200 ;;
+            esac
+            [ "$off" = "$want" ] || run=false
+          fi
+          echo "run=$run" >> "$GITHUB_OUTPUT"
+          echo "Wien $(TZ=Europe/Vienna date '+%H:%M %z'), Lauf: $run"
+
   update:
+    needs: check
+    if: needs.check.outputs.run == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -41,6 +68,7 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add docs/data.json docs/history.json
           git diff --cached --quiet || git commit -m "Daten aktualisiert $(date -u +%F)"
+          git pull --rebase -X theirs origin main || true
           git push
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
