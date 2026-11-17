@@ -24,6 +24,7 @@
     </a>
     <div class="stamp">
       <span class="dot" id="stamp-dot"></span><span><span class="lbl">Datenstand </span><span id="stamp-time">…</span></span>
+      <button class="iconbtn new" id="btn-new" type="button" hidden title="Seit dem Öffnen sind neue Kurse verfügbar">Neue Kurse laden</button>
       <button class="iconbtn" id="btn-present" type="button" aria-pressed="false" title="Große Darstellung für den Bildschirm im Gespräch">Präsentation</button>
       <button class="iconbtn" id="btn-theme" type="button" title="Hell/Dunkel umschalten" aria-label="Hell/Dunkel umschalten"><svg viewBox="0 0 16 16" width="13" height="13" style="display:block"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg></button>
     </div>
@@ -243,7 +244,7 @@
       <p>Kurse: Yahoo Finance (Schlusskurse, teils zeitverzögert; Tagesverlauf in 5-Minuten-Schritten). Bewertung (KGV, Forward-KGV, KBV, Dividende): aus den Einzelwerten der Indizes nach Börsenwert gewichtet, sonst über börsengehandelte Fonds auf den jeweiligen Markt. Zinsen: Europäische Zentralbank. Volatilität: annualisierte Schwankung der letzten 30 Handelstage. Meldungen: Google News.</p>
       <p>Die Marktstimmung (0 = sehr verhalten, 100 = sehr zuversichtlich) ist ein eigener Mischindikator aus VIX, Trend, Marktbreite, Momentum, RSI und dem Verhältnis Aktien zu Gold.</p>
     </details>
-    <span>Datenstand <span id="foot-stamp">…</span> · Aktualisierung werktags um 7:30, 9:30, 14:30, 18:30 und 22:30 Uhr</span>
+    <span>Datenstand <span id="foot-stamp">…</span> · Kurse werktags alle 15 Minuten (Börsen teils 15 Min. verzögert), Kennzahlen und Meldungen um 7:30, 9:30, 14:30, 18:30 und 22:30 Uhr</span>
   </div>
 </footer>
 

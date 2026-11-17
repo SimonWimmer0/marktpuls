@@ -2,13 +2,12 @@ name: Daten aktualisieren und veröffentlichen
 
 on:
   schedule:
-    # Wiener Zeit werktags 7:30, 9:30, 14:30, 18:30, 22:30 und samstags 7:30.
-    # GitHub plant in UTC, daher je ein Satz für Winterzeit (UTC+1) und Sommerzeit (UTC+2);
-    # der Schritt "Zeitfenster prüfen" lässt nur den passenden Satz laufen.
-    - cron: "30 6,8,13,17,21 * * 1-5"   # Winterzeit
-    - cron: "30 6 * * 6"                # Winterzeit, Samstag
-    - cron: "30 5,7,12,16,20 * * 1-5"   # Sommerzeit
-    - cron: "30 5 * * 6"                # Sommerzeit, Samstag
+    # Alle 15 Minuten; der Job "check" lässt nur Läufe werktags 7:25–23:00 und
+    # samstags 7:25–8:15 Wiener Zeit durch (Sommer- und Winterzeit).
+    # Kennzahlen, Einzelwerte-Stammdaten, Zinsen und Meldungen holt fetch_data.py --mode auto
+    # nur beim ersten Lauf nach 7:30, 9:30, 14:30, 18:30 und 22:30 Uhr (Vollabruf).
+    - cron: "*/15 5-22 * * 1-5"
+    - cron: "*/15 5-7 * * 6"
   workflow_dispatch:
   push:
     branches: [main]
@@ -32,19 +31,20 @@ jobs:
         name: Zeitfenster prüfen
         env:
           EVENT: ${{ github.event_name }}
-          CRON: ${{ github.event.schedule }}
         run: |
           run=true
           if [ "$EVENT" = "schedule" ]; then
-            off=$(TZ=Europe/Vienna date +%z)
-            case "$CRON" in
-              "30 6,8,13,17,21 * * 1-5"|"30 6 * * 6") want=+0100 ;;
-              *) want=+0200 ;;
-            esac
-            [ "$off" = "$want" ] || run=false
+            dow=$(TZ=Europe/Vienna date +%u); hm=$(TZ=Europe/Vienna date +%H%M)
+            if [ "$dow" -le 5 ]; then
+              { [ "$hm" -ge 0725 ] && [ "$hm" -le 2300 ]; } || run=false
+            elif [ "$dow" -eq 6 ]; then
+              { [ "$hm" -ge 0725 ] && [ "$hm" -le 0815 ]; } || run=false
+            else
+              run=false
+            fi
           fi
           echo "run=$run" >> "$GITHUB_OUTPUT"
-          echo "Wien $(TZ=Europe/Vienna date '+%H:%M %z'), Lauf: $run"
+          echo "Wien $(TZ=Europe/Vienna date '+%a %H:%M'), Lauf: $run"
 
   update:
     needs: check
@@ -61,15 +61,19 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - name: Daten holen
-        run: python scripts/fetch_data.py
-      - name: Datenstand speichern
+        run: python scripts/fetch_data.py --mode auto
+      - name: Datenstand speichern (nur nach Vollabruf)
         run: |
-          git config user.name "marktpuls-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add docs/data.json docs/history.json
-          git diff --cached --quiet || git commit -m "Daten aktualisiert $(date -u +%F)"
-          git pull --rebase -X theirs origin main || true
-          git push
+          full=$(python -c "import json;d=json.load(open('docs/stamp.json'));print(d['generated']==d['fullGenerated'])")
+          echo "Vollabruf: $full"
+          if [ "$full" = "True" ]; then
+            git config user.name "marktpuls-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add docs/data.json docs/history.json docs/stamp.json cache/infos.json
+            git diff --cached --quiet || git commit -m "Daten aktualisiert $(date -u +%F)"
+            git pull --rebase -X theirs origin main || true
+            git push
+          fi
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

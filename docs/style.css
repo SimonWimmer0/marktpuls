@@ -74,6 +74,9 @@ button { font: inherit; color: inherit; }
 .dot.stale { background: #ffbf3c; box-shadow: 0 0 0 3px rgba(255, 191, 60, .2); }
 .iconbtn { border: 1px solid rgba(255, 255, 255, .2); background: transparent; color: var(--head-fg); border-radius: 7px; padding: 6px 10px; cursor: pointer; font-size: 12.5px; }
 .iconbtn:hover, .iconbtn[aria-pressed="true"] { background: rgba(255, 255, 255, .1); }
+.iconbtn.new { background: var(--yellow); color: var(--yellow-ink); border-color: var(--yellow); font-weight: 600; }
+.iconbtn.new:hover { background: #fff07a; }
+.iconbtn[hidden] { display: none; }
 .tabs-scroll { overflow-x: auto; scrollbar-width: none; }
 .tabs-scroll::-webkit-scrollbar { display: none; }
 .tabs { display: flex; gap: 6px; }

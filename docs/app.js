@@ -21,6 +21,19 @@
     try { data = await (await fetch("data.json?ts=" + Date.now(), { cache: "no-store" })).json(); }
     catch (e) { $("#app-error").hidden = false; return; }
   }
+  // Neue Kurse während die Seite offen ist: dezenter Hinweis statt automatischem Neuladen
+  if (!window.__DATA__) {
+    const check = async () => {
+      if (document.hidden) return;
+      try {
+        const st = await (await fetch("stamp.json?ts=" + Date.now(), { cache: "no-store" })).json();
+        if (st.generated && st.generated > data.generated) $("#btn-new").hidden = false;
+      } catch {}
+    };
+    setInterval(check, 3 * 60 * 1000);
+    document.addEventListener("visibilitychange", check);
+    $("#btn-new").onclick = () => location.reload();
+  }
   const I = data.indices || [];
   const M = data.macro || {};
   const ALL = {};

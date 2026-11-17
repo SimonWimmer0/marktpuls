@@ -25,6 +25,9 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 OUT = ROOT / "docs" / "data.json"
 HIST = ROOT / "docs" / "history.json"
+INFO_CACHE = ROOT / "cache" / "infos.json"  # Stammdaten der Einzelwerte aus dem letzten Vollabruf
+INFO_KEYS = ("shortName", "longName", "sector", "currency", "marketCap", "sharesOutstanding",
+             "impliedSharesOutstanding", "trailingPE", "forwardPE", "priceToBook", "dividendYield")
 
 # ---------------------------------------------------------------- Universum
 # proxy = US-gelistetes ETF, aus dem KGV und Dividendenrendite gelesen werden
@@ -331,7 +334,7 @@ def _info(ticker: str) -> dict:
     return {}
 
 
-def load_members() -> dict[str, dict]:
+def load_members(cached: bool = False) -> dict[str, dict]:
     """Einzelwerte je Index: Börsenwert, Bewertung, Entwicklung und Kurse des letzten Jahres."""
     from concurrent.futures import ThreadPoolExecutor
 
@@ -340,11 +343,26 @@ def load_members() -> dict[str, dict]:
     from constituents import CONSTITUENTS, SECTOR_DE, SHARES_FALLBACK
 
     tickers = sorted({t for c in CONSTITUENTS.values() for t in c["tickers"]})
-    with ThreadPoolExecutor(max_workers=6) as ex:
-        infos = dict(zip(tickers, ex.map(_info, tickers)))
-    for t in [t for t, i in infos.items() if not i.get("shortName")]:  # zweiter Versuch, einzeln
-        time.sleep(1)
-        infos[t] = _info(t)
+    if cached:
+        # Schnellabruf: Stammdaten aus dem letzten Vollabruf, nur Kurse neu
+        try:
+            infos = json.loads(INFO_CACHE.read_text())
+        except Exception:  # noqa: BLE001
+            return {}
+    else:
+        with ThreadPoolExecutor(max_workers=6) as ex:
+            infos = dict(zip(tickers, ex.map(_info, tickers)))
+        for t in [t for t, i in infos.items() if not i.get("shortName")]:  # zweiter Versuch, einzeln
+            time.sleep(1)
+            infos[t] = _info(t)
+        slim = {}
+        for t, i in infos.items():
+            if i.get("shortName") or i.get("longName"):
+                slim[t] = {k: i.get(k) for k in INFO_KEYS}
+                slim[t]["px"] = i.get("regularMarketPrice") or i.get("currentPrice") or i.get("previousClose")
+        INFO_CACHE.parent.mkdir(parents=True, exist_ok=True)
+        INFO_CACHE.write_text(json.dumps(slim, ensure_ascii=False, indent=0))
+        infos = slim
     try:
         df = yf.download(tickers, period="2y", interval="1d", auto_adjust=False,
                          group_by="ticker", threads=True, progress=False)
@@ -368,6 +386,12 @@ def load_members() -> dict[str, dict]:
             if c is None or not info:
                 continue
             last = float(c.iloc[-1])
+            if cached and info.get("px"):
+                # Börsenwert und Kennzahlen mit dem Kurs fortschreiben
+                f = last / float(info["px"])
+                info = {**info, **{k: info[k] * f for k in ("marketCap", "trailingPE", "forwardPE", "priceToBook") if info.get(k)}}
+                if info.get("dividendYield"):
+                    info["dividendYield"] = info["dividendYield"] / f
             mcap = info.get("marketCap")
             if not mcap:
                 shares = info.get("sharesOutstanding") or info.get("impliedSharesOutstanding") or SHARES_FALLBACK.get(t)
@@ -754,10 +778,46 @@ def demo_data():
 
 
 # ---------------------------------------------------------------- Main
+FULL_TIMES = ((7, 30), (9, 30), (14, 30), (18, 30), (22, 30))  # Wiener Zeit, Vollabruf
+
+
+def full_due(prev: dict | None) -> bool:
+    """Vollabruf nötig, wenn der letzte vor dem zuletzt erreichten Termin liegt."""
+    if not prev or not prev.get("generated") or not prev.get("members"):
+        return True
+    from zoneinfo import ZoneInfo
+
+    tz = ZoneInfo("Europe/Vienna")
+    now = dt.datetime.now(tz)
+    last = dt.datetime.fromisoformat(prev.get("fullGenerated") or prev["generated"]).astimezone(tz)
+    for back in range(0, 4):
+        day = (now - dt.timedelta(days=back)).date()
+        for h, m in reversed(FULL_TIMES):
+            t = dt.datetime.combine(day, dt.time(h, m), tz)
+            if t <= now:
+                return last < t
+    return True
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--demo", action="store_true")
+    ap.add_argument("--mode", choices=("full", "quick", "auto"), default="full",
+                    help="quick: nur Kurse und Tagesverlauf neu, Rest aus data.json; auto: full zu den Terminen")
     args = ap.parse_args()
+    prev = None
+    if OUT.exists():
+        try:
+            prev = json.loads(OUT.read_text())
+        except Exception:  # noqa: BLE001
+            prev = None
+    mode = args.mode
+    if mode == "auto":
+        mode = "full" if full_due(prev) else "quick"
+    if mode == "quick" and (not prev or not INFO_CACHE.exists()):
+        mode = "full"
+    print("Modus:", "Demo" if args.demo else mode, file=sys.stderr)
+    intraday = members = rates = None
     if args.demo:
         prices, fund, news = demo_data()
     else:
@@ -766,15 +826,33 @@ def main():
         if len(prices) < 5:
             print("Zu wenige Kurse geladen – data.json bleibt unverändert.", file=sys.stderr)
             sys.exit(1)
-        fund = load_fundamentals([p for *_, p in INDICES])
         intraday = load_intraday([s for _, _, s, *_ in INDICES] + [m[2] for m in MACRO])
-        members = load_members()
-        rates = load_rates()
-        news = load_news()
-    data, hist = build(prices, fund, news, demo=args.demo, intraday=intraday if not args.demo else None,
-                       members=members if not args.demo else None, rates=rates if not args.demo else None)
+        if mode == "full":
+            fund = load_fundamentals([p for *_, p in INDICES])
+            members = load_members()
+            rates = load_rates()
+            news = load_news()
+        else:
+            fund = {x["proxy"]: {"pe": x.get("pe"), "divYield": x.get("divYield"), "pb": x.get("pb")}
+                    for x in prev.get("indices", []) if not x.get("hasMembers")}
+            members = load_members(cached=True) or prev.get("members")
+            rates = prev.get("rates")
+            news = []
+    data, hist = build(prices, fund, news, demo=args.demo, intraday=intraday, members=members, rates=rates)
+    if not args.demo and mode == "quick":
+        # Meldungen und Bewertung der ETF-Märkte bleiben vom letzten Vollabruf
+        data["news"], data["risks"] = prev.get("news", []), prev.get("risks", [])
+        old = {x["id"]: x for x in prev.get("indices", [])}
+        for x in data["indices"]:
+            o = old.get(x["id"])
+            if o and not x["hasMembers"]:
+                x["divYield"] = o.get("divYield")
+        data["fullGenerated"] = prev.get("fullGenerated") or prev.get("generated")
+    else:
+        data["fullGenerated"] = data["generated"]
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")))
+    (OUT.parent / "stamp.json").write_text(json.dumps({"generated": data["generated"], "fullGenerated": data["fullGenerated"]}))
     if not args.demo:
         HIST.write_text(json.dumps(hist, ensure_ascii=False))
     print(f"geschrieben: {OUT} ({OUT.stat().st_size // 1024} KB)", file=sys.stderr)
