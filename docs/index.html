@@ -31,9 +31,12 @@
   <div class="tabs-scroll"><nav class="wrap tabs" id="tabs" aria-label="Bereiche">
     <a href="#ueberblick">Überblick</a>
     <a href="#indizes">Indizes</a>
+    <a href="#kennzahlen">Kennzahlen</a>
+    <a href="#einzelwerte">Einzelwerte</a>
+    <a href="#analyse">Chartanalyse</a>
     <a href="#vergleich">Vergleich</a>
     <a href="#umfeld">Zinsen &amp; Rohstoffe</a>
-    <a href="#risiken">Risiken</a>
+    <a href="#risiken">Meldungen &amp; Marktrisiken</a>
   </nav></div>
 </header>
 
@@ -89,6 +92,96 @@
   </main>
 </div>
 
+<!-- ============ Kennzahlen ============ -->
+<div class="view" data-view="kennzahlen" hidden>
+  <main class="wrap">
+    <section>
+      <div class="sec-head"><h2>Bewertung</h2><p>Index auswählen. Grün heißt im Vergleich günstig bewertet, Rot teuer, je kräftiger, desto deutlicher.</p></div>
+      <div class="chips" id="kz-pick" role="group" aria-label="Index"></div>
+      <div class="kz-head"><h3 id="kz-title"></h3><p id="kz-src"></p></div>
+      <div class="kz-grid" id="kz-big"></div>
+      <div class="kz-grid small" id="kz-small"></div>
+    </section>
+    <section>
+      <div class="sec-head">
+        <h2>Im Vergleich</h2><p>Alle Indizes nach Kennzahl gereiht. Zeile anklicken, um den Index oben anzuzeigen.</p>
+        <div class="tools"><div class="seg" id="kz-metric" role="group" aria-label="Kennzahl"></div></div>
+      </div>
+      <div class="panel"><div class="bars" id="kz-bars"></div></div>
+    </section>
+    <section>
+      <div class="sec-head"><h2>Alle Kennzahlen</h2></div>
+      <div class="tablewrap"><table id="kz-matrix" class="compact"><thead></thead><tbody></tbody></table></div>
+      <p class="foot-note">KGV, Forward-KGV und Kurs-Buchwert der Indizes werden aus den Einzelwerten berechnet (Summe Börsenwert ÷ Summe Gewinne). Wo keine Einzelwerte vorliegen, stammen sie von einem börsengehandelten Fonds auf den Markt.</p>
+    </section>
+  </main>
+</div>
+
+<!-- ============ Einzelwerte ============ -->
+<div class="view" data-view="einzelwerte" hidden>
+  <main class="wrap">
+    <section>
+      <div class="sec-head">
+        <h2>Einzelwerte</h2><p id="ew-note"></p>
+        <div class="tools"><div class="seg" id="ew-period" role="group" aria-label="Zeitraum"></div></div>
+      </div>
+      <div class="chips" id="ew-pick" role="group" aria-label="Index"></div>
+      <div class="tm-box" id="ew-map"></div>
+    </section>
+    <section class="split three">
+      <div><div class="sec-head"><h2>Stärkste Werte</h2></div><div class="movers" id="ew-top"></div></div>
+      <div><div class="sec-head"><h2>Schwächste Werte</h2></div><div class="movers" id="ew-flop"></div></div>
+      <div><div class="sec-head"><h2>Marktbreite</h2></div><div class="panel" id="ew-breadth"></div></div>
+    </section>
+    <section>
+      <div class="sec-head"><h2>Alle Werte</h2><p>Spaltenkopf anklicken zum Sortieren, Zeile anklicken für den Chart.</p></div>
+      <div class="tablewrap"><table id="ew-table" class="compact"><thead></thead><tbody></tbody></table></div>
+    </section>
+  </main>
+</div>
+
+<!-- ============ Chartanalyse ============ -->
+<div class="view" data-view="analyse" hidden>
+  <main class="wrap">
+    <section>
+      <div class="sec-head">
+        <h2>Chartanalyse</h2><p>Markt wählen und Hilfslinien ein- oder ausblenden. Mit der Maus über den Chart fahren zeigt die Werte am jeweiligen Tag.</p>
+      </div>
+      <div class="ta-bar">
+        <label class="ta-sel"><span>Markt</span><select id="ta-pick"></select></label>
+        <div class="seg" id="ta-range" role="group" aria-label="Zeitraum"></div>
+      </div>
+      <div class="chips" id="ta-tools" role="group" aria-label="Hilfsmittel"></div>
+      <div class="panel ta-panel">
+        <div class="ta-head"><div><h3 id="ta-title"></h3><div class="sub" id="ta-sub"></div></div></div>
+        <div class="ta-read num" id="ta-read"></div>
+        <div id="ta-chart">
+          <div id="ta-main"></div>
+          <div class="ta-subwin" id="ta-rsi" hidden></div>
+          <div class="ta-subwin" id="ta-macd" hidden></div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="sec-head"><h2>Signale auf einen Blick</h2><p>Automatisch aus den Tagesschlusskursen abgeleitet.</p></div>
+      <div class="signals" id="ta-signals"></div>
+    </section>
+    <section>
+      <details class="explain panel">
+        <summary>Was die Hilfsmittel bedeuten</summary>
+        <dl>
+          <dt>Gleitende Durchschnitte (20, 50, 200 Tage)</dt><dd>Durchschnittskurs der letzten 20, 50 oder 200 Handelstage. Die 200-Tage-Linie gilt als Maß für den langfristigen Trend. Kreuzt die 50- die 200-Tage-Linie nach oben, spricht man vom Golden Cross, nach unten vom Death Cross.</dd>
+          <dt>Bollinger-Bänder</dt><dd>20-Tage-Linie plus und minus zwei Standardabweichungen. Enge Bänder zeigen ruhige Phasen, weite Bänder starke Schwankungen.</dd>
+          <dt>Unterstützung &amp; Widerstand</dt><dd>Kursbereiche, an denen der Markt im gewählten Zeitraum mehrfach gedreht hat. Darunter liegende Zonen gelten als Unterstützung, darüber liegende als Widerstand.</dd>
+          <dt>Trendkanal</dt><dd>Ausgleichslinie durch die Kurse des Zeitraums mit einem Band von zwei Standardabweichungen.</dd>
+          <dt>RSI (Relative-Stärke-Index)</dt><dd>Verhältnis der Kursgewinne zu den Verlusten der letzten 14 Tage, von 0 bis 100. Über 70 gilt als überkauft, unter 30 als überverkauft.</dd>
+          <dt>MACD</dt><dd>Differenz der 12- und 26-Tage-Durchschnitte (exponentiell gewichtet) mit einer 9-Tage-Signallinie. Liegt der MACD über der Signallinie, überwiegt der Aufwärtsschwung.</dd>
+        </dl>
+      </details>
+    </section>
+  </main>
+</div>
+
 <!-- ============ Vergleich ============ -->
 <div class="view" data-view="vergleich" hidden>
   <main class="wrap">
@@ -111,7 +204,16 @@
 <div class="view" data-view="umfeld" hidden>
   <main class="wrap">
     <section>
-      <div class="sec-head"><h2>Zinsen, Währungen &amp; Rohstoffe</h2><p>Kachel anklicken, um den Chart groß zu öffnen.</p></div>
+      <div class="sec-head"><h2>Zinsen Euroraum</h2><p>Leitzinsen, Euribor und Renditen nach Laufzeit. Kachel anklicken, um den Verlauf groß zu öffnen.</p></div>
+      <div id="rates"></div>
+    </section>
+    <section>
+      <div class="sec-head"><h2>Zinskurve</h2><p>Renditen von Staatsanleihen bester Bonität (AAA) im Euroraum nach Laufzeit. Zeigt, wie sich Fixzinsen über verschiedene Laufzeiten entwickeln.</p></div>
+      <div class="panel curve" id="curve"></div>
+      <p class="foot-note">Quelle: Europäische Zentralbank. Der Euribor wird als Monatsdurchschnitt veröffentlicht. Swapsätze sind lizenzpflichtig und können nicht frei abgerufen werden; die AAA-Renditen verlaufen ähnlich und dienen als Orientierung für die Laufzeiten.</p>
+    </section>
+    <section>
+      <div class="sec-head"><h2>Währungen, Rohstoffe &amp; US-Zinsen</h2><p>Kachel anklicken, um den Chart groß zu öffnen.</p></div>
       <div id="macro-groups"></div>
     </section>
   </main>
@@ -121,14 +223,14 @@
 <div class="view" data-view="risiken" hidden>
   <main class="wrap">
     <section>
-      <div class="sec-head"><h2>Risiko-Radar</h2><p>Schlagzeilen der letzten drei Tage, automatisch nach Themen sortiert. Je mehr und je schärfer die Meldungen, desto höher die Stufe.</p></div>
+      <div class="sec-head"><h2>Marktrisiken</h2><p>Schlagzeilen der letzten drei Tage, automatisch nach Themen sortiert. Je mehr und je schärfer die Meldungen, desto höher die Stufe.</p></div>
       <div class="risk-layout">
         <div class="panel"><div id="radar"></div></div>
         <div class="risks" id="risks"></div>
       </div>
     </section>
     <section>
-      <div class="sec-head"><h2>Aktuelle Schlagzeilen</h2></div>
+      <div class="sec-head"><h2>Aktuelle Meldungen</h2></div>
       <div class="news" id="news"></div>
     </section>
   </main>
@@ -138,7 +240,7 @@
   <div class="wrap">
     <details>
       <summary>Datenquellen &amp; Methodik</summary>
-      <p>Kurse: Yahoo Finance (Schlusskurse, teils zeitverzögert). KGV und Dividendenrendite: börsengehandelte Fonds auf den jeweiligen Markt. Volatilität: annualisierte Schwankung der letzten 30 Handelstage. Schlagzeilen: Google News.</p>
+      <p>Kurse: Yahoo Finance (Schlusskurse, teils zeitverzögert; Tagesverlauf in 5-Minuten-Schritten). Bewertung (KGV, Forward-KGV, KBV, Dividende): aus den Einzelwerten der Indizes nach Börsenwert gewichtet, sonst über börsengehandelte Fonds auf den jeweiligen Markt. Zinsen: Europäische Zentralbank. Volatilität: annualisierte Schwankung der letzten 30 Handelstage. Meldungen: Google News.</p>
       <p>Die Marktstimmung (0 = sehr verhalten, 100 = sehr zuversichtlich) ist ein eigener Mischindikator aus VIX, Trend, Marktbreite, Momentum, RSI und dem Verhältnis Aktien zu Gold.</p>
     </details>
     <span>Datenstand <span id="foot-stamp">…</span> · Aktualisierung werktags morgens und abends</span>

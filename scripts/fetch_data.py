@@ -22,6 +22,7 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 OUT = ROOT / "docs" / "data.json"
 HIST = ROOT / "docs" / "history.json"
 
@@ -165,6 +166,11 @@ def rsi(s: pd.Series, n=14):
     return 100 - 100 / (1 + rs)
 
 
+def rv(v):
+    """Kurs auf sinnvolle Stellen runden (spart Platz in data.json)."""
+    return r(v, 2 if abs(v) >= 100 else 4)
+
+
 def analyse(s: pd.Series) -> dict:
     s = s.dropna()
     s = s[~s.index.duplicated(keep="last")]
@@ -188,7 +194,9 @@ def analyse(s: pd.Series) -> dict:
         "10J": pct(last, value_at(s, 3652)) if (s.index[-1] - s.index[0]).days > 3652 - 10 else None,
         "Max": pct(last, float(s.iloc[0])),
     }
-    daily = s.iloc[-272:]
+    # Tageswerte der letzten gut 10 Jahre (plus Vorlauf für die 200-Tage-Linie)
+    daily = s[s.index >= s.index[-1] - pd.Timedelta(days=3652 + 300)]
+
     def resampled(series, rule):
         out = series.resample(rule).last().dropna()
         idx = out.index.tolist()
@@ -196,12 +204,10 @@ def analyse(s: pd.Series) -> dict:
         out.index = pd.DatetimeIndex(idx)
         return out
 
-    w_src = s[s.index >= s.index[-1] - pd.Timedelta(days=3652 + 7)]
-    weekly = resampled(w_src, "W-FRI")
-    # Seit Beginn: Monatswerte, der erste Kurs bleibt als Startpunkt erhalten
-    monthly = resampled(s, "ME")
-    if monthly.index[0] != s.index[0]:
-        monthly = pd.concat([s.iloc[:1], monthly])
+    # Seit Beginn: Wochenwerte, der erste Kurs bleibt als Startpunkt erhalten
+    weekly = resampled(s, "W-FRI")
+    if weekly.index[0] != s.index[0]:
+        weekly = pd.concat([s.iloc[:1], weekly])
     return {
         "last": r(last, 4),
         "prev": r(prev, 4),
@@ -216,9 +222,8 @@ def analyse(s: pd.Series) -> dict:
         "vol30": r(ret.iloc[-30:].std() * math.sqrt(252) * 100, 1) if len(ret) >= 30 else None,
         "rsi14": r(rsi(s), 0),
         "maxDD1J": r(dd[dd.index > s.index[-1] - pd.Timedelta(days=365)].min(), 1),
-        "daily": [[d.strftime("%Y-%m-%d"), r(v, 4)] for d, v in daily.items()],
-        "weekly": [[d.strftime("%Y-%m-%d"), r(v, 4)] for d, v in weekly.items()],
-        "monthly": [[d.strftime("%Y-%m-%d"), r(v, 4)] for d, v in monthly.items()],
+        "daily": [[d.strftime("%Y-%m-%d"), rv(v)] for d, v in daily.items()],
+        "weekly": [[d.strftime("%Y-%m-%d"), rv(v)] for d, v in weekly.items()],
         "since": s.index[0].strftime("%Y-%m-%d"),
     }
 
@@ -279,6 +284,235 @@ def load_fundamentals(proxies: list[str]) -> dict[str, dict]:
         }
         time.sleep(0.4)
     return res
+
+
+def load_intraday(symbols: list[str]) -> dict[str, dict]:
+    """Kursverlauf innerhalb des letzten Handelstags (5 Min.) und der letzten Woche (30 Min.)."""
+    import yfinance as yf
+
+    out: dict[str, dict] = {s: {} for s in symbols}
+    for key, period, interval in (("1T", "5d", "5m"), ("1W", "5d", "30m")):
+        try:
+            df = yf.download(symbols, period=period, interval=interval, auto_adjust=False,
+                             group_by="ticker", threads=True, progress=False, prepost=False)
+        except Exception as e:  # noqa: BLE001
+            print("intraday error", e, file=sys.stderr)
+            continue
+        for sym in symbols:
+            try:
+                col = (df[sym]["Close"] if isinstance(df.columns, pd.MultiIndex) else df["Close"]).dropna()
+            except Exception:  # noqa: BLE001
+                continue
+            if len(col) < 5:
+                continue
+            idx = pd.to_datetime(col.index)
+            idx = idx.tz_convert("Europe/Vienna") if idx.tz is not None else idx
+            col = pd.Series(col.values, index=idx)
+            if key == "1T":
+                # letzter Handelstag (auch wenn er erst läuft); nur bei weniger als 15 Minuten den vorigen
+                days = sorted(set(col.index.date))
+                day = days[-1]
+                if (col.index.date == day).sum() < 3 and len(days) > 1:
+                    day = days[-2]
+                col = col[col.index.date == day]
+            out[sym][key] = [[t.strftime("%Y-%m-%dT%H:%M"), rv(v)] for t, v in col.items()]
+        time.sleep(1)
+    return out
+
+
+def _info(ticker: str) -> dict:
+    import yfinance as yf
+
+    for attempt in range(3):
+        try:
+            return yf.Ticker(ticker).info or {}
+        except Exception:  # noqa: BLE001
+            time.sleep(2 + attempt * 3)
+    return {}
+
+
+def load_members() -> dict[str, dict]:
+    """Einzelwerte je Index: Börsenwert, Bewertung, Entwicklung und Kurse des letzten Jahres."""
+    from concurrent.futures import ThreadPoolExecutor
+
+    import yfinance as yf
+
+    from constituents import CONSTITUENTS, SECTOR_DE, SHARES_FALLBACK
+
+    tickers = sorted({t for c in CONSTITUENTS.values() for t in c["tickers"]})
+    with ThreadPoolExecutor(max_workers=6) as ex:
+        infos = dict(zip(tickers, ex.map(_info, tickers)))
+    for t in [t for t, i in infos.items() if not i.get("shortName")]:  # zweiter Versuch, einzeln
+        time.sleep(1)
+        infos[t] = _info(t)
+    try:
+        df = yf.download(tickers, period="2y", interval="1d", auto_adjust=False,
+                         group_by="ticker", threads=True, progress=False)
+    except Exception as e:  # noqa: BLE001
+        print("member download error", e, file=sys.stderr)
+        return {}
+
+    def close(t):
+        try:
+            c = df[t]["Close"].dropna()
+            c.index = pd.to_datetime(c.index).tz_localize(None)
+            return c.astype(float) if len(c) > 30 else None
+        except Exception:  # noqa: BLE001
+            return None
+
+    res = {}
+    for iid, cfg in CONSTITUENTS.items():
+        rows, series = [], {}
+        for t in cfg["tickers"]:
+            info, c = infos.get(t, {}), close(t)
+            if c is None or not info:
+                continue
+            last = float(c.iloc[-1])
+            mcap = info.get("marketCap")
+            if not mcap:
+                shares = info.get("sharesOutstanding") or info.get("impliedSharesOutstanding") or SHARES_FALLBACK.get(t)
+                mcap = shares * last if shares else None
+            if not mcap:
+                continue
+            pe, fpe, pb = info.get("trailingPE"), info.get("forwardPE"), info.get("priceToBook")
+            dy = info.get("dividendYield")
+            dy = dy / 100 if dy and dy > 0.3 else dy  # Yahoo liefert teils Prozent, teils Anteil
+            name = (info.get("shortName") or info.get("longName") or t).strip()
+            name = re.sub(r"\s{2,}.*$", "", name)
+            rows.append({
+                "t": t, "n": name, "sector": SECTOR_DE.get(info.get("sector"), info.get("sector") or "Sonstige"),
+                "cur": info.get("currency"), "mcap": float(mcap), "last": r(last, 2),
+                "pe": r(pe, 1) if pe and 0 < pe < 300 else None,
+                "fpe": r(fpe, 1) if fpe and 0 < fpe < 300 else None,
+                "pb": r(pb, 2) if pb and 0 < pb < 100 else None,
+                "dy": r(dy * 100, 2) if dy and 0 < dy < 0.25 else None,
+                "perf": {
+                    "1T": r(pct(last, float(c.iloc[-2]))),
+                    "1W": r(pct(last, value_at(c, 7))), "1M": r(pct(last, value_at(c, 30))),
+                    "3M": r(pct(last, value_at(c, 91))), "YTD": r(pct(last, ytd_base(c))),
+                    "1J": r(pct(last, value_at(c, 365))),
+                },
+            })
+            series[t] = c[c.index >= c.index[-1] - pd.Timedelta(days=366)]
+        if len(rows) < 5:
+            continue
+        total = sum(x["mcap"] for x in rows)
+        for x in rows:
+            x["w"] = r(x["mcap"] / total * 100, 2)
+
+        # Index-Kennzahlen aus den Einzelwerten: Summe Börsenwert / Summe Gewinne
+        def agg(key):
+            with_val = [x for x in rows if x.get(key)]
+            cover = sum(x["mcap"] for x in with_val) / total
+            if cover < 0.6:
+                return None
+            return r(sum(x["mcap"] for x in with_val) / sum(x["mcap"] / x[key] for x in with_val), 1)
+
+        dy_rows = [x for x in rows if x.get("dy") is not None]
+        dates = sorted(set().union(*[set(v.index) for v in series.values()]))
+        dates = [d for d in dates if d >= max(v.index[0] for v in series.values())]
+        for x in rows:
+            v = series[x["t"]].reindex(dates).ffill()
+            x["c"] = [r(y, 2) for y in v.values]
+        rows.sort(key=lambda x: -x["mcap"])
+        res[iid] = {
+            "note": cfg["note"], "count": len(rows), "currency": rows[0]["cur"],
+            "pe": agg("pe"), "fpe": agg("fpe"), "pb": agg("pb"),
+            "dy": r(sum(x["mcap"] * x["dy"] for x in dy_rows) / sum(x["mcap"] for x in dy_rows), 2) if dy_rows else None,
+            "dates": [d.strftime("%Y-%m-%d") for d in dates],
+            "members": [{**x, "mcap": r(x["mcap"] / 1e9, 2)} for x in rows],
+        }
+    print("Einzelwerte:", {k: v["count"] for k, v in res.items()}, file=sys.stderr)
+    return res
+
+
+ECB = "https://data-api.ecb.europa.eu/service/data/"
+
+
+def _ecb(key: str, start: str) -> pd.Series | None:
+    import csv
+    import io
+    import urllib.request
+
+    url = f"{ECB}{key}?startPeriod={start}&format=csvdata"
+    for attempt in range(3):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "MarktPuls/1.0"})
+            with urllib.request.urlopen(req, timeout=40) as resp:
+                text = resp.read().decode("utf-8")
+            rows = list(csv.DictReader(io.StringIO(text)))
+            ser = pd.Series({pd.Timestamp(x["TIME_PERIOD"]): float(x["OBS_VALUE"]) for x in rows if x.get("OBS_VALUE")})
+            return ser.sort_index() if len(ser) else None
+        except Exception as e:  # noqa: BLE001
+            print("ecb error", key, e, file=sys.stderr)
+            time.sleep(3)
+    return None
+
+
+def load_rates() -> dict:
+    """Zinsen im Euroraum aus dem EZB-Datenportal (frei nutzbar, Quelle: EZB)."""
+    start10 = (dt.date.today() - dt.timedelta(days=3652 + 30)).isoformat()
+    start_m = (dt.date.today() - dt.timedelta(days=365 * 21)).strftime("%Y-%m")
+    out = {"source": "Europäische Zentralbank (EZB-Datenportal)", "items": [], "curve": None}
+
+    def item(iid, name, ser, note, freq="D", dec=2):
+        if ser is None or not len(ser):
+            return
+        last = float(ser.iloc[-1])
+        def ago(days):
+            sub = ser[ser.index <= ser.index[-1] - pd.Timedelta(days=days)]
+            return float(sub.iloc[-1]) if len(sub) else None
+        hist = ser
+        if freq == "D":
+            hist = ser.resample("W-FRI").last().dropna() if len(ser) > 800 else ser
+        out["items"].append({
+            "id": iid, "name": name, "note": note, "freq": freq, "dec": dec,
+            "last": r(last, 3), "date": ser.index[-1].strftime("%Y-%m-%d" if freq == "D" else "%Y-%m"),
+            "chg1M": r(last - ago(30), 3) if ago(30) is not None else None,
+            "chg1J": r(last - ago(365), 3) if ago(365) is not None else None,
+            "hist": [[d.strftime("%Y-%m-%d"), r(v, 3)] for d, v in hist.items()],
+        })
+
+    def daily_level(key):  # Leitzinsen: tägliche Reihe aus Änderungsdaten
+        ser = _ecb(key, start10)
+        if ser is None:
+            return None
+        return ser.resample("D").last().ffill()
+
+    item("dfr", "EZB-Einlagesatz", daily_level("FM/D.U2.EUR.4F.KR.DFR.LEV"), "Leitzins: Verzinsung von Bankeinlagen bei der EZB")
+    item("mrr", "EZB-Hauptrefi-Satz", daily_level("FM/D.U2.EUR.4F.KR.MRR_FR.LEV"), "Leitzins: Zinssatz für Kredite der EZB an Banken")
+    item("estr", "€STR (Tagesgeld)", _ecb("EST/B.EU000A2X2A25.WT", start10), "Euro-Kurzfristzins, Basis vieler Tagesgeld- und Kreditverträge", dec=3)
+    for tenor, key in (("1M", "EURIBOR1MD_"), ("3M", "EURIBOR3MD_"), ("6M", "EURIBOR6MD_"), ("12M", "EURIBOR1YD_")):
+        item(f"euribor{tenor.lower()}", f"Euribor {tenor[:-1]} {'Monat' if tenor == '1M' else 'Monate'}",
+             _ecb(f"FM/M.U2.EUR.RT.MM.{key}.HSTA", start_m),
+             "Monatsdurchschnitt laut EZB, Referenz für variable Kredite", freq="M", dec=3)
+
+    tenors = ["1Y", "2Y", "3Y", "5Y", "7Y", "10Y", "15Y", "20Y", "30Y"]
+    curve = {}
+    for t in tenors:
+        ser = _ecb(f"YC/B.U2.EUR.4F.G_N_A.SV_C_YM.SR_{t}", start10)
+        if ser is not None:
+            curve[t] = ser
+    if curve:
+        ref = curve.get("10Y") if "10Y" in curve else next(iter(curve.values()))
+        today = ref.index[-1]
+        def at(ser, days):
+            sub = ser[ser.index <= today - pd.Timedelta(days=days)]
+            return r(float(sub.iloc[-1]), 3) if len(sub) else None
+        out["curve"] = {
+            "name": "Zinskurve Euroraum (Staatsanleihen mit AAA-Rating)",
+            "date": today.strftime("%Y-%m-%d"),
+            "tenors": [t for t in tenors if t in curve],
+            "now": [at(curve[t], 0) for t in tenors if t in curve],
+            "m1": [at(curve[t], 30) for t in tenors if t in curve],
+            "y1": [at(curve[t], 365) for t in tenors if t in curve],
+        }
+        for t, label in (("2Y", "2 Jahre"), ("5Y", "5 Jahre"), ("10Y", "10 Jahre"), ("20Y", "20 Jahre")):
+            if t in curve:
+                item(f"yc{t.lower()}", f"Rendite {label}", curve[t],
+                     "AAA-Staatsanleihen, Orientierung für Fixzinsen über diese Laufzeit", dec=3)
+    print("EZB-Zinsen:", [x["id"] for x in out["items"]], file=sys.stderr)
+    return out
 
 
 def load_news() -> list[dict]:
@@ -402,23 +636,31 @@ def market_mood(idx: list[dict], macro: dict) -> dict:
     return {"score": score, "label": label, "components": comps}
 
 
-def build(prices: dict, fund: dict, news: list[dict], demo=False) -> dict:
+def build(prices: dict, fund: dict, news: list[dict], demo=False, intraday=None, members=None, rates=None) -> dict:
+    intraday, members = intraday or {}, members or {}
     indices = []
     for iid, name, sym, region, flag, proxy in INDICES:
         if sym not in prices:
             continue
         a = analyse(prices[sym])
         f = fund.get(proxy, {})
+        m = members.get(iid)
+        # Bewertung bevorzugt aus den Einzelwerten, sonst aus dem ETF auf den Markt
+        if m and m.get("pe"):
+            val = {"pe": m["pe"], "fpe": m.get("fpe"), "divYield": m.get("dy") or f.get("divYield"),
+                   "pb": m.get("pb"), "valSource": f"Einzelwerte ({m['note']})"}
+        else:
+            val = {"pe": f.get("pe"), "fpe": None, "divYield": f.get("divYield"), "pb": f.get("pb"),
+                   "valSource": f"ETF {proxy}"}
         indices.append({"id": iid, "name": name, "symbol": sym, "region": region, "flag": flag,
-                        "proxy": proxy, "pe": f.get("pe"), "divYield": f.get("divYield"),
-                        "pb": f.get("pb"), **a})
+                        "proxy": proxy, **val, "hasMembers": bool(m), "intraday": intraday.get(sym, {}), **a})
     macro = {}
     for mid, name, sym, unit, dec, group in MACRO:
         if sym not in prices:
             continue
         a = analyse(prices[sym])
         macro[mid] = {"id": mid, "name": name, "symbol": sym, "unit": unit, "dec": dec,
-                      "group": group, **a}
+                      "group": group, "intraday": intraday.get(sym, {}), **a}
     if "us10" in macro and "us3m" in macro:
         spread = macro["us10"]["last"] - macro["us3m"]["last"]
         macro["curve"] = {"id": "curve", "name": "Zinskurve 10J–3M", "unit": "%-Pkt", "dec": 2,
@@ -452,6 +694,8 @@ def build(prices: dict, fund: dict, news: list[dict], demo=False) -> dict:
         "indices": indices,
         "macro": macro,
         "sectors": sectors,
+        "members": members,
+        "rates": rates,
         "mood": mood,
         "moodHistory": hist,
         "risks": risks,
@@ -523,8 +767,12 @@ def main():
             print("Zu wenige Kurse geladen – data.json bleibt unverändert.", file=sys.stderr)
             sys.exit(1)
         fund = load_fundamentals([p for *_, p in INDICES])
+        intraday = load_intraday([s for _, _, s, *_ in INDICES] + [m[2] for m in MACRO])
+        members = load_members()
+        rates = load_rates()
         news = load_news()
-    data, hist = build(prices, fund, news, demo=args.demo)
+    data, hist = build(prices, fund, news, demo=args.demo, intraday=intraday if not args.demo else None,
+                       members=members if not args.demo else None, rates=rates if not args.demo else None)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")))
     if not args.demo:
