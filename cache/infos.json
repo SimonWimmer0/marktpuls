@@ -18,14 +18,14 @@
 "longName": "ABB Ltd",
 "sector": "Industrials",
 "currency": "CHF",
-"marketCap": 123142455296,
+"marketCap": 119171276800,
 "sharesOutstanding": 1805078553,
 "impliedSharesOutstanding": 1805078553,
-"trailingPE": 31.00909,
-"forwardPE": 22.318825,
-"priceToBook": 9.020357,
+"trailingPE": 30.009089,
+"forwardPE": 21.599073,
+"priceToBook": 8.729463,
 "dividendYield": 1.38,
-"px": 68.22
+"px": 66.02
 },
 "ABBV": {
 "shortName": "AbbVie Inc.",
@@ -38,7 +38,7 @@
 "trailingPE": 48.718212,
 "forwardPE": 17.483313,
 "priceToBook": -109.34825,
-"dividendYield": 2.42,
+"dividendYield": 2.44,
 "px": 283.54
 },
 "ABI.BR": {
@@ -46,14 +46,14 @@
 "longName": "Anheuser-Busch InBev SA/NV",
 "sector": "Consumer Defensive",
 "currency": "EUR",
-"marketCap": 143431335936,
+"marketCap": 143903932416,
 "sharesOutstanding": 1747086877,
 "impliedSharesOutstanding": 1969128856,
-"trailingPE": 16.592255,
-"forwardPE": 16.84041,
-"priceToBook": 1.7254957,
-"dividendYield": 1.52,
-"px": 72.84
+"trailingPE": 16.646925,
+"forwardPE": 16.895899,
+"priceToBook": 1.7311811,
+"dividendYield": 1.92,
+"px": 73.08
 },
 "ABT": {
 "shortName": "Abbott Laboratories",
@@ -77,10 +77,10 @@
 "marketCap": 129123401728,
 "sharesOutstanding": 590737475,
 "impliedSharesOutstanding": 590737475,
-"trailingPE": 16.119469,
+"trailingPE": 15.491141,
 "forwardPE": 13.737165,
 "priceToBook": 4.123606,
-"dividendYield": 3.01,
+"dividendYield": 3.13,
 "px": 218.58
 },
 "AD.AS": {
@@ -88,14 +88,14 @@
 "longName": "Koninklijke Ahold Delhaize N.V.",
 "sector": "Consumer Defensive",
 "currency": "EUR",
-"marketCap": 29944309760,
+"marketCap": 30328436736,
 "sharesOutstanding": 873011999,
 "impliedSharesOutstanding": 873011999,
-"trailingPE": 13.091603,
-"forwardPE": 11.804059,
-"priceToBook": 2.0643997,
-"dividendYield": 3.56,
-"px": 34.3
+"trailingPE": 13.259543,
+"forwardPE": 11.9554825,
+"priceToBook": 2.0908818,
+"dividendYield": 3.62,
+"px": 34.74
 },
 "ADBE": {
 "shortName": "Adobe Inc.",
@@ -122,7 +122,7 @@
 "trailingPE": 44.826603,
 "forwardPE": 22.898716,
 "priceToBook": 5.451263,
-"dividendYield": 1.15,
+"dividendYield": 1.17,
 "px": 377.44
 },
 "ADP": {
@@ -136,7 +136,7 @@
 "trailingPE": 26.701242,
 "forwardPE": 22.270597,
 "priceToBook": 23.398851,
-"dividendYield": 2.49,
+"dividendYield": 2.52,
 "px": 301.19
 },
 "ADS.DE": {
@@ -144,98 +144,98 @@
 "longName": "adidas AG",
 "sector": "Consumer Cyclical",
 "currency": "EUR",
-"marketCap": 29112627200,
+"marketCap": 28935110656,
 "sharesOutstanding": 169062879,
 "impliedSharesOutstanding": 169062879,
-"trailingPE": 18.57605,
-"forwardPE": 14.684689,
-"priceToBook": 4.746417,
+"trailingPE": 18.462782,
+"forwardPE": 14.595148,
+"priceToBook": 4.7174754,
 "dividendYield": 1.61,
-"px": 172.2
+"px": 171.15
 },
 "ADYEN.AS": {
 "shortName": "ADYEN",
 "longName": "Adyen N.V.",
 "sector": "Technology",
 "currency": "EUR",
-"marketCap": 25455368192,
+"marketCap": 25307004928,
 "sharesOutstanding": 31566677,
 "impliedSharesOutstanding": 31566677,
-"trailingPE": 21.853659,
-"forwardPE": 17.93578,
-"priceToBook": 4.3080606,
+"trailingPE": 21.726286,
+"forwardPE": 17.831244,
+"priceToBook": 4.2829514,
 "dividendYield": 0.0,
-"px": 806.4
+"px": 801.7
 },
 "AI.PA": {
 "shortName": "AIR LIQUIDE",
 "longName": "L'Air Liquide S.A.",
 "sector": "Basic Materials",
 "currency": "EUR",
-"marketCap": 120703205376,
+"marketCap": 120422408192,
 "sharesOutstanding": 638168550,
 "impliedSharesOutstanding": 638168550,
-"trailingPE": 33.95691,
-"forwardPE": 26.298811,
-"priceToBook": 4.5397596,
+"trailingPE": 33.877914,
+"forwardPE": 26.237633,
+"priceToBook": 4.5291986,
 "dividendYield": 1.77,
-"px": 189.14
+"px": 188.7
 },
 "AIR.DE": {
 "shortName": "Airbus SE                     A",
 "longName": "Airbus SE",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 156423569408,
+"marketCap": 152982913024,
 "sharesOutstanding": 789141199,
 "impliedSharesOutstanding": 789141199,
-"trailingPE": 25.41282,
-"forwardPE": 41.382046,
-"priceToBook": 5.8494406,
+"trailingPE": 24.853846,
+"forwardPE": 40.471817,
+"priceToBook": 5.7207775,
 "dividendYield": 1.62,
-"px": 198.22
+"px": 193.86
 },
 "AIR.PA": {
 "shortName": "AIRBUS SE",
 "longName": "Airbus SE",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 156360441856,
+"marketCap": 153030262784,
 "sharesOutstanding": 789141199,
 "impliedSharesOutstanding": 789141199,
-"trailingPE": 25.435173,
-"forwardPE": 22.85618,
-"priceToBook": 5.8470798,
+"trailingPE": 24.893454,
+"forwardPE": 22.369387,
+"priceToBook": 5.722548,
 "dividendYield": 1.62,
-"px": 198.14
+"px": 193.92
 },
 "ALC.SW": {
 "shortName": "ALCON N",
 "longName": "Alcon Inc.",
 "sector": "Healthcare",
 "currency": "CHF",
-"marketCap": 30418927616,
+"marketCap": 30063433728,
 "sharesOutstanding": 480400000,
 "impliedSharesOutstanding": 480400000,
-"trailingPE": 58.09174,
-"forwardPE": 17.555027,
-"priceToBook": 1.6980324,
+"trailingPE": 57.412846,
+"forwardPE": 17.349869,
+"priceToBook": 1.6781881,
 "dividendYield": 0.44,
-"px": 63.32
+"px": 62.58
 },
 "ALV.DE": {
 "shortName": "Allianz SE                    v",
 "longName": "Allianz SE",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": 171102371840,
+"marketCap": 169868181504,
 "sharesOutstanding": 373994237,
 "impliedSharesOutstanding": 373994237,
-"trailingPE": 14.9901705,
-"forwardPE": 13.599009,
-"priceToBook": 2.823795,
+"trailingPE": 14.882045,
+"forwardPE": 13.500917,
+"priceToBook": 2.8034267,
 "dividendYield": 3.7,
-"px": 457.5
+"px": 454.2
 },
 "AMAT": {
 "shortName": "Applied Materials, Inc.",
@@ -248,7 +248,7 @@
 "trailingPE": 26.856577,
 "forwardPE": 13.768111,
 "priceToBook": 10.295252,
-"dividendYield": 0.6,
+"dividendYield": 0.63,
 "px": 338.93
 },
 "AMD": {
@@ -276,7 +276,7 @@
 "trailingPE": 25.43884,
 "forwardPE": 17.496979,
 "priceToBook": 16.538027,
-"dividendYield": 2.27,
+"dividendYield": 2.3,
 "px": 438.82
 },
 "AMZN": {
@@ -298,14 +298,14 @@
 "longName": "Andritz AG",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 7937902080,
+"marketCap": 7732104704,
 "sharesOutstanding": 97998794,
 "impliedSharesOutstanding": 97998794,
-"trailingPE": 16.59836,
-"forwardPE": 13.619008,
-"priceToBook": 3.0745873,
+"trailingPE": 16.168034,
+"forwardPE": 13.265923,
+"priceToBook": 2.994876,
 "dividendYield": 3.33,
-"px": 81.0
+"px": 78.9
 },
 "ARM": {
 "shortName": "Arm Holdings plc",
@@ -326,28 +326,28 @@
 "longName": "ASML Holding N.V.",
 "sector": "Technology",
 "currency": "EUR",
-"marketCap": 496495099904,
+"marketCap": 469901279232,
 "sharesOutstanding": 385417742,
 "impliedSharesOutstanding": 385417742,
-"trailingPE": 36.826756,
-"forwardPE": 22.826591,
-"priceToBook": 22.367302,
-"dividendYield": 0.6,
-"px": 1288.2
+"trailingPE": 34.854202,
+"forwardPE": 21.603928,
+"priceToBook": 21.169239,
+"dividendYield": 0.58,
+"px": 1219.2
 },
 "ATS.VI": {
 "shortName": "AT&S Austria Tech.&Systemtech.",
 "longName": "AT & S Austria Technologie & Systemtechnik Aktiengesellschaft",
 "sector": "Technology",
 "currency": "EUR",
-"marketCap": 4428899840,
+"marketCap": 4063709952,
 "sharesOutstanding": 38850000,
 "impliedSharesOutstanding": 38850000,
-"trailingPE": 83.21168,
-"forwardPE": 7.8820024,
-"priceToBook": 4.7515836,
+"trailingPE": 76.350365,
+"forwardPE": 7.2320824,
+"priceToBook": 4.3597865,
 "dividendYield": 0.0,
-"px": 114.0
+"px": 104.6
 },
 "AVGO": {
 "shortName": "Broadcom Inc.",
@@ -358,7 +358,7 @@
 "sharesOutstanding": 4773629865,
 "impliedSharesOutstanding": 4773629865,
 "trailingPE": 44.27203,
-"forwardPE": 17.855635,
+"forwardPE": 17.88146,
 "priceToBook": 16.600422,
 "dividendYield": 0.73,
 "px": 346.65
@@ -374,7 +374,7 @@
 "trailingPE": 17.527323,
 "forwardPE": 15.3889065,
 "priceToBook": 5.831599,
-"dividendYield": 1.2,
+"dividendYield": 1.22,
 "px": 311.11
 },
 "BA": {
@@ -402,7 +402,7 @@
 "trailingPE": 11.591886,
 "forwardPE": 9.3762665,
 "priceToBook": 1.2372946,
-"dividendYield": 2.62,
+"dividendYield": 2.64,
 "px": 48.57
 },
 "BAS.DE": {
@@ -410,70 +410,70 @@
 "longName": "BASF SE",
 "sector": "Basic Materials",
 "currency": "EUR",
-"marketCap": 43631521792,
+"marketCap": 43192451072,
 "sharesOutstanding": 860921903,
 "impliedSharesOutstanding": 860921903,
-"trailingPE": 22.524445,
-"forwardPE": 16.046202,
-"priceToBook": 1.1881653,
+"trailingPE": 22.297777,
+"forwardPE": 15.884725,
+"priceToBook": 1.1762085,
 "dividendYield": 4.4,
-"px": 50.68
+"px": 50.17
 },
 "BAYN.DE": {
 "shortName": "Bayer AG                      N",
 "longName": "Bayer Aktiengesellschaft",
 "sector": "Healthcare",
 "currency": "EUR",
-"marketCap": 53718949888,
+"marketCap": 52972302336,
 "sharesOutstanding": 982424082,
 "impliedSharesOutstanding": 982424082,
 "trailingPE": null,
-"forwardPE": 11.279412,
-"priceToBook": 1.8412634,
+"forwardPE": 11.122639,
+"priceToBook": 1.8156716,
 "dividendYield": 0.2,
-"px": 54.68
+"px": 53.92
 },
 "BBVA.MC": {
 "shortName": "BANCO BILBAO VIZCAYA ARGENTARIA",
 "longName": "Banco Bilbao Vizcaya Argentaria, S.A.",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": 123226275840,
+"marketCap": 121317056512,
 "sharesOutstanding": 5454903940,
 "impliedSharesOutstanding": 5454903940,
-"trailingPE": 11.52551,
-"forwardPE": 9.601448,
-"priceToBook": 2.143874,
+"trailingPE": 11.346938,
+"forwardPE": 9.452687,
+"priceToBook": 2.1106577,
 "dividendYield": 4.29,
-"px": 22.59
+"px": 22.24
 },
 "BEI.DE": {
 "shortName": "BEIERSDORF AG                 I",
 "longName": "Beiersdorf Aktiengesellschaft",
 "sector": "Consumer Defensive",
 "currency": "EUR",
-"marketCap": 17232097280,
+"marketCap": 17384749056,
 "sharesOutstanding": 218072613,
 "impliedSharesOutstanding": 218072613,
-"trailingPE": 18.376743,
-"forwardPE": 19.81166,
-"priceToBook": 1.9146615,
+"trailingPE": 18.539534,
+"forwardPE": 19.987164,
+"priceToBook": 1.9316227,
 "dividendYield": 1.24,
-"px": 79.02
+"px": 79.72
 },
 "BG.VI": {
 "shortName": "BAWAG Group AG",
 "longName": "BAWAG Group AG",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": 12620058624,
+"marketCap": 12373662720,
 "sharesOutstanding": 76998527,
 "impliedSharesOutstanding": 76998527,
-"trailingPE": 13.866328,
-"forwardPE": 10.097138,
-"priceToBook": 2.8289835,
+"trailingPE": 14.171076,
+"forwardPE": 9.900002,
+"priceToBook": 2.7737503,
 "dividendYield": 3.81,
-"px": 163.9
+"px": 160.7
 },
 "BKNG": {
 "shortName": "Booking Holdings Inc. Common St",
@@ -486,7 +486,7 @@
 "trailingPE": 15.978309,
 "forwardPE": 12.041004,
 "priceToBook": -10.560575,
-"dividendYield": 1.1,
+"dividendYield": 1.14,
 "px": 147.32
 },
 "BMW.DE": {
@@ -494,56 +494,56 @@
 "longName": "Bayerische Motoren Werke Aktiengesellschaft",
 "sector": "Consumer Cyclical",
 "currency": "EUR",
-"marketCap": 32122204160,
+"marketCap": 32441417728,
 "sharesOutstanding": 591133711,
 "impliedSharesOutstanding": 591133711,
-"trailingPE": 5.3748765,
-"forwardPE": 6.779154,
-"priceToBook": 0.33400536,
+"trailingPE": 5.428289,
+"forwardPE": 6.846521,
+"priceToBook": 0.33732453,
 "dividendYield": 8.0,
-"px": 54.34
+"px": 54.88
 },
 "BN.PA": {
 "shortName": "DANONE",
 "longName": "Danone S.A.",
 "sector": "Consumer Defensive",
 "currency": "EUR",
-"marketCap": 43656790016,
+"marketCap": 44339531776,
 "sharesOutstanding": 644095494,
 "impliedSharesOutstanding": 644095494,
-"trailingPE": 22.443708,
-"forwardPE": 16.133986,
-"priceToBook": 2.4761627,
+"trailingPE": 22.7947,
+"forwardPE": 16.386301,
+"priceToBook": 2.5148869,
 "dividendYield": 3.25,
-"px": 67.78
+"px": 68.84
 },
 "BNP.PA": {
 "shortName": "BNP PARIBAS ACT.A",
 "longName": "BNP Paribas SA",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": 100886806528,
+"marketCap": 99626401792,
 "sharesOutstanding": 1096000000,
 "impliedSharesOutstanding": 1096000000,
-"trailingPE": 8.053369,
-"forwardPE": 7.1052113,
-"priceToBook": 0.8312939,
+"trailingPE": 7.952756,
+"forwardPE": 7.016444,
+"priceToBook": 0.8209083,
 "dividendYield": 7.02,
-"px": 92.05
+"px": 90.9
 },
 "BNR.DE": {
 "shortName": "Brenntag SE                   N",
 "longName": "Brenntag SE",
 "sector": "Basic Materials",
 "currency": "EUR",
-"marketCap": 8313710080,
+"marketCap": 8244404736,
 "sharesOutstanding": 144385372,
 "impliedSharesOutstanding": 144385372,
-"trailingPE": 21.893536,
-"forwardPE": 13.958078,
-"priceToBook": 1.8089285,
+"trailingPE": 21.711025,
+"forwardPE": 13.84172,
+"priceToBook": 1.7938488,
 "dividendYield": 3.28,
-"px": 57.58
+"px": 57.1
 },
 "BRK-B": {
 "shortName": "Berkshire Hathaway Inc. New",
@@ -564,14 +564,14 @@
 "longName": "CA Immobilien Anlagen AG",
 "sector": "Real Estate",
 "currency": "EUR",
-"marketCap": 1903037952,
+"marketCap": 1907590784,
 "sharesOutstanding": 91054445,
 "impliedSharesOutstanding": 91054445,
-"trailingPE": 13.0625,
-"forwardPE": 17.697615,
-"priceToBook": 0.7873719,
+"trailingPE": 13.09375,
+"forwardPE": 17.739956,
+"priceToBook": 0.78925556,
 "dividendYield": 4.31,
-"px": 20.9
+"px": 20.95
 },
 "CAT": {
 "shortName": "Caterpillar, Inc.",
@@ -584,7 +584,7 @@
 "trailingPE": 21.089874,
 "forwardPE": 16.700232,
 "priceToBook": 11.446068,
-"dividendYield": 1.17,
+"dividendYield": 1.21,
 "px": 537.37
 },
 "CBK.DE": {
@@ -592,14 +592,14 @@
 "longName": "Commerzbank AG",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": 40283172864,
+"marketCap": 39656280064,
 "sharesOutstanding": 1080847095,
 "impliedSharesOutstanding": 1080847095,
-"trailingPE": 12.548821,
-"forwardPE": 9.532555,
-"priceToBook": 1.5132568,
+"trailingPE": 12.353535,
+"forwardPE": 9.384208,
+"priceToBook": 1.4897072,
 "dividendYield": 2.92,
-"px": 37.27
+"px": 36.69
 },
 "CEG": {
 "shortName": "Constellation Energy Corporatio",
@@ -612,7 +612,7 @@
 "trailingPE": 20.259647,
 "forwardPE": 18.825235,
 "priceToBook": 2.7089512,
-"dividendYield": 0.65,
+"dividendYield": 0.68,
 "px": 252.03
 },
 "CFR.SW": {
@@ -620,14 +620,14 @@
 "longName": "Compagnie Financière Richemont SA",
 "sector": "Consumer Cyclical",
 "currency": "CHF",
-"marketCap": 104153620480,
+"marketCap": 102566182912,
 "sharesOutstanding": 534182089,
 "impliedSharesOutstanding": 587940297,
-"trailingPE": 26.881638,
-"forwardPE": 22.124565,
-"priceToBook": 4.808489,
+"trailingPE": 26.471926,
+"forwardPE": 21.787357,
+"priceToBook": 4.7352014,
 "dividendYield": 1.86,
-"px": 177.15
+"px": 174.45
 },
 "CMCSA": {
 "shortName": "Comcast Corporation",
@@ -651,11 +651,11 @@
 "marketCap": null,
 "sharesOutstanding": null,
 "impliedSharesOutstanding": null,
-"trailingPE": 18.19949,
-"forwardPE": 10.518894,
-"priceToBook": 3.0631485,
+"trailingPE": 18.005116,
+"forwardPE": 10.40655,
+"priceToBook": 3.0304334,
 "dividendYield": 3.73,
-"px": 71.16
+"px": 70.4
 },
 "COST": {
 "shortName": "Costco Wholesale Corporation",
@@ -676,14 +676,14 @@
 "longName": "CPI Europe AG",
 "sector": "Real Estate",
 "currency": "EUR",
-"marketCap": 2116523136,
+"marketCap": 2113763584,
 "sharesOutstanding": 137974126,
 "impliedSharesOutstanding": 137974126,
-"trailingPE": 4.4723034,
-"forwardPE": 240.02504,
-"priceToBook": 0.4578421,
+"trailingPE": 4.466472,
+"forwardPE": 239.7121,
+"priceToBook": 0.45724517,
 "dividendYield": 0.0,
-"px": 15.34
+"px": 15.32
 },
 "CRM": {
 "shortName": "Salesforce, Inc.",
@@ -696,7 +696,7 @@
 "trailingPE": 16.77127,
 "forwardPE": 11.450434,
 "priceToBook": 3.9309916,
-"dividendYield": 0.92,
+"dividendYield": 0.96,
 "px": 183.31
 },
 "CRWD": {
@@ -718,14 +718,14 @@
 "longName": "AXA SA",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": 91837448192,
+"marketCap": 91513724928,
 "sharesOutstanding": 2023296997,
 "impliedSharesOutstanding": 2023296997,
-"trailingPE": 12.234501,
-"forwardPE": 10.11801,
-"priceToBook": 2.054683,
+"trailingPE": 12.191375,
+"forwardPE": 10.082343,
+"priceToBook": 2.04744,
 "dividendYield": 5.07,
-"px": 45.39
+"px": 45.23
 },
 "CSCO": {
 "shortName": "Cisco Systems, Inc.",
@@ -738,7 +738,7 @@
 "trailingPE": 25.186169,
 "forwardPE": 15.635189,
 "priceToBook": 7.2207394,
-"dividendYield": 1.73,
+"dividendYield": 1.77,
 "px": 94.7
 },
 "CVX": {
@@ -752,7 +752,7 @@
 "trailingPE": 15.161528,
 "forwardPE": 12.499644,
 "priceToBook": 2.0734804,
-"dividendYield": 3.46,
+"dividendYield": 3.45,
 "px": 206.5
 },
 "DB1.DE": {
@@ -760,56 +760,56 @@
 "longName": "Deutsche Börse AG",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": 57162600448,
+"marketCap": 56342941696,
 "sharesOutstanding": 178187660,
 "impliedSharesOutstanding": 178187660,
-"trailingPE": 26.490503,
-"forwardPE": 23.266102,
-"priceToBook": 5.2500653,
+"trailingPE": 26.110655,
+"forwardPE": 22.932487,
+"priceToBook": 5.174784,
 "dividendYield": 1.3,
-"px": 320.8
+"px": 316.2
 },
 "DBK.DE": {
 "shortName": "DEUTSCHE BANK AG              N",
 "longName": "Deutsche Bank Aktiengesellschaft",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": 55808409600,
+"marketCap": 54538350592,
 "sharesOutstanding": 1854100000,
 "impliedSharesOutstanding": 1854100000,
-"trailingPE": 9.03904,
-"forwardPE": 7.5942407,
-"priceToBook": 0.7028277,
+"trailingPE": 8.833334,
+"forwardPE": 7.421415,
+"priceToBook": 0.6868331,
 "dividendYield": 3.33,
-"px": 30.1
+"px": 29.415
 },
 "DG.PA": {
 "shortName": "VINCI",
 "longName": "Vinci SA",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 61665927168,
+"marketCap": 61638422528,
 "sharesOutstanding": 550097470,
 "impliedSharesOutstanding": 550097470,
-"trailingPE": 12.345815,
-"forwardPE": 11.330489,
-"priceToBook": 2.0307236,
+"trailingPE": 12.340309,
+"forwardPE": 11.325436,
+"priceToBook": 2.0298178,
 "dividendYield": 4.47,
-"px": 112.1
+"px": 112.05
 },
 "DHL.DE": {
 "shortName": "DHL AG                        N",
 "longName": "DHL AG",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 65467797504,
+"marketCap": 64424402944,
 "sharesOutstanding": 1110000000,
 "impliedSharesOutstanding": 1110000000,
-"trailingPE": 17.76506,
-"forwardPE": 14.93399,
-"priceToBook": 2.798311,
+"trailingPE": 17.481928,
+"forwardPE": 14.695978,
+"priceToBook": 2.7537127,
 "dividendYield": 3.17,
-"px": 58.98
+"px": 58.04
 },
 "DIS": {
 "shortName": "Walt Disney Company (The)",
@@ -822,7 +822,7 @@
 "trailingPE": 20.986038,
 "forwardPE": 14.123482,
 "priceToBook": 1.8694713,
-"dividendYield": 1.63,
+"dividendYield": 1.66,
 "px": 120.25
 },
 "DOC.VI": {
@@ -830,154 +830,154 @@
 "longName": "DO & CO Aktiengesellschaft",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 2504228352,
+"marketCap": 2460294656,
 "sharesOutstanding": 10983458,
 "impliedSharesOutstanding": 10983458,
-"trailingPE": 20.917433,
-"forwardPE": 17.621582,
-"priceToBook": 4.7734694,
+"trailingPE": 20.550459,
+"forwardPE": 17.312431,
+"priceToBook": 4.6897244,
 "dividendYield": 1.1,
-"px": 228.0
+"px": 224.0
 },
 "DTE.DE": {
 "shortName": "DEUTSCHE TELEKOM AG           N",
 "longName": "Deutsche Telekom AG",
 "sector": "Communication Services",
 "currency": "EUR",
-"marketCap": 124539183104,
+"marketCap": 125782646784,
 "sharesOutstanding": 4782610264,
 "impliedSharesOutstanding": 4782610264,
-"trailingPE": 14.0,
-"forwardPE": 10.17271,
-"priceToBook": 1.9980052,
+"trailingPE": 14.139785,
+"forwardPE": 10.274281,
+"priceToBook": 2.0179543,
 "dividendYield": 3.8,
-"px": 26.04
+"px": 26.3
 },
 "DTG.DE": {
 "shortName": "Daimler Truck Holding AG      N",
 "longName": "Daimler Truck Holding AG",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 31202174976,
+"marketCap": 30959828992,
 "sharesOutstanding": 757334352,
 "impliedSharesOutstanding": 757334352,
-"trailingPE": 22.51366,
-"forwardPE": 8.645255,
-"priceToBook": 1.3334197,
+"trailingPE": 22.338799,
+"forwardPE": 8.578107,
+"priceToBook": 1.323063,
 "dividendYield": 4.57,
-"px": 41.2
+"px": 40.88
 },
 "EBS.VI": {
 "shortName": "Erste Group Bank AG",
 "longName": "Erste Group Bank AG",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": 43573567488,
+"marketCap": 42913361920,
 "sharesOutstanding": 388356224,
 "impliedSharesOutstanding": 388356224,
-"trailingPE": 11.910828,
-"forwardPE": 9.837618,
-"priceToBook": 1.7426689,
+"trailingPE": 11.730361,
+"forwardPE": 9.688563,
+"priceToBook": 1.7162648,
 "dividendYield": 0.67,
-"px": 112.2
+"px": 110.5
 },
 "EL.PA": {
 "shortName": "ESSILORLUXOTTICA",
 "longName": "EssilorLuxottica Société anonyme",
 "sector": "Healthcare",
 "currency": "EUR",
-"marketCap": 81040900096,
+"marketCap": 81613873152,
 "sharesOutstanding": 458376127,
 "impliedSharesOutstanding": 458376127,
-"trailingPE": 33.04673,
-"forwardPE": 22.377028,
-"priceToBook": 2.071956,
+"trailingPE": 33.280376,
+"forwardPE": 22.535236,
+"priceToBook": 2.0866048,
 "dividendYield": 2.21,
-"px": 176.8
+"px": 178.05
 },
 "ENEL.MI": {
 "shortName": "ENEL",
 "longName": "Enel SpA",
 "sector": "Utilities",
 "currency": "EUR",
-"marketCap": 93780033536,
+"marketCap": 92718522368,
 "sharesOutstanding": 9920663654,
 "impliedSharesOutstanding": 9920663654,
-"trailingPE": 21.48409,
-"forwardPE": 12.303948,
-"priceToBook": 4.142419,
+"trailingPE": 21.240908,
+"forwardPE": 12.164678,
+"priceToBook": 4.09553,
 "dividendYield": 5.13,
-"px": 9.453
+"px": 9.346
 },
 "ENI.MI": {
 "shortName": "ENI",
 "longName": "Eni S.p.A.",
 "sector": "Energy",
 "currency": "EUR",
-"marketCap": 70118989824,
+"marketCap": 69196374016,
 "sharesOutstanding": 2838825386,
 "impliedSharesOutstanding": 2838825386,
-"trailingPE": 16.68919,
-"forwardPE": 8.533132,
-"priceToBook": 1.3079855,
+"trailingPE": 16.469595,
+"forwardPE": 8.420853,
+"priceToBook": 1.2907752,
 "dividendYield": 4.33,
-"px": 24.7
+"px": 24.375
 },
 "ENR.DE": {
 "shortName": "Siemens Energy AG             N",
 "longName": "Siemens Energy AG",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 107802509312,
+"marketCap": 102833561600,
 "sharesOutstanding": 850848567,
 "impliedSharesOutstanding": 850848567,
-"trailingPE": 28.993135,
-"forwardPE": 14.281495,
-"priceToBook": 9.518443,
+"trailingPE": 27.656752,
+"forwardPE": 13.623217,
+"priceToBook": 9.079709,
 "dividendYield": 0.55,
-"px": 126.7
+"px": 120.86
 },
 "EOAN.DE": {
 "shortName": "E.ON SE                       N",
 "longName": "E.ON SE",
 "sector": "Utilities",
 "currency": "EUR",
-"marketCap": 48381136896,
+"marketCap": 48302747648,
 "sharesOutstanding": 2613077958,
 "impliedSharesOutstanding": 2613077958,
-"trailingPE": 10.891176,
-"forwardPE": 14.86122,
-"priceToBook": 2.1531572,
+"trailingPE": 10.873529,
+"forwardPE": 14.837141,
+"priceToBook": 2.1496687,
 "dividendYield": 3.04,
-"px": 18.515
+"px": 18.485
 },
 "EVN.VI": {
 "shortName": "EVN AG",
 "longName": "EVN AG",
 "sector": "Utilities",
 "currency": "EUR",
-"marketCap": 5438932992,
+"marketCap": 5376518656,
 "sharesOutstanding": 178325659,
 "impliedSharesOutstanding": 178325659,
-"trailingPE": 10.701755,
-"forwardPE": 12.131192,
-"priceToBook": 0.83938795,
+"trailingPE": 10.578948,
+"forwardPE": 11.9919815,
+"priceToBook": 0.82975566,
 "dividendYield": 2.95,
-"px": 30.5
+"px": 30.15
 },
 "FME.DE": {
 "shortName": "Fresenius Medical Care AG     I",
 "longName": "Fresenius Medical Care AG",
 "sector": "Healthcare",
 "currency": "EUR",
-"marketCap": 9529184256,
+"marketCap": 9783502848,
 "sharesOutstanding": 259509365,
 "impliedSharesOutstanding": 259509365,
-"trailingPE": 11.960913,
-"forwardPE": 9.642706,
-"priceToBook": 0.744888,
+"trailingPE": 12.28013,
+"forwardPE": 9.900055,
+"priceToBook": 0.76476794,
 "dividendYield": 3.86,
-"px": 36.72
+"px": 37.7
 },
 "FRE.DE": {
 "shortName": "Fresenius SE & Co. KGaA       N",
@@ -987,39 +987,39 @@
 "marketCap": null,
 "sharesOutstanding": null,
 "impliedSharesOutstanding": null,
-"trailingPE": 18.361702,
-"forwardPE": 13.243272,
-"priceToBook": 1.4220196,
+"trailingPE": 18.368795,
+"forwardPE": 13.248386,
+"priceToBook": 1.4225689,
 "dividendYield": 1.97,
-"px": 51.78
+"px": 51.8
 },
 "G1A.DE": {
 "shortName": "GEA Group AG                  I",
 "longName": "GEA Group Aktiengesellschaft",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 11316673536,
+"marketCap": 11235316736,
 "sharesOutstanding": 162712763,
 "impliedSharesOutstanding": 162712763,
-"trailingPE": 25.569855,
-"forwardPE": 18.200851,
-"priceToBook": 4.4005065,
+"trailingPE": 25.38603,
+"forwardPE": 18.070004,
+"priceToBook": 4.3688707,
 "dividendYield": 1.86,
-"px": 69.55
+"px": 69.05
 },
 "G24.DE": {
 "shortName": "Scout24 SE                    N",
 "longName": "Scout24 SE",
 "sector": "Communication Services",
 "currency": "EUR",
-"marketCap": 6114412544,
+"marketCap": 5766211584,
 "sharesOutstanding": 69640229,
 "impliedSharesOutstanding": 69640229,
-"trailingPE": 19.42478,
-"forwardPE": 18.343182,
-"priceToBook": 4.961854,
+"trailingPE": 18.318584,
+"forwardPE": 17.29858,
+"priceToBook": 4.6792884,
 "dividendYield": 1.69,
-"px": 87.8
+"px": 82.8
 },
 "GE": {
 "shortName": "GE Aerospace",
@@ -1032,7 +1032,7 @@
 "trailingPE": 35.43111,
 "forwardPE": 34.24108,
 "priceToBook": 18.806324,
-"dividendYield": 0.57,
+"dividendYield": 0.59,
 "px": 318.88
 },
 "GEBN.SW": {
@@ -1040,14 +1040,14 @@
 "longName": "Geberit AG",
 "sector": "Industrials",
 "currency": "CHF",
-"marketCap": 18709626880,
+"marketCap": 18735513600,
 "sharesOutstanding": 32358401,
 "impliedSharesOutstanding": 32358401,
-"trailingPE": 30.657476,
-"forwardPE": 27.559725,
-"priceToBook": 16.87978,
+"trailingPE": 30.699892,
+"forwardPE": 27.597857,
+"priceToBook": 16.903135,
 "dividendYield": 2.23,
-"px": 578.2
+"px": 579.0
 },
 "GILD": {
 "shortName": "Gilead Sciences, Inc.",
@@ -1060,7 +1060,7 @@
 "trailingPE": null,
 "forwardPE": 16.40835,
 "priceToBook": 15.847925,
-"dividendYield": 1.94,
+"dividendYield": 1.97,
 "px": 166.53
 },
 "GIVN.SW": {
@@ -1068,14 +1068,14 @@
 "longName": "Givaudan SA",
 "sector": "Basic Materials",
 "currency": "CHF",
-"marketCap": 37423759360,
+"marketCap": 37663772672,
 "sharesOutstanding": 9231317,
 "impliedSharesOutstanding": 9231317,
-"trailingPE": 39.474197,
-"forwardPE": 29.940159,
-"priceToBook": 8.501536,
+"trailingPE": 39.727364,
+"forwardPE": 30.132177,
+"priceToBook": 8.55606,
 "dividendYield": 1.78,
-"px": 4054.0
+"px": 4080.0
 },
 "GOOGL": {
 "shortName": "Alphabet Inc.",
@@ -1088,7 +1088,7 @@
 "trailingPE": 14.238121,
 "forwardPE": 17.823967,
 "priceToBook": 5.0825787,
-"dividendYield": 0.31,
+"dividendYield": 0.32,
 "px": 272.66
 },
 "GS": {
@@ -1102,7 +1102,7 @@
 "trailingPE": 12.185909,
 "forwardPE": 11.4149685,
 "priceToBook": 2.3098056,
-"dividendYield": 2.29,
+"dividendYield": 2.36,
 "px": 847.53
 },
 "HD": {
@@ -1116,7 +1116,7 @@
 "trailingPE": 23.380556,
 "forwardPE": 21.381855,
 "priceToBook": 18.473524,
-"dividendYield": 2.76,
+"dividendYield": 2.77,
 "px": 336.68
 },
 "HEI.DE": {
@@ -1124,56 +1124,56 @@
 "longName": "Heidelberg Materials AG",
 "sector": "Basic Materials",
 "currency": "EUR",
-"marketCap": 30738964480,
+"marketCap": 30492839936,
 "sharesOutstanding": 175801909,
 "impliedSharesOutstanding": 175801909,
-"trailingPE": 15.270743,
-"forwardPE": 12.032548,
-"priceToBook": 1.6496217,
+"trailingPE": 15.148472,
+"forwardPE": 11.936205,
+"priceToBook": 1.6364133,
 "dividendYield": 2.04,
-"px": 174.85
+"px": 173.45
 },
 "HEN3.DE": {
 "shortName": "Henkel AG & Co. KGaA          I",
 "longName": "Henkel AG & Co. KGaA",
 "sector": "Consumer Defensive",
 "currency": "EUR",
-"marketCap": 34784788480,
+"marketCap": 34849566720,
 "sharesOutstanding": 151440961,
 "impliedSharesOutstanding": 404850922,
-"trailingPE": 18.319828,
-"forwardPE": 14.407622,
-"priceToBook": 1.6606429,
+"trailingPE": 18.353945,
+"forwardPE": 14.434452,
+"priceToBook": 1.6637354,
 "dividendYield": 2.36,
-"px": 85.92
+"px": 86.08
 },
 "HNR1.DE": {
 "shortName": "HANNOVER RUECK SE NA O.N.",
 "longName": "Hannover Rück SE",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": 34828451840,
+"marketCap": 35142004736,
 "sharesOutstanding": 120597134,
 "impliedSharesOutstanding": 120597134,
-"trailingPE": 12.540164,
-"forwardPE": 12.0225725,
-"priceToBook": 2.5483775,
+"trailingPE": 12.653061,
+"forwardPE": 12.122396,
+"priceToBook": 2.57132,
 "dividendYield": 4.25,
-"px": 288.8
+"px": 291.4
 },
 "HOLN.SW": {
 "shortName": "HOLCIM N",
 "longName": "Holcim AG",
 "sector": "Basic Materials",
 "currency": "CHF",
-"marketCap": 41008697344,
+"marketCap": 40665755648,
 "sharesOutstanding": 553125111,
 "impliedSharesOutstanding": 553125111,
-"trailingPE": 105.91428,
-"forwardPE": 17.097723,
-"priceToBook": 2.598668,
+"trailingPE": 105.02857,
+"forwardPE": 16.954742,
+"priceToBook": 2.5769365,
 "dividendYield": 2.29,
-"px": 74.14
+"px": 73.52
 },
 "HON": {
 "shortName": "Honeywell International Inc.",
@@ -1186,7 +1186,7 @@
 "trailingPE": 10.800199,
 "forwardPE": 22.058249,
 "priceToBook": 3.0839796,
-"dividendYield": 1.26,
+"dividendYield": 1.29,
 "px": 217.84
 },
 "IBE.MC": {
@@ -1194,14 +1194,14 @@
 "longName": "Iberdrola, S.A.",
 "sector": "Utilities",
 "currency": "EUR",
-"marketCap": 149955674112,
+"marketCap": 149424619520,
 "sharesOutstanding": 6638144188,
 "impliedSharesOutstanding": 6638144188,
-"trailingPE": 30.527027,
-"forwardPE": 20.285742,
-"priceToBook": 2.9197364,
+"trailingPE": 30.418919,
+"forwardPE": 20.213903,
+"priceToBook": 2.9093964,
 "dividendYield": 3.01,
-"px": 22.59
+"px": 22.51
 },
 "IBM": {
 "shortName": "International Business Machines",
@@ -1214,7 +1214,7 @@
 "trailingPE": 19.102388,
 "forwardPE": 16.911116,
 "priceToBook": 5.9542556,
-"dividendYield": 2.96,
+"dividendYield": 3.02,
 "px": 223.88
 },
 "IFX.DE": {
@@ -1222,28 +1222,28 @@
 "longName": "Infineon Technologies AG",
 "sector": "Technology",
 "currency": "EUR",
-"marketCap": 64180838400,
+"marketCap": 61143805952,
 "sharesOutstanding": 1300655393,
 "impliedSharesOutstanding": 1300655393,
-"trailingPE": 43.285088,
-"forwardPE": 12.727329,
-"priceToBook": 3.5710669,
+"trailingPE": 41.23684,
+"forwardPE": 12.1250725,
+"priceToBook": 3.402084,
 "dividendYield": 0.71,
-"px": 49.345
+"px": 47.01
 },
 "INGA.AS": {
 "shortName": "ING GROEP N.V.",
 "longName": "ING Groep N.V.",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": 79906406400,
+"marketCap": 78772985856,
 "sharesOutstanding": 2833560687,
 "impliedSharesOutstanding": 2833560687,
-"trailingPE": 12.000001,
-"forwardPE": 9.451036,
-"priceToBook": 1.6044606,
+"trailingPE": 11.829787,
+"forwardPE": 9.316978,
+"priceToBook": 1.5817022,
 "dividendYield": 4.03,
-"px": 28.2
+"px": 27.8
 },
 "INTC": {
 "shortName": "Intel Corporation",
@@ -1270,7 +1270,7 @@
 "trailingPE": 18.834751,
 "forwardPE": 11.516918,
 "priceToBook": 4.381041,
-"dividendYield": 1.76,
+"dividendYield": 1.78,
 "px": 310.02
 },
 "ISP.MI": {
@@ -1278,14 +1278,14 @@
 "longName": "Intesa Sanpaolo S.p.A.",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": 104620163072,
+"marketCap": 103460986880,
 "sharesOutstanding": 17301167808,
 "impliedSharesOutstanding": 17301167808,
-"trailingPE": 10.425862,
-"forwardPE": 9.257785,
-"priceToBook": 1.5394603,
+"trailingPE": 10.310345,
+"forwardPE": 9.15521,
+"priceToBook": 1.5224032,
 "dividendYield": 7.25,
-"px": 6.047
+"px": 5.98
 },
 "ISRG": {
 "shortName": "Intuitive Surgical, Inc.",
@@ -1306,14 +1306,14 @@
 "longName": "Industria de Diseño Textil, S.A.",
 "sector": "Consumer Cyclical",
 "currency": "EUR",
-"marketCap": 182041133056,
+"marketCap": 179673743360,
 "sharesOutstanding": 3115009210,
 "impliedSharesOutstanding": 3115009210,
-"trailingPE": 28.368933,
-"forwardPE": 24.718094,
-"priceToBook": 10.1953945,
+"trailingPE": 28.0,
+"forwardPE": 24.39664,
+"priceToBook": 10.062805,
 "dividendYield": 1.11,
-"px": 58.44
+"px": 57.68
 },
 "JNJ": {
 "shortName": "Johnson & Johnson",
@@ -1324,9 +1324,9 @@
 "sharesOutstanding": 2407310266,
 "impliedSharesOutstanding": 2407310266,
 "trailingPE": 40.537178,
-"forwardPE": 23.002344,
+"forwardPE": 23.005335,
 "priceToBook": 7.8872166,
-"dividendYield": 1.97,
+"dividendYield": 2.01,
 "px": 267.14
 },
 "JPM": {
@@ -1340,7 +1340,7 @@
 "trailingPE": 13.432047,
 "forwardPE": 12.521771,
 "priceToBook": 2.420463,
-"dividendYield": 2.04,
+"dividendYield": 2.06,
 "px": 320.22
 },
 "KER.PA": {
@@ -1348,14 +1348,14 @@
 "longName": "Kering SA",
 "sector": "Consumer Cyclical",
 "currency": "EUR",
-"marketCap": 21993836544,
+"marketCap": 21699473408,
 "sharesOutstanding": 122651328,
 "impliedSharesOutstanding": 122651328,
 "trailingPE": null,
-"forwardPE": 20.129972,
-"priceToBook": 1.5182972,
+"forwardPE": 19.860554,
+"priceToBook": 1.4979763,
 "dividendYield": 1.69,
-"px": 179.32
+"px": 176.92
 },
 "KLAC": {
 "shortName": "KLA Corporation",
@@ -1368,7 +1368,7 @@
 "trailingPE": 35.458645,
 "forwardPE": 19.9117,
 "priceToBook": 28.26773,
-"dividendYield": 0.64,
+"dividendYield": 0.65,
 "px": 141.48
 },
 "KNIN.SW": {
@@ -1376,14 +1376,14 @@
 "longName": "Kuehne + Nagel International AG",
 "sector": "Industrials",
 "currency": "CHF",
-"marketCap": 27409825792,
+"marketCap": 27006040064,
 "sharesOutstanding": 118760074,
 "impliedSharesOutstanding": 118760074,
-"trailingPE": 28.146343,
-"forwardPE": 23.194115,
-"priceToBook": 10.479001,
+"trailingPE": 27.731707,
+"forwardPE": 22.852434,
+"priceToBook": 10.324631,
 "dividendYield": 2.6,
-"px": 230.8
+"px": 227.4
 },
 "KO": {
 "shortName": "Coca-Cola Company (The)",
@@ -1424,7 +1424,7 @@
 "trailingPE": 43.853294,
 "forwardPE": 26.560026,
 "priceToBook": 29.900635,
-"dividendYield": 0.5,
+"dividendYield": 0.51,
 "px": 1351.12
 },
 "LNZ.VI": {
@@ -1432,42 +1432,42 @@
 "longName": "Lenzing Aktiengesellschaft",
 "sector": "Consumer Cyclical",
 "currency": "EUR",
-"marketCap": 749887872,
+"marketCap": 716869312,
 "sharesOutstanding": 73374542,
 "impliedSharesOutstanding": 73374542,
 "trailingPE": null,
-"forwardPE": -12.805574,
-"priceToBook": 1.4283718,
+"forwardPE": -12.241728,
+"priceToBook": 1.3654788,
 "dividendYield": 0.0,
-"px": 10.22
+"px": 9.77
 },
 "LOGN.SW": {
 "shortName": "LOGITECH N",
 "longName": "Logitech International S.A.",
 "sector": "Technology",
 "currency": "CHF",
-"marketCap": 12122649600,
+"marketCap": 12037557248,
 "sharesOutstanding": 141818544,
 "impliedSharesOutstanding": 141818544,
-"trailingPE": 19.515982,
-"forwardPE": 17.521101,
-"priceToBook": 6.8165994,
+"trailingPE": 19.378994,
+"forwardPE": 17.398117,
+"priceToBook": 6.7687516,
 "dividendYield": 1.59,
-"px": 85.48
+"px": 84.88
 },
 "LONN.SW": {
 "shortName": "LONZA N",
 "longName": "Lonza Group AG",
 "sector": "Healthcare",
 "currency": "CHF",
-"marketCap": 46586101760,
+"marketCap": 46153068544,
 "sharesOutstanding": 69844229,
 "impliedSharesOutstanding": 69844229,
-"trailingPE": 44.201458,
-"forwardPE": 29.701365,
-"priceToBook": 5.73157,
+"trailingPE": 43.79059,
+"forwardPE": 29.42528,
+"priceToBook": 5.6782928,
 "dividendYield": 0.75,
-"px": 667.0
+"px": 660.8
 },
 "LRCX": {
 "shortName": "Lam Research Corporation",
@@ -1480,7 +1480,7 @@
 "trailingPE": 30.354692,
 "forwardPE": 16.59659,
 "priceToBook": 18.293514,
-"dividendYield": 0.62,
+"dividendYield": 0.65,
 "px": 203.68
 },
 "MA": {
@@ -1494,7 +1494,7 @@
 "trailingPE": 32.783882,
 "forwardPE": 27.04984,
 "priceToBook": 80.91179,
-"dividendYield": 0.54,
+"dividendYield": 0.56,
 "px": 626.5
 },
 "MBG.DE": {
@@ -1502,28 +1502,28 @@
 "longName": "Mercedes-Benz Group AG",
 "sector": "Consumer Cyclical",
 "currency": "EUR",
-"marketCap": 36322373632,
+"marketCap": 36426788864,
 "sharesOutstanding": 949232324,
 "impliedSharesOutstanding": 949232324,
-"trailingPE": 6.6202416,
-"forwardPE": 6.5606403,
-"priceToBook": 0.37964323,
+"trailingPE": 6.639273,
+"forwardPE": 6.5795,
+"priceToBook": 0.3807346,
 "dividendYield": 8.98,
-"px": 38.265
+"px": 38.375
 },
 "MC.PA": {
 "shortName": "LVMH",
 "longName": "LVMH Moët Hennessy - Louis Vuitton, Société Européenne",
 "sector": "Consumer Cyclical",
 "currency": "EUR",
-"marketCap": 192277970944,
+"marketCap": 189996531712,
 "sharesOutstanding": 490630174,
 "impliedSharesOutstanding": 490630174,
-"trailingPE": 17.86235,
-"forwardPE": 16.394245,
-"priceToBook": 2.837881,
+"trailingPE": 17.65041,
+"forwardPE": 16.199722,
+"priceToBook": 2.8042088,
 "dividendYield": 3.35,
-"px": 391.9
+"px": 387.25
 },
 "MCD": {
 "shortName": "McDonald's Corporation",
@@ -1550,7 +1550,7 @@
 "trailingPE": 20.98722,
 "forwardPE": 19.534782,
 "priceToBook": 3.1358604,
-"dividendYield": 3.13,
+"dividendYield": 3.17,
 "px": 65.69
 },
 "MELI": {
@@ -1578,7 +1578,7 @@
 "trailingPE": 20.341862,
 "forwardPE": 16.71247,
 "priceToBook": 5.59479,
-"dividendYield": 0.34,
+"dividendYield": 0.35,
 "px": 596.22
 },
 "MMK.VI": {
@@ -1586,14 +1586,14 @@
 "longName": "Mayr-Melnhof Karton AG",
 "sector": "Consumer Cyclical",
 "currency": "EUR",
-"marketCap": 1432063104,
+"marketCap": 1375713408,
 "sharesOutstanding": 19430981,
 "impliedSharesOutstanding": 19430981,
 "trailingPE": null,
-"forwardPE": 10.642598,
-"priceToBook": 0.68584293,
+"forwardPE": 10.223826,
+"priceToBook": 0.658856,
 "dividendYield": 2.71,
-"px": 73.7
+"px": 70.8
 },
 "MMM": {
 "shortName": "3M Company",
@@ -1606,7 +1606,7 @@
 "trailingPE": 26.637314,
 "forwardPE": 17.989422,
 "priceToBook": 22.34506,
-"dividendYield": 1.72,
+"dividendYield": 1.75,
 "px": 178.47
 },
 "MRK": {
@@ -1620,7 +1620,7 @@
 "trailingPE": 134.1515,
 "forwardPE": 14.814327,
 "priceToBook": 7.2976537,
-"dividendYield": 2.55,
+"dividendYield": 2.65,
 "px": 132.81
 },
 "MRK.DE": {
@@ -1628,14 +1628,14 @@
 "longName": "Merck KGaA",
 "sector": "Healthcare",
 "currency": "EUR",
-"marketCap": 64521035776,
+"marketCap": 64086257664,
 "sharesOutstanding": 129242252,
 "impliedSharesOutstanding": 434777878,
-"trailingPE": 33.574657,
-"forwardPE": 16.288433,
-"priceToBook": 2.0490727,
+"trailingPE": 33.348415,
+"forwardPE": 16.196447,
+"priceToBook": 2.035265,
 "dividendYield": 1.47,
-"px": 148.4
+"px": 147.4
 },
 "MSFT": {
 "shortName": "Microsoft Corporation",
@@ -1648,7 +1648,7 @@
 "trailingPE": 26.007307,
 "forwardPE": 20.590195,
 "priceToBook": 7.8657002,
-"dividendYield": 0.77,
+"dividendYield": 0.79,
 "px": 498.3
 },
 "MTX.DE": {
@@ -1656,14 +1656,14 @@
 "longName": "MTU Aero Engines AG",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 18601523200,
+"marketCap": 18353719296,
 "sharesOutstanding": 53870614,
 "impliedSharesOutstanding": 53870614,
-"trailingPE": 20.017391,
-"forwardPE": 16.64066,
-"priceToBook": 3.9025767,
+"trailingPE": 19.750725,
+"forwardPE": 16.418978,
+"priceToBook": 3.8505876,
 "dividendYield": 1.03,
-"px": 345.3
+"px": 340.7
 },
 "MU": {
 "shortName": "Micron Technology, Inc.",
@@ -1684,42 +1684,42 @@
 "longName": "Münchener Rückversicherungs-Gesellschaft Aktiengesellschaft in München",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": 72318148608,
+"marketCap": 72745926656,
 "sharesOutstanding": 125814467,
 "impliedSharesOutstanding": 125814467,
-"trailingPE": 10.786263,
-"forwardPE": 11.141836,
-"priceToBook": 2.1670775,
+"trailingPE": 10.850066,
+"forwardPE": 11.207742,
+"priceToBook": 2.179896,
 "dividendYield": 4.12,
-"px": 574.8
+"px": 578.2
 },
 "NDA-FI.HE": {
 "shortName": "Nordea Bank Abp",
 "longName": "Nordea Bank Abp",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": 56505995264,
+"marketCap": 55742398464,
 "sharesOutstanding": 3393753656,
 "impliedSharesOutstanding": 3393753656,
-"trailingPE": 12.065217,
-"forwardPE": 10.662551,
-"priceToBook": 1.8048779,
+"trailingPE": 11.902173,
+"forwardPE": 10.518462,
+"priceToBook": 1.7804877,
 "dividendYield": 7.81,
-"px": 16.65
+"px": 16.425
 },
 "NESN.SW": {
 "shortName": "NESTLE N",
 "longName": "Nestlé S.A.",
 "sector": "Consumer Defensive",
 "currency": "CHF",
-"marketCap": 217223970816,
+"marketCap": 219616133120,
 "sharesOutstanding": 2572220000,
 "impliedSharesOutstanding": 2572220000,
-"trailingPE": 29.22145,
-"forwardPE": 17.683123,
-"priceToBook": 7.433979,
+"trailingPE": 29.543251,
+"forwardPE": 17.877857,
+"priceToBook": 7.515845,
 "dividendYield": 3.67,
-"px": 84.45
+"px": 85.38
 },
 "NFLX": {
 "shortName": "Netflix, Inc.",
@@ -1746,7 +1746,7 @@
 "trailingPE": 16.504808,
 "forwardPE": 24.699621,
 "priceToBook": 3.3450263,
-"dividendYield": 4.52,
+"dividendYield": 4.78,
 "px": 34.33
 },
 "NOKIA.HE": {
@@ -1754,28 +1754,28 @@
 "longName": "Nokia Oyj",
 "sector": "Technology",
 "currency": "EUR",
-"marketCap": 40019992576,
+"marketCap": 38062002176,
 "sharesOutstanding": 5658935619,
 "impliedSharesOutstanding": 5658935619,
-"trailingPE": 50.514286,
-"forwardPE": 16.58031,
-"priceToBook": 1.8843591,
+"trailingPE": 48.042854,
+"forwardPE": 15.769113,
+"priceToBook": 1.7921662,
 "dividendYield": 1.98,
-"px": 7.072
+"px": 6.726
 },
 "NOVN.SW": {
 "shortName": "NOVARTIS N",
 "longName": "Novartis AG",
 "sector": "Healthcare",
 "currency": "CHF",
-"marketCap": 240308469760,
+"marketCap": 241706057728,
 "sharesOutstanding": 1888623572,
 "impliedSharesOutstanding": 1888623572,
-"trailingPE": 30.51319,
-"forwardPE": 15.388282,
-"priceToBook": 7.830889,
+"trailingPE": 30.690647,
+"forwardPE": 15.4777775,
+"priceToBook": 7.876432,
 "dividendYield": 2.91,
-"px": 127.24
+"px": 127.98
 },
 "NOW": {
 "shortName": "ServiceNow, Inc.",
@@ -1802,7 +1802,7 @@
 "trailingPE": 15.679913,
 "forwardPE": 8.79118,
 "priceToBook": 13.1965275,
-"dividendYield": 0.66,
+"dividendYield": 0.69,
 "px": 145.98
 },
 "OMV.VI": {
@@ -1810,28 +1810,28 @@
 "longName": "OMV Aktiengesellschaft",
 "sector": "Energy",
 "currency": "EUR",
-"marketCap": 22683357184,
+"marketCap": 22438748160,
 "sharesOutstanding": 326144577,
 "impliedSharesOutstanding": 326144577,
-"trailingPE": 10.553869,
-"forwardPE": 7.6247344,
-"priceToBook": 1.4017656,
+"trailingPE": 10.440061,
+"forwardPE": 7.542512,
+"priceToBook": 1.3866495,
 "dividendYield": 4.53,
-"px": 69.55
+"px": 68.8
 },
 "OR.PA": {
 "shortName": "L'OREAL",
 "longName": "L'Oréal S.A.",
 "sector": "Consumer Defensive",
 "currency": "EUR",
-"marketCap": 232818638848,
+"marketCap": 233751953408,
 "sharesOutstanding": 533314966,
 "impliedSharesOutstanding": 533314966,
-"trailingPE": 37.058575,
-"forwardPE": 28.592966,
-"priceToBook": 6.867989,
+"trailingPE": 37.20713,
+"forwardPE": 28.707588,
+"priceToBook": 6.8955207,
 "dividendYield": 1.63,
-"px": 436.55
+"px": 438.3
 },
 "ORCL": {
 "shortName": "Oracle Corporation",
@@ -1844,7 +1844,7 @@
 "trailingPE": 17.33072,
 "forwardPE": 9.9983635,
 "priceToBook": 5.4084325,
-"dividendYield": 1.76,
+"dividendYield": 1.81,
 "px": 110.57
 },
 "P911.DE": {
@@ -1852,28 +1852,28 @@
 "longName": "Dr. Ing. h.c. F. Porsche AG",
 "sector": "Consumer Cyclical",
 "currency": "EUR",
-"marketCap": 39318761472,
+"marketCap": 39674048512,
 "sharesOutstanding": 455500000,
 "impliedSharesOutstanding": 911000000,
-"trailingPE": 17.983332,
-"forwardPE": 25.859177,
-"priceToBook": 1.7101874,
+"trailingPE": 18.145832,
+"forwardPE": 26.092844,
+"priceToBook": 1.7256409,
 "dividendYield": 2.34,
-"px": 43.16
+"px": 43.55
 },
 "PAL.VI": {
 "shortName": "Palfinger AG",
 "longName": "Palfinger AG",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 988702592,
+"marketCap": 969905984,
 "sharesOutstanding": 37593258,
 "impliedSharesOutstanding": 37593258,
-"trailingPE": 10.395257,
-"forwardPE": 12.329821,
-"priceToBook": 1.2702858,
+"trailingPE": 10.197628,
+"forwardPE": 12.095413,
+"priceToBook": 1.246136,
 "dividendYield": 3.42,
-"px": 26.3
+"px": 25.8
 },
 "PANW": {
 "shortName": "Palo Alto Networks, Inc.",
@@ -1884,7 +1884,7 @@
 "sharesOutstanding": 818771631,
 "impliedSharesOutstanding": 818771631,
 "trailingPE": 634.6141,
-"forwardPE": 73.732315,
+"forwardPE": 73.74525,
 "priceToBook": 10.723327,
 "dividendYield": 0.0,
 "px": 361.73
@@ -1900,7 +1900,7 @@
 "trailingPE": 17.484278,
 "forwardPE": 16.17434,
 "priceToBook": 8.50517,
-"dividendYield": 4.17,
+"dividendYield": 4.26,
 "px": 139.0
 },
 "PG": {
@@ -1912,9 +1912,9 @@
 "sharesOutstanding": 2317783143,
 "impliedSharesOutstanding": 2317783143,
 "trailingPE": 24.903563,
-"forwardPE": 22.626844,
+"forwardPE": 22.631422,
 "priceToBook": 7.158088,
-"dividendYield": 2.56,
+"dividendYield": 2.59,
 "px": 167.85
 },
 "PGHN.SW": {
@@ -1922,14 +1922,14 @@
 "longName": "Partners Group Holding AG",
 "sector": "Financial Services",
 "currency": "CHF",
-"marketCap": 16403880960,
+"marketCap": 16275082240,
 "sharesOutstanding": 25759865,
 "impliedSharesOutstanding": 25759865,
-"trailingPE": 13.90393,
-"forwardPE": 14.058949,
-"priceToBook": 11.203378,
+"trailingPE": 13.79476,
+"forwardPE": 13.948562,
+"priceToBook": 11.115412,
 "dividendYield": 7.22,
-"px": 636.8
+"px": 631.8
 },
 "PLTR": {
 "shortName": "Palantir Technologies Inc.",
@@ -1956,7 +1956,7 @@
 "trailingPE": 27.216057,
 "forwardPE": 20.617632,
 "priceToBook": -36.61233,
-"dividendYield": 3.32,
+"dividendYield": 3.43,
 "px": 186.43
 },
 "POS.VI": {
@@ -1964,42 +1964,42 @@
 "longName": "PORR AG",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 1331532672,
+"marketCap": 1311893504,
 "sharesOutstanding": 39278250,
 "impliedSharesOutstanding": 39278250,
-"trailingPE": 10.694007,
-"forwardPE": 9.746982,
-"priceToBook": 1.75912,
+"trailingPE": 10.536278,
+"forwardPE": 9.603221,
+"priceToBook": 1.7331743,
 "dividendYield": 3.25,
-"px": 33.9
+"px": 33.4
 },
 "POST.VI": {
 "shortName": "Oesterreichische Post AG",
 "longName": "Österreichische Post AG",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 2165062144,
+"marketCap": 2161684480,
 "sharesOutstanding": 67552638,
 "impliedSharesOutstanding": 67552638,
-"trailingPE": 18.52601,
-"forwardPE": 16.174614,
-"priceToBook": 3.6321394,
+"trailingPE": 18.49711,
+"forwardPE": 16.149382,
+"priceToBook": 3.6264732,
 "dividendYield": 5.71,
-"px": 32.05
+"px": 32.0
 },
 "PRX.AS": {
 "shortName": "PROSUS",
 "longName": "Prosus N.V.",
 "sector": "Consumer Cyclical",
 "currency": "EUR",
-"marketCap": 67077144576,
+"marketCap": 65823170560,
 "sharesOutstanding": 2088663836,
 "impliedSharesOutstanding": 2089956053,
-"trailingPE": 7.116408,
-"forwardPE": 7.6655025,
-"priceToBook": 1.4391955,
+"trailingPE": 6.9833703,
+"forwardPE": 7.5221996,
+"priceToBook": 1.4122905,
 "dividendYield": 0.87,
-"px": 32.095
+"px": 31.495
 },
 "QCOM": {
 "shortName": "QUALCOMM Incorporated",
@@ -2009,10 +2009,10 @@
 "marketCap": 173350699008,
 "sharesOutstanding": 1070000000,
 "impliedSharesOutstanding": 1070000000,
-"trailingPE": 12.588189,
+"trailingPE": 12.756693,
 "forwardPE": 13.299458,
 "priceToBook": 5.712825,
-"dividendYield": 2.3,
+"dividendYield": 2.27,
 "px": 162.01
 },
 "QIA.DE": {
@@ -2020,84 +2020,84 @@
 "longName": "Qiagen N.V.",
 "sector": "Healthcare",
 "currency": "EUR",
-"marketCap": 9343968256,
+"marketCap": 9328480256,
 "sharesOutstanding": 206496521,
 "impliedSharesOutstanding": 206496521,
-"trailingPE": 28.45912,
-"forwardPE": 19.55911,
-"priceToBook": 3.0208435,
+"trailingPE": 28.41195,
+"forwardPE": 19.526691,
+"priceToBook": 3.0158367,
 "dividendYield": 0.68,
-"px": 45.25
+"px": 45.175
 },
 "RACE.MI": {
 "shortName": "FERRARI",
 "longName": "Ferrari N.V.",
 "sector": "Consumer Cyclical",
 "currency": "EUR",
-"marketCap": 65073152000,
+"marketCap": 64591388672,
 "sharesOutstanding": 175186827,
 "impliedSharesOutstanding": 175186827,
-"trailingPE": 40.11339,
-"forwardPE": 33.455074,
-"priceToBook": 16.65994,
+"trailingPE": 39.816414,
+"forwardPE": 33.20739,
+"priceToBook": 16.5366,
 "dividendYield": 0.96,
-"px": 371.45
+"px": 368.7
 },
 "RBI.VI": {
 "shortName": "Raiffeisen Bank Internat. AG",
 "longName": "Raiffeisen Bank International AG",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": 19557199872,
+"marketCap": 19113836544,
 "sharesOutstanding": 328416464,
 "impliedSharesOutstanding": 328416464,
-"trailingPE": 9.9748745,
-"forwardPE": 8.954873,
-"priceToBook": 0.9607628,
+"trailingPE": 9.748744,
+"forwardPE": 8.751866,
+"priceToBook": 0.9389823,
 "dividendYield": 2.69,
-"px": 59.55
+"px": 58.2
 },
 "RHM.DE": {
 "shortName": "RHEINMETALL AG                I",
 "longName": "Rheinmetall AG",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 33862346752,
+"marketCap": 33246330880,
 "sharesOutstanding": 46668063,
 "impliedSharesOutstanding": 46668063,
-"trailingPE": 25.531315,
-"forwardPE": 14.598316,
-"priceToBook": 6.339388,
+"trailingPE": 25.066854,
+"forwardPE": 14.3327465,
+"priceToBook": 6.224063,
 "dividendYield": 1.55,
-"px": 725.6
+"px": 712.4
 },
 "RI.PA": {
 "shortName": "PERNOD RICARD",
 "longName": "Pernod Ricard SA",
 "sector": "Consumer Defensive",
 "currency": "EUR",
-"marketCap": 17864038400,
+"marketCap": 17929508864,
 "sharesOutstanding": 251818962,
 "impliedSharesOutstanding": 251818962,
-"trailingPE": 14.872118,
-"forwardPE": 11.970653,
-"priceToBook": 1.1518853,
+"trailingPE": 14.926624,
+"forwardPE": 12.014525,
+"priceToBook": 1.1561068,
 "dividendYield": 6.55,
-"px": 70.94
+"px": 71.2
 },
 "RMS.PA": {
 "shortName": "HERMES INTL",
 "longName": "Hermès International Société en commandite par actions",
 "sector": "Consumer Cyclical",
 "currency": "EUR",
-"marketCap": 133054996480,
+"marketCap": 130021507072,
 "sharesOutstanding": 104602982,
 "impliedSharesOutstanding": 104602982,
-"trailingPE": 29.581396,
-"forwardPE": 26.542362,
-"priceToBook": 7.003711,
+"trailingPE": 28.906977,
+"forwardPE": 25.937231,
+"priceToBook": 6.8440356,
 "dividendYield": 1.41,
-"px": 1272.0
+"px": 1243.0
 },
 "RO.SW": {
 "shortName": "ROCHE I",
@@ -2118,84 +2118,84 @@
 "longName": "RWE Aktiengesellschaft",
 "sector": "Utilities",
 "currency": "EUR",
-"marketCap": 44599549952,
+"marketCap": 43445174272,
 "sharesOutstanding": 779985169,
 "impliedSharesOutstanding": 779985169,
-"trailingPE": 60.189476,
-"forwardPE": 16.671623,
-"priceToBook": 1.0706462,
+"trailingPE": 58.63158,
+"forwardPE": 16.240108,
+"priceToBook": 1.0429344,
 "dividendYield": 2.08,
-"px": 57.18
+"px": 55.7
 },
 "SAF.PA": {
 "shortName": "SAFRAN",
 "longName": "Safran SA",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 124401065984,
+"marketCap": 122913701888,
 "sharesOutstanding": 413155288,
 "impliedSharesOutstanding": 413155288,
-"trailingPE": 31.997875,
-"forwardPE": 24.076733,
-"priceToBook": 8.601628,
+"trailingPE": 31.615303,
+"forwardPE": 23.788868,
+"priceToBook": 8.498786,
 "dividendYield": 1.1,
-"px": 301.1
+"px": 297.5
 },
 "SAN.MC": {
 "shortName": "BANCO SANTANDER S.A.",
 "longName": "Banco Santander, S.A.",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": 152097357824,
+"marketCap": 150109356032,
 "sharesOutstanding": 14405887701,
 "impliedSharesOutstanding": 14405887701,
-"trailingPE": 11.602197,
-"forwardPE": 8.488571,
-"priceToBook": 1.3420618,
+"trailingPE": 11.450549,
+"forwardPE": 8.37762,
+"priceToBook": 1.3245201,
 "dividendYield": 2.41,
-"px": 10.558
+"px": 10.42
 },
 "SAN.PA": {
 "shortName": "SANOFI",
 "longName": "Sanofi",
 "sector": "Healthcare",
 "currency": "EUR",
-"marketCap": 100598808576,
+"marketCap": 101475246080,
 "sharesOutstanding": 1200606331,
 "impliedSharesOutstanding": 1200606331,
-"trailingPE": 24.216763,
-"forwardPE": 8.804088,
-"priceToBook": 1.3796453,
+"trailingPE": 24.427744,
+"forwardPE": 8.880791,
+"priceToBook": 1.3916651,
 "dividendYield": 4.78,
-"px": 83.79
+"px": 84.52
 },
 "SAP.DE": {
 "shortName": "SAP SE                        I",
 "longName": "SAP SE",
 "sector": "Technology",
 "currency": "EUR",
-"marketCap": 215859298304,
+"marketCap": 213666299904,
 "sharesOutstanding": 1154204232,
 "impliedSharesOutstanding": 1154204232,
-"trailingPE": 27.065125,
-"forwardPE": 22.038523,
-"priceToBook": 4.6807656,
+"trailingPE": 26.79016,
+"forwardPE": 21.814625,
+"priceToBook": 4.633212,
 "dividendYield": 1.29,
-"px": 187.02
+"px": 185.12
 },
 "SBO.VI": {
 "shortName": "SBO AG",
 "longName": "SBO AG",
 "sector": "Energy",
 "currency": "EUR",
-"marketCap": 442840960,
+"marketCap": 439689056,
 "sharesOutstanding": 15759465,
 "impliedSharesOutstanding": 15759465,
-"trailingPE": 85.15151,
-"forwardPE": 9.1475525,
-"priceToBook": 1.0372066,
+"trailingPE": 84.54545,
+"forwardPE": 9.082445,
+"priceToBook": 1.0298244,
 "dividendYield": 2.67,
-"px": 28.1
+"px": 27.9
 },
 "SBUX": {
 "shortName": "Starbucks Corporation",
@@ -2205,10 +2205,10 @@
 "marketCap": 119106248704,
 "sharesOutstanding": 1140100000,
 "impliedSharesOutstanding": 1140100000,
-"trailingPE": 49.278305,
+"trailingPE": 47.271492,
 "forwardPE": 28.04496,
 "priceToBook": -15.529954,
-"dividendYield": 2.31,
+"dividendYield": 2.41,
 "px": 104.47
 },
 "SCMN.SW": {
@@ -2216,42 +2216,42 @@
 "longName": "Swisscom AG",
 "sector": "Communication Services",
 "currency": "CHF",
-"marketCap": 36520370176,
+"marketCap": 36857081856,
 "sharesOutstanding": 51801943,
 "impliedSharesOutstanding": 51801943,
-"trailingPE": 28.222578,
-"forwardPE": 23.66415,
-"priceToBook": 3.024466,
+"trailingPE": 28.482786,
+"forwardPE": 23.88233,
+"priceToBook": 3.0523512,
 "dividendYield": 3.69,
-"px": 705.0
+"px": 711.5
 },
 "SGO.PA": {
 "shortName": "SAINT GOBAIN",
 "longName": "Compagnie de Saint-Gobain S.A.",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 35596648448,
+"marketCap": 35206438912,
 "sharesOutstanding": 487758917,
 "impliedSharesOutstanding": 487758917,
-"trailingPE": 13.539889,
-"forwardPE": 11.104281,
-"priceToBook": 1.4060575,
+"trailingPE": 13.391466,
+"forwardPE": 10.982557,
+"priceToBook": 1.3906443,
 "dividendYield": 3.11,
-"px": 72.98
+"px": 72.18
 },
 "SHL.DE": {
 "shortName": "Siemens Healthineers AG       N",
 "longName": "Siemens Healthineers AG",
 "sector": "Healthcare",
 "currency": "EUR",
-"marketCap": 49043300352,
+"marketCap": 48763498496,
 "sharesOutstanding": 1119198976,
 "impliedSharesOutstanding": 1119198976,
-"trailingPE": 22.243654,
-"forwardPE": 16.654568,
-"priceToBook": 2.452017,
+"trailingPE": 22.11675,
+"forwardPE": 16.559551,
+"priceToBook": 2.438028,
 "dividendYield": 2.28,
-"px": 43.82
+"px": 43.57
 },
 "SHW": {
 "shortName": "Sherwin-Williams Company (The)",
@@ -2261,10 +2261,10 @@
 "marketCap": 82098872320,
 "sharesOutstanding": 241588072,
 "impliedSharesOutstanding": 241588072,
-"trailingPE": 31.878986,
+"trailingPE": 31.26311,
 "forwardPE": 25.802105,
 "priceToBook": 20.523613,
-"dividendYield": 0.92,
+"dividendYield": 0.94,
 "px": 339.83
 },
 "SIE.DE": {
@@ -2272,140 +2272,140 @@
 "longName": "Siemens Aktiengesellschaft",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 203968921600,
+"marketCap": 197931630592,
 "sharesOutstanding": 764214809,
 "impliedSharesOutstanding": 764214809,
-"trailingPE": 24.874186,
-"forwardPE": 17.634062,
-"priceToBook": 2.9721272,
+"trailingPE": 24.137932,
+"forwardPE": 17.103386,
+"priceToBook": 2.8841548,
 "dividendYield": 2.01,
-"px": 266.9
+"px": 259.0
 },
 "SIKA.SW": {
 "shortName": "SIKA N",
 "longName": "Sika AG",
 "sector": "Basic Materials",
 "currency": "CHF",
-"marketCap": 29841700864,
+"marketCap": 29552908288,
 "sharesOutstanding": 160439241,
 "impliedSharesOutstanding": 160439241,
-"trailingPE": 28.703703,
-"forwardPE": 22.439188,
-"priceToBook": 4.379253,
+"trailingPE": 28.425926,
+"forwardPE": 22.222034,
+"priceToBook": 4.3368726,
 "dividendYield": 1.99,
-"px": 186.0
+"px": 184.2
 },
 "SLHN.SW": {
 "shortName": "SWISS LIFE HOLDING AG N",
 "longName": "Swiss Life Holding AG",
 "sector": "Financial Services",
 "currency": "CHF",
-"marketCap": 26749431808,
+"marketCap": 26537043968,
 "sharesOutstanding": 27945498,
 "impliedSharesOutstanding": 27945498,
-"trailingPE": 20.78159,
-"forwardPE": 18.628426,
-"priceToBook": 4.236523,
+"trailingPE": 20.616587,
+"forwardPE": 18.480518,
+"priceToBook": 4.2028856,
 "dividendYield": 3.81,
-"px": 957.2
+"px": 949.6
 },
 "SOON.SW": {
 "shortName": "SONOVA N",
 "longName": "Sonova Holding AG",
 "sector": "Healthcare",
 "currency": "CHF",
-"marketCap": 17469511680,
+"marketCap": 17481420800,
 "sharesOutstanding": 59541624,
 "impliedSharesOutstanding": 59541624,
-"trailingPE": 29.136047,
-"forwardPE": 23.082224,
-"priceToBook": 6.2650805,
+"trailingPE": 29.15591,
+"forwardPE": 23.09796,
+"priceToBook": 6.2693515,
 "dividendYield": 1.6,
-"px": 293.4
+"px": 293.6
 },
 "SREN.SW": {
 "shortName": "SWISS RE N",
 "longName": "Swiss Re AG",
 "sector": "Financial Services",
 "currency": "CHF",
-"marketCap": 43618603008,
+"marketCap": 43854540800,
 "sharesOutstanding": 294919585,
 "impliedSharesOutstanding": 294919585,
-"trailingPE": 11.350729,
-"forwardPE": 11.573228,
-"priceToBook": 2.1533058,
+"trailingPE": 11.412126,
+"forwardPE": 11.635829,
+"priceToBook": 2.164953,
 "dividendYield": 4.23,
-"px": 147.9
+"px": 148.7
 },
 "SRT3.DE": {
 "shortName": "SARTORIUS AG                  V",
 "longName": "Sartorius Aktiengesellschaft",
 "sector": "Healthcare",
 "currency": "EUR",
-"marketCap": 20646633472,
+"marketCap": 20370425856,
 "sharesOutstanding": 34813621,
 "impliedSharesOutstanding": 69052290,
-"trailingPE": 95.833336,
-"forwardPE": 46.164986,
-"priceToBook": 7.627745,
+"trailingPE": 94.551285,
+"forwardPE": 45.547394,
+"priceToBook": 7.525702,
 "dividendYield": 0.25,
-"px": 299.0
+"px": 295.0
 },
 "STLAM.MI": {
 "shortName": "STELLANTIS",
 "longName": "Stellantis N.V.",
 "sector": "Consumer Cyclical",
 "currency": "EUR",
-"marketCap": 9418153984,
+"marketCap": 9355705344,
 "sharesOutstanding": 2904596446,
 "impliedSharesOutstanding": 2904596446,
 "trailingPE": null,
-"forwardPE": 3.5891788,
-"priceToBook": 0.16764037,
+"forwardPE": 3.5653799,
+"priceToBook": 0.1665288,
 "dividendYield": 0.0,
-"px": 3.2425
+"px": 3.221
 },
 "STR.VI": {
 "shortName": "STRABAG SE",
 "longName": "Strabag SE",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 12029128704,
+"marketCap": 11775155200,
 "sharesOutstanding": 115442693,
 "impliedSharesOutstanding": 115442696,
-"trailingPE": 12.785276,
-"forwardPE": 12.148897,
-"priceToBook": 2.2005405,
+"trailingPE": 12.515338,
+"forwardPE": 11.892395,
+"priceToBook": 2.15408,
 "dividendYield": 2.78,
-"px": 104.2
+"px": 102.0
 },
 "SU.PA": {
 "shortName": "SCHNEIDER ELECTRIC SE",
 "longName": "Schneider Electric S.E.",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 138240704512,
+"marketCap": 134127263744,
 "sharesOutstanding": 587633141,
 "impliedSharesOutstanding": 587633141,
-"trailingPE": 27.93943,
-"forwardPE": 18.680717,
-"priceToBook": 5.4076734,
+"trailingPE": 27.108076,
+"forwardPE": 18.12486,
+"priceToBook": 5.2467647,
 "dividendYield": 1.76,
-"px": 235.25
+"px": 228.25
 },
 "SY1.DE": {
 "shortName": "Symrise AG                    I",
 "longName": "Symrise AG",
 "sector": "Basic Materials",
 "currency": "EUR",
-"marketCap": 13067784192,
+"marketCap": 13037603840,
 "sharesOutstanding": 137180179,
 "impliedSharesOutstanding": 137180179,
-"trailingPE": 53.81921,
-"forwardPE": 21.40751,
-"priceToBook": 3.4998899,
+"trailingPE": 53.694916,
+"forwardPE": 21.35807,
+"priceToBook": 3.491807,
 "dividendYield": 1.3,
-"px": 95.26
+"px": 95.04
 },
 "TKA.VI": {
 "shortName": "Telekom Austria AG",
@@ -2415,11 +2415,11 @@
 "marketCap": null,
 "sharesOutstanding": null,
 "impliedSharesOutstanding": null,
-"trailingPE": 8.737373,
-"forwardPE": 7.956437,
-"priceToBook": 1.0292717,
+"trailingPE": 8.686869,
+"forwardPE": 7.9104466,
+"priceToBook": 1.0233222,
 "dividendYield": 4.86,
-"px": 8.65
+"px": 8.6
 },
 "TMO": {
 "shortName": "Thermo Fisher Scientific Inc",
@@ -2446,7 +2446,7 @@
 "trailingPE": 15.673096,
 "forwardPE": 11.401062,
 "priceToBook": 3.067877,
-"dividendYield": 2.85,
+"dividendYield": 2.88,
 "px": 162.53
 },
 "TRV": {
@@ -2482,14 +2482,14 @@
 "longName": "TotalEnergies SE",
 "sector": "Energy",
 "currency": "EUR",
-"marketCap": 173605011456,
+"marketCap": 172091785216,
 "sharesOutstanding": 2193089956,
 "impliedSharesOutstanding": 2193089956,
-"trailingPE": 9.183295,
-"forwardPE": 7.5491533,
-"priceToBook": 1.4788381,
+"trailingPE": 9.103249,
+"forwardPE": 7.4833508,
+"priceToBook": 1.4659477,
 "dividendYield": 4.51,
-"px": 79.16
+"px": 78.47
 },
 "TXN": {
 "shortName": "Texas Instruments Incorporated",
@@ -2510,28 +2510,28 @@
 "longName": "UBS Group AG",
 "sector": "Financial Services",
 "currency": "CHF",
-"marketCap": 116392124416,
+"marketCap": 113664892928,
 "sharesOutstanding": 3030255878,
 "impliedSharesOutstanding": 3030255878,
-"trailingPE": 15.871901,
-"forwardPE": 10.702146,
-"priceToBook": 1.5934575,
+"trailingPE": 15.499999,
+"forwardPE": 10.451379,
+"priceToBook": 1.5561205,
 "dividendYield": 2.25,
-"px": 38.41
+"px": 37.51
 },
 "UCG.MI": {
 "shortName": "UNICREDIT",
 "longName": "UniCredit S.p.A.",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": 120341635072,
+"marketCap": 119847206912,
 "sharesOutstanding": 1498277375,
 "impliedSharesOutstanding": 1498277375,
-"trailingPE": 10.680851,
-"forwardPE": 9.086261,
-"priceToBook": 1.6192569,
+"trailingPE": 10.636968,
+"forwardPE": 9.048929,
+"priceToBook": 1.612604,
 "dividendYield": 7.5,
-"px": 80.32
+"px": 79.99
 },
 "UNH": {
 "shortName": "UnitedHealth Group Incorporated",
@@ -2542,7 +2542,7 @@
 "sharesOutstanding": 896022611,
 "impliedSharesOutstanding": 896022611,
 "trailingPE": 18.863014,
-"forwardPE": 14.0832405,
+"forwardPE": 14.078627,
 "priceToBook": 3.0185785,
 "dividendYield": 2.81,
 "px": 330.48
@@ -2552,14 +2552,14 @@
 "longName": "UNIQA Insurance Group AG",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": 5586767872,
+"marketCap": 5623603200,
 "sharesOutstanding": 306965261,
 "impliedSharesOutstanding": 306965262,
-"trailingPE": 12.465754,
-"forwardPE": 11.070695,
-"priceToBook": 1.705717,
+"trailingPE": 12.547945,
+"forwardPE": 11.143687,
+"priceToBook": 1.7169634,
 "dividendYield": 3.96,
-"px": 18.2
+"px": 18.32
 },
 "V": {
 "shortName": "Visa Inc.",
@@ -2572,7 +2572,7 @@
 "trailingPE": 32.65016,
 "forwardPE": 23.467947,
 "priceToBook": 20.986591,
-"dividendYield": 0.75,
+"dividendYield": 0.78,
 "px": 402.25
 },
 "VER.VI": {
@@ -2583,11 +2583,11 @@
 "marketCap": null,
 "sharesOutstanding": null,
 "impliedSharesOutstanding": null,
-"trailingPE": 24.873648,
-"forwardPE": 16.399336,
-"priceToBook": 2.4849427,
+"trailingPE": 24.638988,
+"forwardPE": 16.244625,
+"priceToBook": 2.4614997,
 "dividendYield": 2.9,
-"px": 68.9
+"px": 68.25
 },
 "VIG.VI": {
 "shortName": "VIENNA INSURANCE GROUP AG",
@@ -2597,53 +2597,53 @@
 "marketCap": null,
 "sharesOutstanding": null,
 "impliedSharesOutstanding": null,
-"trailingPE": 6.811989,
-"forwardPE": 9.44651,
-"priceToBook": 1.3448331,
+"trailingPE": 6.7393274,
+"forwardPE": 9.345747,
+"priceToBook": 1.3304882,
 "dividendYield": 2.31,
-"px": 75.0
+"px": 74.2
 },
 "VNA.DE": {
 "shortName": "Vonovia SE                    N",
 "longName": "Vonovia SE",
 "sector": "Real Estate",
 "currency": "EUR",
-"marketCap": 14254108672,
+"marketCap": 14508647424,
 "sharesOutstanding": 848458878,
 "impliedSharesOutstanding": 848458878,
-"trailingPE": 9.333333,
-"forwardPE": 9.924268,
-"priceToBook": 0.52062345,
+"trailingPE": 9.5,
+"forwardPE": 10.101488,
+"priceToBook": 0.52992034,
 "dividendYield": 7.29,
-"px": 16.8
+"px": 17.1
 },
 "VOE.VI": {
 "shortName": "voestalpine AG",
 "longName": "Voestalpine AG",
 "sector": "Basic Materials",
 "currency": "EUR",
-"marketCap": 5801889280,
+"marketCap": 5743596032,
 "sharesOutstanding": 171450616,
 "impliedSharesOutstanding": 171450616,
-"trailingPE": 11.393939,
-"forwardPE": 6.8963127,
-"priceToBook": 0.7423332,
+"trailingPE": 11.279461,
+"forwardPE": 6.8270235,
+"priceToBook": 0.7348748,
 "dividendYield": 2.22,
-"px": 33.84
+"px": 33.5
 },
 "VOW3.DE": {
 "shortName": "VOLKSWAGEN AG                 V",
 "longName": "Volkswagen AG",
 "sector": "Consumer Cyclical",
 "currency": "EUR",
-"marketCap": 32403726336,
+"marketCap": 32263362560,
 "sharesOutstanding": 206205445,
 "impliedSharesOutstanding": 501295263,
-"trailingPE": 30.635073,
-"forwardPE": 3.2961175,
-"priceToBook": 0.18980503,
+"trailingPE": 30.50237,
+"forwardPE": 3.2818398,
+"priceToBook": 0.18898286,
 "dividendYield": 8.06,
-"px": 64.64
+"px": 64.36
 },
 "VRTX": {
 "shortName": "Vertex Pharmaceuticals Incorpor",
@@ -2670,7 +2670,7 @@
 "trailingPE": 11.668367,
 "forwardPE": 8.620153,
 "priceToBook": 1.7886752,
-"dividendYield": 6.13,
+"dividendYield": 6.19,
 "px": 45.74
 },
 "WFC": {
@@ -2684,7 +2684,7 @@
 "trailingPE": 11.3695345,
 "forwardPE": 10.079526,
 "priceToBook": 1.5250293,
-"dividendYield": 2.47,
+"dividendYield": 2.48,
 "px": 80.61
 },
 "WIE.VI": {
@@ -2692,28 +2692,28 @@
 "longName": "Wienerberger AG",
 "sector": "Basic Materials",
 "currency": "EUR",
-"marketCap": 1694812928,
+"marketCap": 1677340544,
 "sharesOutstanding": 109201866,
 "impliedSharesOutstanding": 109201866,
-"trailingPE": 27.228071,
-"forwardPE": 13.981982,
-"priceToBook": 0.6493724,
+"trailingPE": 26.947369,
+"forwardPE": 13.837837,
+"priceToBook": 0.64267784,
 "dividendYield": 6.12,
-"px": 15.52
+"px": 15.36
 },
 "WKL.AS": {
 "shortName": "WOLTERS KLUWER",
 "longName": "Wolters Kluwer N.V.",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 19200512000,
+"marketCap": 19120435200,
 "sharesOutstanding": 222434115,
 "impliedSharesOutstanding": 222434115,
-"trailingPE": 14.857143,
-"forwardPE": 13.926399,
-"priceToBook": 20.498693,
+"trailingPE": 14.79518,
+"forwardPE": 13.868319,
+"priceToBook": 20.413204,
 "dividendYield": 3.01,
-"px": 86.32
+"px": 85.96
 },
 "WMT": {
 "shortName": "Walmart Inc.",
@@ -2740,7 +2740,7 @@
 "trailingPE": 16.350822,
 "forwardPE": 12.72943,
 "priceToBook": 2.4391854,
-"dividendYield": 2.67,
+"dividendYield": 2.69,
 "px": 158.93
 },
 "ZAL.DE": {
@@ -2748,27 +2748,27 @@
 "longName": "Zalando SE",
 "sector": "Consumer Cyclical",
 "currency": "EUR",
-"marketCap": 7038510080,
+"marketCap": 6994549760,
 "sharesOutstanding": 244223114,
 "impliedSharesOutstanding": 244223114,
-"trailingPE": 125.304344,
-"forwardPE": 14.912707,
-"priceToBook": 2.8860404,
+"trailingPE": 124.521736,
+"forwardPE": 14.819568,
+"priceToBook": 2.868015,
 "dividendYield": 0.0,
-"px": 28.82
+"px": 28.64
 },
 "ZURN.SW": {
 "shortName": "ZURICH INSURANCE N",
 "longName": "Zurich Insurance Group AG",
 "sector": "Financial Services",
 "currency": "CHF",
-"marketCap": 94879358976,
+"marketCap": 94909235200,
 "sharesOutstanding": 149369269,
 "impliedSharesOutstanding": 149369269,
-"trailingPE": 16.208218,
-"forwardPE": 14.729091,
-"priceToBook": 3.6217475,
+"trailingPE": 16.213322,
+"forwardPE": 14.733728,
+"priceToBook": 3.622888,
 "dividendYield": 4.72,
-"px": 635.2
+"px": 635.4
 }
 }
