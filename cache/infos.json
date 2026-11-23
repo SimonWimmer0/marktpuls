@@ -7,10 +7,10 @@
 "marketCap": 4978144444416,
 "sharesOutstanding": 14532182000,
 "impliedSharesOutstanding": 14532182000,
-"trailingPE": 38.883087,
+"trailingPE": 38.146996,
 "forwardPE": 32.400333,
 "priceToBook": 44.41333,
-"dividendYield": 0.31,
+"dividendYield": 0.32,
 "px": 342.56
 },
 "ABBN.SW": {
@@ -18,13 +18,13 @@
 "longName": "ABB Ltd",
 "sector": "Industrials",
 "currency": "CHF",
-"marketCap": 117943828480,
-"sharesOutstanding": 1805078553,
-"impliedSharesOutstanding": 1805078553,
+"marketCap": 117901967360,
+"sharesOutstanding": 1804437894,
+"impliedSharesOutstanding": 1804437894,
 "trailingPE": 29.699997,
 "forwardPE": 21.376604,
 "priceToBook": 8.63955,
-"dividendYield": 1.38,
+"dividendYield": 1.44,
 "px": 65.34
 },
 "ABBV": {
@@ -38,7 +38,7 @@
 "trailingPE": 49.17526,
 "forwardPE": 17.647331,
 "priceToBook": -110.37409,
-"dividendYield": 2.44,
+"dividendYield": 2.42,
 "px": 286.2
 },
 "ABI.BR": {
@@ -66,7 +66,7 @@
 "trailingPE": 38.432835,
 "forwardPE": 17.348917,
 "priceToBook": 3.496029,
-"dividendYield": 2.43,
+"dividendYield": 2.45,
 "px": 103.0
 },
 "ACN": {
@@ -77,10 +77,10 @@
 "marketCap": 130653405184,
 "sharesOutstanding": 590737475,
 "impliedSharesOutstanding": 590737475,
-"trailingPE": 16.120262,
+"trailingPE": 16.31047,
 "forwardPE": 13.89994,
 "priceToBook": 4.1724677,
-"dividendYield": 3.13,
+"dividendYield": 3.09,
 "px": 221.17
 },
 "AD.AS": {
@@ -94,7 +94,7 @@
 "trailingPE": 13.403102,
 "forwardPE": 11.900419,
 "priceToBook": 2.081252,
-"dividendYield": 3.62,
+"dividendYield": 3.59,
 "px": 34.58
 },
 "ADBE": {
@@ -105,7 +105,7 @@
 "marketCap": 84732731392,
 "sharesOutstanding": 389200000,
 "impliedSharesOutstanding": 389200000,
-"trailingPE": 12.376919,
+"trailingPE": 12.15578,
 "forwardPE": 7.9435387,
 "priceToBook": 7.236016,
 "dividendYield": 0.0,
@@ -119,10 +119,10 @@
 "marketCap": 167620886528,
 "sharesOutstanding": 484565465,
 "impliedSharesOutstanding": 484565465,
-"trailingPE": 44.808292,
+"trailingPE": 41.083138,
 "forwardPE": 20.986444,
 "priceToBook": 4.9960284,
-"dividendYield": 1.17,
+"dividendYield": 1.27,
 "px": 345.92
 },
 "ADP": {
@@ -133,7 +133,7 @@
 "marketCap": 119102865408,
 "sharesOutstanding": 394759432,
 "impliedSharesOutstanding": 394759432,
-"trailingPE": 26.699999,
+"trailingPE": 26.747341,
 "forwardPE": 22.311653,
 "priceToBook": 23.439247,
 "dividendYield": 2.52,
@@ -147,10 +147,10 @@
 "marketCap": 27895375872,
 "sharesOutstanding": 169062879,
 "impliedSharesOutstanding": 169062879,
-"trailingPE": 17.799353,
-"forwardPE": 14.070695,
+"trailingPE": 18.581081,
+"forwardPE": 14.042948,
 "priceToBook": 4.5479603,
-"dividendYield": 1.63,
+"dividendYield": 1.7,
 "px": 165.0
 },
 "ADYEN.AS": {
@@ -178,7 +178,7 @@
 "trailingPE": 33.7982,
 "forwardPE": 26.081903,
 "priceToBook": 4.5023165,
-"dividendYield": 1.78,
+"dividendYield": 1.79,
 "px": 187.58
 },
 "AIR.DE": {
@@ -192,7 +192,7 @@
 "trailingPE": 24.358974,
 "forwardPE": 39.66597,
 "priceToBook": 5.6068697,
-"dividendYield": 1.61,
+"dividendYield": 1.68,
 "px": 190.0
 },
 "AIR.PA": {
@@ -206,7 +206,7 @@
 "trailingPE": 24.353846,
 "forwardPE": 21.912588,
 "priceToBook": 5.6056895,
-"dividendYield": 1.62,
+"dividendYield": 1.68,
 "px": 189.96
 },
 "ALC.SW": {
@@ -217,10 +217,10 @@
 "marketCap": 29919311872,
 "sharesOutstanding": 480400000,
 "impliedSharesOutstanding": 480400000,
-"trailingPE": 58.205605,
+"trailingPE": 57.13761,
 "forwardPE": 17.266695,
 "priceToBook": 1.670143,
-"dividendYield": 0.44,
+"dividendYield": 0.45,
 "px": 62.28
 },
 "ALV.DE": {
@@ -234,7 +234,7 @@
 "trailingPE": 14.803407,
 "forwardPE": 13.429578,
 "priceToBook": 2.7886133,
-"dividendYield": 3.74,
+"dividendYield": 3.78,
 "px": 451.8
 },
 "AMAT": {
@@ -245,10 +245,10 @@
 "marketCap": 240166404096,
 "sharesOutstanding": 793597443,
 "impliedSharesOutstanding": 793597443,
-"trailingPE": 26.852705,
+"trailingPE": 23.98019,
 "forwardPE": 12.289364,
 "priceToBook": 9.192613,
-"dividendYield": 0.63,
+"dividendYield": 0.7,
 "px": 302.63
 },
 "AMD": {
@@ -273,10 +273,10 @@
 "marketCap": 235642683392,
 "sharesOutstanding": 540911490,
 "impliedSharesOutstanding": 540911490,
-"trailingPE": 25.43141,
+"trailingPE": 25.254494,
 "forwardPE": 17.338457,
 "priceToBook": 16.41818,
-"dividendYield": 2.3,
+"dividendYield": 2.31,
 "px": 435.64
 },
 "AMZN": {
@@ -304,7 +304,7 @@
 "trailingPE": 15.881147,
 "forwardPE": 13.030532,
 "priceToBook": 2.9417348,
-"dividendYield": 3.33,
+"dividendYield": 3.48,
 "px": 77.5
 },
 "ARM": {
@@ -332,7 +332,7 @@
 "trailingPE": 33.39051,
 "forwardPE": 20.696676,
 "priceToBook": 20.280243,
-"dividendYield": 0.58,
+"dividendYield": 0.64,
 "px": 1168.0
 },
 "ATS.VI": {
@@ -358,9 +358,9 @@
 "sharesOutstanding": 4773629865,
 "impliedSharesOutstanding": 4773629865,
 "trailingPE": 38.877396,
-"forwardPE": 15.702569,
+"forwardPE": 15.67989,
 "priceToBook": 14.577627,
-"dividendYield": 0.75,
+"dividendYield": 0.85,
 "px": 304.41
 },
 "AXP": {
@@ -374,7 +374,7 @@
 "trailingPE": 16.997183,
 "forwardPE": 14.923447,
 "priceToBook": 5.6552143,
-"dividendYield": 1.22,
+"dividendYield": 1.26,
 "px": 301.7
 },
 "BA": {
@@ -399,10 +399,10 @@
 "marketCap": 324585848832,
 "sharesOutstanding": 6900209006,
 "impliedSharesOutstanding": 6900209006,
-"trailingPE": 11.586207,
+"trailingPE": 11.22673,
 "forwardPE": 9.080906,
 "priceToBook": 1.1983187,
-"dividendYield": 2.64,
+"dividendYield": 2.72,
 "px": 47.04
 },
 "BAS.DE": {
@@ -410,13 +410,13 @@
 "longName": "BASF SE",
 "sector": "Basic Materials",
 "currency": "EUR",
-"marketCap": 42495107072,
-"sharesOutstanding": 860921903,
-"impliedSharesOutstanding": 860921903,
+"marketCap": 43650293760,
+"sharesOutstanding": 884325217,
+"impliedSharesOutstanding": 884325217,
 "trailingPE": 21.937778,
 "forwardPE": 15.617289,
 "priceToBook": 1.1572186,
-"dividendYield": 4.44,
+"dividendYield": 4.56,
 "px": 49.36
 },
 "BAYN.DE": {
@@ -430,7 +430,7 @@
 "trailingPE": null,
 "forwardPE": 11.007122,
 "priceToBook": 1.7968144,
-"dividendYield": 0.2,
+"dividendYield": 0.21,
 "px": 53.36
 },
 "BBVA.MC": {
@@ -442,9 +442,9 @@
 "sharesOutstanding": 5454903940,
 "impliedSharesOutstanding": 5454903940,
 "trailingPE": 11.137754,
-"forwardPE": 9.278424,
+"forwardPE": 9.286872,
 "priceToBook": 2.0717473,
-"dividendYield": 4.29,
+"dividendYield": 4.44,
 "px": 21.83
 },
 "BEI.DE": {
@@ -452,13 +452,13 @@
 "longName": "Beiersdorf Aktiengesellschaft",
 "sector": "Consumer Defensive",
 "currency": "EUR",
-"marketCap": 17266989056,
-"sharesOutstanding": 218072613,
-"impliedSharesOutstanding": 218072613,
-"trailingPE": 18.413952,
+"marketCap": 17302712320,
+"sharesOutstanding": 218523759,
+"impliedSharesOutstanding": 218523759,
+"trailingPE": 17.914026,
 "forwardPE": 19.851776,
 "priceToBook": 1.9185385,
-"dividendYield": 1.27,
+"dividendYield": 1.26,
 "px": 79.18
 },
 "BG.VI": {
@@ -469,10 +469,10 @@
 "marketCap": 12258165760,
 "sharesOutstanding": 76998527,
 "impliedSharesOutstanding": 76998527,
-"trailingPE": 14.0388,
+"trailingPE": 13.688736,
 "forwardPE": 9.807593,
 "priceToBook": 2.7478597,
-"dividendYield": 3.81,
+"dividendYield": 3.93,
 "px": 159.2
 },
 "BKNG": {
@@ -486,7 +486,7 @@
 "trailingPE": 15.71692,
 "forwardPE": 11.844026,
 "priceToBook": -10.387814,
-"dividendYield": 1.14,
+"dividendYield": 1.16,
 "px": 144.91
 },
 "BMW.DE": {
@@ -500,7 +500,7 @@
 "trailingPE": 5.2878337,
 "forwardPE": 6.6693697,
 "priceToBook": 0.32859635,
-"dividendYield": 8.1,
+"dividendYield": 8.23,
 "px": 53.46
 },
 "BN.PA": {
@@ -511,10 +511,10 @@
 "marketCap": 43978838016,
 "sharesOutstanding": 644095494,
 "impliedSharesOutstanding": 644095494,
-"trailingPE": 22.609272,
+"trailingPE": 22.460526,
 "forwardPE": 16.253002,
 "priceToBook": 2.4944289,
-"dividendYield": 3.32,
+"dividendYield": 3.3,
 "px": 68.28
 },
 "BNP.PA": {
@@ -528,7 +528,7 @@
 "trailingPE": 7.8346457,
 "forwardPE": 6.9122396,
 "priceToBook": 0.80871665,
-"dividendYield": 7.02,
+"dividendYield": 7.21,
 "px": 89.55
 },
 "BNR.DE": {
@@ -542,7 +542,7 @@
 "trailingPE": 21.239544,
 "forwardPE": 13.588166,
 "priceToBook": 1.7548931,
-"dividendYield": 3.3,
+"dividendYield": 3.4,
 "px": 55.86
 },
 "BRK-B": {
@@ -553,7 +553,7 @@
 "marketCap": 1210976043008,
 "sharesOutstanding": 1403805594,
 "impliedSharesOutstanding": 2124519233,
-"trailingPE": 16.006739,
+"trailingPE": 15.952981,
 "forwardPE": 24.98179,
 "priceToBook": 0.001062614,
 "dividendYield": 0.0,
@@ -570,7 +570,7 @@
 "trailingPE": 12.911392,
 "forwardPE": 17.274227,
 "priceToBook": 0.76853526,
-"dividendYield": 4.31,
+"dividendYield": 4.41,
 "px": 20.4
 },
 "CAT": {
@@ -581,10 +581,10 @@
 "marketCap": 233578954752,
 "sharesOutstanding": 457594174,
 "impliedSharesOutstanding": 457594174,
-"trailingPE": 21.092976,
+"trailingPE": 20.03336,
 "forwardPE": 15.86362,
 "priceToBook": 10.872667,
-"dividendYield": 1.21,
+"dividendYield": 1.28,
 "px": 510.45
 },
 "CBK.DE": {
@@ -598,7 +598,7 @@
 "trailingPE": 12.239057,
 "forwardPE": 9.297245,
 "priceToBook": 1.4759023,
-"dividendYield": 2.95,
+"dividendYield": 3.03,
 "px": 36.35
 },
 "CEG": {
@@ -610,9 +610,9 @@
 "sharesOutstanding": 351608504,
 "impliedSharesOutstanding": 351608504,
 "trailingPE": 19.084406,
-"forwardPE": 17.733204,
+"forwardPE": 17.740519,
 "priceToBook": 2.5518079,
-"dividendYield": 0.68,
+"dividendYield": 0.72,
 "px": 237.41
 },
 "CFR.SW": {
@@ -623,10 +623,10 @@
 "marketCap": 99361906688,
 "sharesOutstanding": 534182089,
 "impliedSharesOutstanding": 587940297,
-"trailingPE": 26.910828,
+"trailingPE": 25.644917,
 "forwardPE": 21.07876,
 "priceToBook": 4.587269,
-"dividendYield": 1.86,
+"dividendYield": 1.95,
 "px": 169.0
 },
 "CMCSA": {
@@ -640,7 +640,7 @@
 "trailingPE": 7.8797464,
 "forwardPE": 7.070108,
 "priceToBook": 0.9550842,
-"dividendYield": 5.31,
+"dividendYield": 5.3,
 "px": 24.9
 },
 "CON.DE": {
@@ -648,13 +648,13 @@
 "longName": "Continental Aktiengesellschaft",
 "sector": "Consumer Cyclical",
 "currency": "EUR",
-"marketCap": null,
-"sharesOutstanding": null,
-"impliedSharesOutstanding": null,
-"trailingPE": 17.785166,
+"marketCap": 13908416512,
+"sharesOutstanding": 200005983,
+"impliedSharesOutstanding": 200005983,
+"trailingPE": 18.156658,
 "forwardPE": 10.279425,
 "priceToBook": 2.993414,
-"dividendYield": 3.79,
+"dividendYield": 3.88,
 "px": 69.54
 },
 "COST": {
@@ -668,7 +668,7 @@
 "trailingPE": 53.090076,
 "forwardPE": 44.009495,
 "priceToBook": 13.645368,
-"dividendYield": 0.54,
+"dividendYield": 0.53,
 "px": 1102.15
 },
 "CPI.VI": {
@@ -679,7 +679,7 @@
 "marketCap": 2111004160,
 "sharesOutstanding": 137974126,
 "impliedSharesOutstanding": 137974126,
-"trailingPE": 4.4736843,
+"trailingPE": 4.4868035,
 "forwardPE": 239.39915,
 "priceToBook": 0.45664826,
 "dividendYield": 0.0,
@@ -696,7 +696,7 @@
 "trailingPE": 16.52516,
 "forwardPE": 11.282403,
 "priceToBook": 3.8733058,
-"dividendYield": 0.96,
+"dividendYield": 0.97,
 "px": 180.62
 },
 "CRWD": {
@@ -708,7 +708,7 @@
 "sharesOutstanding": 1023934842,
 "impliedSharesOutstanding": 1023934842,
 "trailingPE": 3824.0002,
-"forwardPE": 142.40053,
+"forwardPE": 142.3643,
 "priceToBook": 46.044556,
 "dividendYield": 0.0,
 "px": 229.44
@@ -721,10 +721,10 @@
 "marketCap": 91331624960,
 "sharesOutstanding": 2023296997,
 "impliedSharesOutstanding": 2023296997,
-"trailingPE": 12.167115,
+"trailingPE": 12.069518,
 "forwardPE": 10.062282,
 "priceToBook": 2.0433662,
-"dividendYield": 5.11,
+"dividendYield": 5.14,
 "px": 45.14
 },
 "CSCO": {
@@ -738,7 +738,7 @@
 "trailingPE": 24.106382,
 "forwardPE": 14.964874,
 "priceToBook": 6.9111705,
-"dividendYield": 1.77,
+"dividendYield": 1.85,
 "px": 90.64
 },
 "CVX": {
@@ -752,7 +752,7 @@
 "trailingPE": 15.298825,
 "forwardPE": 12.612837,
 "priceToBook": 2.0922573,
-"dividendYield": 3.45,
+"dividendYield": 3.42,
 "px": 208.37
 },
 "DB1.DE": {
@@ -766,7 +766,7 @@
 "trailingPE": 26.01982,
 "forwardPE": 22.802122,
 "priceToBook": 5.156782,
-"dividendYield": 1.31,
+"dividendYield": 1.33,
 "px": 315.1
 },
 "DBK.DE": {
@@ -777,10 +777,10 @@
 "marketCap": 54009929728,
 "sharesOutstanding": 1854100000,
 "impliedSharesOutstanding": 1854100000,
-"trailingPE": 8.747747,
+"trailingPE": 8.492711,
 "forwardPE": 7.349509,
 "priceToBook": 0.6801784,
-"dividendYield": 3.32,
+"dividendYield": 3.43,
 "px": 29.13
 },
 "DG.PA": {
@@ -794,7 +794,7 @@
 "trailingPE": 12.319645,
 "forwardPE": 11.219307,
 "priceToBook": 2.0107968,
-"dividendYield": 4.5,
+"dividendYield": 4.55,
 "px": 111.0
 },
 "DHL.DE": {
@@ -802,13 +802,13 @@
 "longName": "DHL AG",
 "sector": "Industrials",
 "currency": "EUR",
-"marketCap": 63381000192,
-"sharesOutstanding": 1110000000,
-"impliedSharesOutstanding": 1110000000,
+"marketCap": 63908790272,
+"sharesOutstanding": 1119243239,
+"impliedSharesOutstanding": 1119243239,
 "trailingPE": 17.198795,
 "forwardPE": 14.482351,
 "priceToBook": 2.709114,
-"dividendYield": 3.22,
+"dividendYield": 3.33,
 "px": 57.1
 },
 "DIS": {
@@ -819,10 +819,10 @@
 "marketCap": 201513353216,
 "sharesOutstanding": 1708029668,
 "impliedSharesOutstanding": 1708029668,
-"trailingPE": 21.37319,
+"trailingPE": 20.955595,
 "forwardPE": 13.833536,
 "priceToBook": 1.8341807,
-"dividendYield": 1.66,
+"dividendYield": 1.7,
 "px": 117.98
 },
 "DOC.VI": {
@@ -833,10 +833,10 @@
 "marketCap": 2443819520,
 "sharesOutstanding": 10983458,
 "impliedSharesOutstanding": 10983458,
-"trailingPE": 20.045044,
+"trailingPE": 20.544783,
 "forwardPE": 17.196499,
 "priceToBook": 4.65832,
-"dividendYield": 1.1,
+"dividendYield": 1.12,
 "px": 222.5
 },
 "DTE.DE": {
@@ -850,7 +850,7 @@
 "trailingPE": 14.16129,
 "forwardPE": 10.289907,
 "priceToBook": 2.0210235,
-"dividendYield": 3.84,
+"dividendYield": 3.8,
 "px": 26.34
 },
 "DTG.DE": {
@@ -861,10 +861,10 @@
 "marketCap": 30687186944,
 "sharesOutstanding": 757334352,
 "impliedSharesOutstanding": 757334352,
-"trailingPE": 22.142076,
+"trailingPE": 21.902702,
 "forwardPE": 8.502566,
 "priceToBook": 1.3114117,
-"dividendYield": 4.61,
+"dividendYield": 4.69,
 "px": 40.52
 },
 "EBS.VI": {
@@ -875,10 +875,10 @@
 "marketCap": 42369662976,
 "sharesOutstanding": 388356224,
 "impliedSharesOutstanding": 388356224,
-"trailingPE": 11.189743,
+"trailingPE": 11.508439,
 "forwardPE": 9.565812,
 "priceToBook": 1.6945202,
-"dividendYield": 0.67,
+"dividendYield": 0.69,
 "px": 109.1
 },
 "EL.PA": {
@@ -892,7 +892,7 @@
 "trailingPE": 32.635517,
 "forwardPE": 22.098581,
 "priceToBook": 2.0461738,
-"dividendYield": 2.26,
+"dividendYield": 2.29,
 "px": 174.6
 },
 "ENEL.MI": {
@@ -906,7 +906,7 @@
 "trailingPE": 21.400002,
 "forwardPE": 12.25579,
 "priceToBook": 4.126205,
-"dividendYield": 5.18,
+"dividendYield": 5.2,
 "px": 9.416
 },
 "ENI.MI": {
@@ -920,7 +920,7 @@
 "trailingPE": 16.544521,
 "forwardPE": 8.34485,
 "priceToBook": 1.2791252,
-"dividendYield": 4.37,
+"dividendYield": 4.47,
 "px": 24.155
 },
 "ENR.DE": {
@@ -931,10 +931,10 @@
 "marketCap": 100672405504,
 "sharesOutstanding": 850848567,
 "impliedSharesOutstanding": 850848567,
-"trailingPE": 27.075516,
+"trailingPE": 29.0,
 "forwardPE": 13.33691,
 "priceToBook": 8.888889,
-"dividendYield": 0.55,
+"dividendYield": 0.59,
 "px": 118.32
 },
 "EOAN.DE": {
@@ -942,13 +942,13 @@
 "longName": "E.ON SE",
 "sector": "Utilities",
 "currency": "EUR",
-"marketCap": 48629383168,
-"sharesOutstanding": 2613077958,
-"impliedSharesOutstanding": 2613077958,
-"trailingPE": 10.947059,
-"forwardPE": 14.937473,
+"marketCap": 48651837440,
+"sharesOutstanding": 2614284446,
+"impliedSharesOutstanding": 2614284446,
+"trailingPE": 11.210844,
+"forwardPE": 14.924176,
 "priceToBook": 2.1642053,
-"dividendYield": 3.08,
+"dividendYield": 3.06,
 "px": 18.61
 },
 "EVN.VI": {
@@ -962,7 +962,7 @@
 "trailingPE": 10.724382,
 "forwardPE": 12.07153,
 "priceToBook": 0.83525985,
-"dividendYield": 2.95,
+"dividendYield": 2.97,
 "px": 30.35
 },
 "FME.DE": {
@@ -973,10 +973,10 @@
 "marketCap": 9757551616,
 "sharesOutstanding": 259509365,
 "impliedSharesOutstanding": 259509365,
-"trailingPE": 12.247557,
+"trailingPE": 12.327868,
 "forwardPE": 9.873794,
 "priceToBook": 0.7627393,
-"dividendYield": 4.06,
+"dividendYield": 3.96,
 "px": 37.6
 },
 "FRE.DE": {
@@ -984,13 +984,13 @@
 "longName": "Fresenius SE & Co. KGaA",
 "sector": "Healthcare",
 "currency": "EUR",
-"marketCap": null,
-"sharesOutstanding": null,
-"impliedSharesOutstanding": null,
-"trailingPE": 18.219858,
+"marketCap": 28939130880,
+"sharesOutstanding": 563237277,
+"impliedSharesOutstanding": 563237277,
+"trailingPE": 18.09155,
 "forwardPE": 13.140967,
 "priceToBook": 1.4110346,
-"dividendYield": 2.03,
+"dividendYield": 2.04,
 "px": 51.38
 },
 "G1A.DE": {
@@ -1004,7 +1004,7 @@
 "trailingPE": 25.091911,
 "forwardPE": 17.860647,
 "priceToBook": 4.3182535,
-"dividendYield": 1.87,
+"dividendYield": 1.9,
 "px": 68.25
 },
 "G24.DE": {
@@ -1018,7 +1018,7 @@
 "trailingPE": 17.865044,
 "forwardPE": 16.877417,
 "priceToBook": 4.563436,
-"dividendYield": 1.71,
+"dividendYield": 1.86,
 "px": 80.75
 },
 "GE": {
@@ -1029,10 +1029,10 @@
 "marketCap": 319946424320,
 "sharesOutstanding": 1033351921,
 "impliedSharesOutstanding": 1033351921,
-"trailingPE": 36.42588,
-"forwardPE": 33.24675,
+"trailingPE": 35.385143,
+"forwardPE": 33.287354,
 "priceToBook": 18.260202,
-"dividendYield": 0.59,
+"dividendYield": 0.61,
 "px": 309.62
 },
 "GEBN.SW": {
@@ -1046,7 +1046,7 @@
 "trailingPE": 30.487804,
 "forwardPE": 27.407196,
 "priceToBook": 16.78636,
-"dividendYield": 2.23,
+"dividendYield": 2.24,
 "px": 575.0
 },
 "GILD": {
@@ -1088,7 +1088,7 @@
 "trailingPE": 13.853265,
 "forwardPE": 17.342186,
 "priceToBook": 4.9451966,
-"dividendYield": 0.32,
+"dividendYield": 0.33,
 "px": 265.29
 },
 "GS": {
@@ -1102,7 +1102,7 @@
 "trailingPE": 11.368655,
 "forwardPE": 10.634813,
 "priceToBook": 2.1548972,
-"dividendYield": 2.36,
+"dividendYield": 2.53,
 "px": 790.69
 },
 "HD": {
@@ -1114,9 +1114,9 @@
 "sharesOutstanding": 997689626,
 "impliedSharesOutstanding": 997689626,
 "trailingPE": 23.544445,
-"forwardPE": 21.531736,
-"priceToBook": 18.603018,
-"dividendYield": 2.77,
+"forwardPE": 21.569475,
+"priceToBook": 18.659328,
+"dividendYield": 2.75,
 "px": 339.04
 },
 "HEI.DE": {
@@ -1130,7 +1130,7 @@
 "trailingPE": 15.157206,
 "forwardPE": 11.943087,
 "priceToBook": 1.6373568,
-"dividendYield": 2.06,
+"dividendYield": 2.07,
 "px": 173.55
 },
 "HEN3.DE": {
@@ -1142,7 +1142,7 @@
 "sharesOutstanding": 151440961,
 "impliedSharesOutstanding": 404850922,
 "trailingPE": 18.277185,
-"forwardPE": 14.374085,
+"forwardPE": 14.405028,
 "priceToBook": 1.6567774,
 "dividendYield": 2.41,
 "px": 85.72
@@ -1158,7 +1158,7 @@
 "trailingPE": 12.757272,
 "forwardPE": 12.222238,
 "priceToBook": 2.5924976,
-"dividendYield": 4.33,
+"dividendYield": 4.25,
 "px": 293.8
 },
 "HOLN.SW": {
@@ -1172,7 +1172,7 @@
 "trailingPE": 104.4,
 "forwardPE": 16.853273,
 "priceToBook": 2.5615141,
-"dividendYield": 2.29,
+"dividendYield": 2.33,
 "px": 73.08
 },
 "HON": {
@@ -1183,10 +1183,10 @@
 "marketCap": 67483115520,
 "sharesOutstanding": 317358518,
 "impliedSharesOutstanding": 317358518,
-"trailingPE": 10.79939,
+"trailingPE": 10.54239,
 "forwardPE": 21.531702,
 "priceToBook": 3.0103629,
-"dividendYield": 1.29,
+"dividendYield": 1.32,
 "px": 212.64
 },
 "IBE.MC": {
@@ -1200,7 +1200,7 @@
 "trailingPE": 30.635136,
 "forwardPE": 20.357582,
 "priceToBook": 2.9300764,
-"dividendYield": 3.01,
+"dividendYield": 3.0,
 "px": 22.67
 },
 "IBM": {
@@ -1211,10 +1211,10 @@
 "marketCap": 212122927104,
 "sharesOutstanding": 945120805,
 "impliedSharesOutstanding": 945120805,
-"trailingPE": 19.101276,
+"trailingPE": 19.150171,
 "forwardPE": 16.953415,
 "priceToBook": 5.969149,
-"dividendYield": 3.02,
+"dividendYield": 3.01,
 "px": 224.44
 },
 "IFX.DE": {
@@ -1228,7 +1228,7 @@
 "trailingPE": 39.85965,
 "forwardPE": 11.72013,
 "priceToBook": 3.2884643,
-"dividendYield": 0.71,
+"dividendYield": 0.77,
 "px": 45.44
 },
 "INGA.AS": {
@@ -1242,7 +1242,7 @@
 "trailingPE": 11.621795,
 "forwardPE": 9.114217,
 "priceToBook": 1.5472803,
-"dividendYield": 4.03,
+"dividendYield": 4.18,
 "px": 27.195
 },
 "INTC": {
@@ -1267,10 +1267,10 @@
 "marketCap": 72271306752,
 "sharesOutstanding": 267236000,
 "impliedSharesOutstanding": 267236000,
-"trailingPE": 16.430134,
-"forwardPE": 10.046563,
-"priceToBook": 3.8217173,
-"dividendYield": 1.78,
+"trailingPE": 15.392146,
+"forwardPE": 10.163895,
+"priceToBook": 3.9235144,
+"dividendYield": 2.04,
 "px": 270.44
 },
 "ISP.MI": {
@@ -1284,7 +1284,7 @@
 "trailingPE": 10.174138,
 "forwardPE": 9.034264,
 "priceToBook": 1.5022912,
-"dividendYield": 7.28,
+"dividendYield": 7.46,
 "px": 5.901
 },
 "ISRG": {
@@ -1302,7 +1302,7 @@
 "px": 399.05
 },
 "ITX.MC": {
-"shortName": null,
+"shortName": "INDUSTRIA DE DISE...O TEXTIL S.",
 "longName": "Industria de Diseño Textil, S.A.",
 "sector": "Consumer Cyclical",
 "currency": "EUR",
@@ -1310,9 +1310,9 @@
 "sharesOutstanding": 3115009210,
 "impliedSharesOutstanding": 3115009210,
 "trailingPE": 28.048544,
-"forwardPE": 24.438936,
+"forwardPE": 24.414255,
 "priceToBook": 10.080252,
-"dividendYield": 1.11,
+"dividendYield": 1.13,
 "px": 57.78
 },
 "JNJ": {
@@ -1326,7 +1326,7 @@
 "trailingPE": 41.04249,
 "forwardPE": 23.292364,
 "priceToBook": 7.985533,
-"dividendYield": 2.01,
+"dividendYield": 1.98,
 "px": 270.47
 },
 "JPM": {
@@ -1340,7 +1340,7 @@
 "trailingPE": 13.025587,
 "forwardPE": 12.142857,
 "priceToBook": 2.3472188,
-"dividendYield": 2.06,
+"dividendYield": 2.13,
 "px": 310.53
 },
 "KER.PA": {
@@ -1354,7 +1354,7 @@
 "trailingPE": null,
 "forwardPE": 19.344172,
 "priceToBook": 1.4590284,
-"dividendYield": 1.67,
+"dividendYield": 1.74,
 "px": 172.32
 },
 "KLAC": {
@@ -1368,7 +1368,7 @@
 "trailingPE": 31.796993,
 "forwardPE": 17.855509,
 "priceToBook": 25.348652,
-"dividendYield": 0.65,
+"dividendYield": 0.73,
 "px": 126.87
 },
 "KNIN.SW": {
@@ -1382,7 +1382,7 @@
 "trailingPE": 27.451221,
 "forwardPE": 22.621298,
 "priceToBook": 10.220204,
-"dividendYield": 2.6,
+"dividendYield": 2.67,
 "px": 225.1
 },
 "KO": {
@@ -1396,7 +1396,7 @@
 "trailingPE": 28.610619,
 "forwardPE": 27.447618,
 "priceToBook": 11.164959,
-"dividendYield": 2.21,
+"dividendYield": 2.19,
 "px": 96.99
 },
 "LIN": {
@@ -1410,7 +1410,7 @@
 "trailingPE": 33.388443,
 "forwardPE": 25.704033,
 "priceToBook": 5.8556437,
-"dividendYield": 1.25,
+"dividendYield": 1.27,
 "px": 502.83
 },
 "LLY": {
@@ -1449,10 +1449,10 @@
 "marketCap": 11697193984,
 "sharesOutstanding": 141818544,
 "impliedSharesOutstanding": 141818544,
-"trailingPE": 18.008734,
+"trailingPE": 18.660633,
 "forwardPE": 16.906183,
 "priceToBook": 6.5773644,
-"dividendYield": 1.59,
+"dividendYield": 1.65,
 "px": 82.48
 },
 "LONN.SW": {
@@ -1463,10 +1463,10 @@
 "marketCap": 45482565632,
 "sharesOutstanding": 69844229,
 "impliedSharesOutstanding": 69844229,
-"trailingPE": 44.2091,
+"trailingPE": 43.154408,
 "forwardPE": 28.908997,
 "priceToBook": 5.5958,
-"dividendYield": 0.75,
+"dividendYield": 0.77,
 "px": 651.2
 },
 "LRCX": {
@@ -1480,7 +1480,7 @@
 "trailingPE": 27.312965,
 "forwardPE": 14.93351,
 "priceToBook": 16.460392,
-"dividendYield": 0.65,
+"dividendYield": 0.72,
 "px": 183.27
 },
 "MA": {
@@ -1508,7 +1508,7 @@
 "trailingPE": 6.5086503,
 "forwardPE": 6.450053,
 "priceToBook": 0.3732439,
-"dividendYield": 9.15,
+"dividendYield": 9.3,
 "px": 37.62
 },
 "MC.PA": {
@@ -1519,10 +1519,10 @@
 "marketCap": 187396194304,
 "sharesOutstanding": 490630174,
 "impliedSharesOutstanding": 490630174,
-"trailingPE": 17.408842,
+"trailingPE": 17.18947,
 "forwardPE": 15.97801,
 "priceToBook": 2.7658298,
-"dividendYield": 3.32,
+"dividendYield": 3.4,
 "px": 381.95
 },
 "MCD": {
@@ -1547,10 +1547,10 @@
 "marketCap": 83899760640,
 "sharesOutstanding": 1265838379,
 "impliedSharesOutstanding": 1265838379,
-"trailingPE": 21.175718,
+"trailingPE": 20.908516,
 "forwardPE": 19.710234,
 "priceToBook": 3.164025,
-"dividendYield": 3.17,
+"dividendYield": 3.14,
 "px": 66.28
 },
 "MELI": {
@@ -1578,7 +1578,7 @@
 "trailingPE": 19.134768,
 "forwardPE": 15.720743,
 "priceToBook": 5.2627926,
-"dividendYield": 0.35,
+"dividendYield": 0.37,
 "px": 560.84
 },
 "MMK.VI": {
@@ -1592,7 +1592,7 @@
 "trailingPE": null,
 "forwardPE": 9.935019,
 "priceToBook": 0.64024425,
-"dividendYield": 2.71,
+"dividendYield": 2.91,
 "px": 68.8
 },
 "MMM": {
@@ -1603,7 +1603,7 @@
 "marketCap": 91972698112,
 "sharesOutstanding": 516729574,
 "impliedSharesOutstanding": 516729574,
-"trailingPE": 26.64521,
+"trailingPE": 26.565674,
 "forwardPE": 17.94104,
 "priceToBook": 22.284964,
 "dividendYield": 1.75,
@@ -1620,7 +1620,7 @@
 "trailingPE": 135.07071,
 "forwardPE": 14.915834,
 "priceToBook": 7.3476567,
-"dividendYield": 2.65,
+"dividendYield": 2.63,
 "px": 133.72
 },
 "MRK.DE": {
@@ -1634,7 +1634,7 @@
 "trailingPE": 33.133484,
 "forwardPE": 15.961348,
 "priceToBook": 2.0221477,
-"dividendYield": 1.48,
+"dividendYield": 1.5,
 "px": 146.45
 },
 "MSFT": {
@@ -1646,9 +1646,9 @@
 "sharesOutstanding": 7426194552,
 "impliedSharesOutstanding": 7426194552,
 "trailingPE": 25.2881,
-"forwardPE": 20.020792,
+"forwardPE": 20.018377,
 "priceToBook": 7.648182,
-"dividendYield": 0.79,
+"dividendYield": 0.81,
 "px": 484.52
 },
 "MTX.DE": {
@@ -1659,10 +1659,10 @@
 "marketCap": 17960462336,
 "sharesOutstanding": 53870614,
 "impliedSharesOutstanding": 53870614,
-"trailingPE": 19.519907,
+"trailingPE": 19.327536,
 "forwardPE": 16.067175,
 "priceToBook": 3.7680829,
-"dividendYield": 1.04,
+"dividendYield": 1.08,
 "px": 333.4
 },
 "MU": {
@@ -1673,10 +1673,10 @@
 "marketCap": 672642433024,
 "sharesOutstanding": 1131423212,
 "impliedSharesOutstanding": 1131423212,
-"trailingPE": 9.289219,
+"trailingPE": 7.998251,
 "forwardPE": 2.846877,
 "priceToBook": 4.8590927,
-"dividendYield": 0.09,
+"dividendYield": 0.1,
 "px": 594.51
 },
 "MUV2.DE": {
@@ -1687,10 +1687,10 @@
 "marketCap": 72972386304,
 "sharesOutstanding": 125814467,
 "impliedSharesOutstanding": 125814467,
-"trailingPE": 10.883842,
+"trailingPE": 10.861423,
 "forwardPE": 11.242633,
 "priceToBook": 2.1866822,
-"dividendYield": 4.18,
+"dividendYield": 4.14,
 "px": 580.0
 },
 "NDA-FI.HE": {
@@ -1701,10 +1701,10 @@
 "marketCap": 55046680576,
 "sharesOutstanding": 3393753656,
 "impliedSharesOutstanding": 3393753656,
-"trailingPE": 11.753623,
+"trailingPE": 11.839416,
 "forwardPE": 10.387181,
 "priceToBook": 1.7582654,
-"dividendYield": 7.81,
+"dividendYield": 8.01,
 "px": 16.22
 },
 "NESN.SW": {
@@ -1718,7 +1718,7 @@
 "trailingPE": 29.602076,
 "forwardPE": 17.913454,
 "priceToBook": 7.5308104,
-"dividendYield": 3.67,
+"dividendYield": 3.62,
 "px": 85.55
 },
 "NFLX": {
@@ -1730,7 +1730,7 @@
 "sharesOutstanding": 4106325903,
 "impliedSharesOutstanding": 4106325903,
 "trailingPE": 16.395954,
-"forwardPE": 15.042399,
+"forwardPE": 15.049981,
 "priceToBook": 7.9542904,
 "dividendYield": 0.0,
 "px": 56.73
@@ -1744,9 +1744,9 @@
 "sharesOutstanding": 1203921077,
 "impliedSharesOutstanding": 1485308829,
 "trailingPE": 15.826922,
-"forwardPE": 23.685156,
+"forwardPE": 23.959764,
 "priceToBook": 3.207639,
-"dividendYield": 4.78,
+"dividendYield": 4.98,
 "px": 32.92
 },
 "NOKIA.HE": {
@@ -1760,7 +1760,7 @@
 "trailingPE": 46.02857,
 "forwardPE": 15.107964,
 "priceToBook": 1.7170264,
-"dividendYield": 1.98,
+"dividendYield": 2.17,
 "px": 6.444
 },
 "NOVN.SW": {
@@ -1774,7 +1774,7 @@
 "trailingPE": 30.63789,
 "forwardPE": 15.451171,
 "priceToBook": 7.862892,
-"dividendYield": 2.91,
+"dividendYield": 2.9,
 "px": 127.76
 },
 "NOW": {
@@ -1786,7 +1786,7 @@
 "sharesOutstanding": 1037917000,
 "impliedSharesOutstanding": 1037917000,
 "trailingPE": 63.028778,
-"forwardPE": 18.243341,
+"forwardPE": 18.232368,
 "priceToBook": 6.943256,
 "dividendYield": 0.0,
 "px": 87.61
@@ -1802,7 +1802,7 @@
 "trailingPE": 13.483351,
 "forwardPE": 7.5596437,
 "priceToBook": 11.347857,
-"dividendYield": 0.69,
+"dividendYield": 0.8,
 "px": 125.53
 },
 "OMV.VI": {
@@ -1810,13 +1810,13 @@
 "longName": "OMV Aktiengesellschaft",
 "sector": "Energy",
 "currency": "EUR",
-"marketCap": 22487666688,
-"sharesOutstanding": 326144577,
-"impliedSharesOutstanding": 326144577,
-"trailingPE": 10.462822,
+"marketCap": 22477772800,
+"sharesOutstanding": 326001057,
+"impliedSharesOutstanding": 326001057,
+"trailingPE": 10.7902975,
 "forwardPE": 7.558956,
 "priceToBook": 1.3896726,
-"dividendYield": 4.53,
+"dividendYield": 4.57,
 "px": 68.95
 },
 "OR.PA": {
@@ -1830,7 +1830,7 @@
 "trailingPE": 36.926994,
 "forwardPE": 28.491446,
 "priceToBook": 6.843604,
-"dividendYield": 1.65,
+"dividendYield": 1.66,
 "px": 435.0
 },
 "ORCL": {
@@ -1844,7 +1844,7 @@
 "trailingPE": 15.860501,
 "forwardPE": 9.15017,
 "priceToBook": 4.9496183,
-"dividendYield": 1.81,
+"dividendYield": 1.98,
 "px": 101.19
 },
 "P911.DE": {
@@ -1856,9 +1856,9 @@
 "sharesOutstanding": 455500000,
 "impliedSharesOutstanding": 911000000,
 "trailingPE": 18.120832,
-"forwardPE": 26.056896,
+"forwardPE": 25.739363,
 "priceToBook": 1.7232636,
-"dividendYield": 2.34,
+"dividendYield": 2.32,
 "px": 43.49
 },
 "PAL.VI": {
@@ -1872,7 +1872,7 @@
 "trailingPE": 10.256917,
 "forwardPE": 12.165736,
 "priceToBook": 1.253381,
-"dividendYield": 3.42,
+"dividendYield": 3.47,
 "px": 25.95
 },
 "PANW": {
@@ -1884,7 +1884,7 @@
 "sharesOutstanding": 821000000,
 "impliedSharesOutstanding": 821000000,
 "trailingPE": 602.3158,
-"forwardPE": 69.87195,
+"forwardPE": 69.706535,
 "priceToBook": 9.809143,
 "dividendYield": 0.0,
 "px": 343.32
@@ -1897,10 +1897,10 @@
 "marketCap": 191519621120,
 "sharesOutstanding": 1362741092,
 "impliedSharesOutstanding": 1362741092,
-"trailingPE": 17.480099,
+"trailingPE": 17.677986,
 "forwardPE": 16.353537,
 "priceToBook": 8.5994,
-"dividendYield": 4.26,
+"dividendYield": 4.21,
 "px": 140.54
 },
 "PG": {
@@ -1911,10 +1911,10 @@
 "marketCap": 392562900992,
 "sharesOutstanding": 2317783143,
 "impliedSharesOutstanding": 2317783143,
-"trailingPE": 25.279104,
+"trailingPE": 25.50753,
 "forwardPE": 22.80715,
 "priceToBook": 7.2229095,
-"dividendYield": 2.59,
+"dividendYield": 2.57,
 "px": 169.37
 },
 "PGHN.SW": {
@@ -1922,13 +1922,13 @@
 "longName": "Partners Group Holding AG",
 "sector": "Financial Services",
 "currency": "CHF",
-"marketCap": 15816556544,
-"sharesOutstanding": 25759865,
-"impliedSharesOutstanding": 25759865,
-"trailingPE": 13.330439,
+"marketCap": 15830845440,
+"sharesOutstanding": 25783135,
+"impliedSharesOutstanding": 25783135,
+"trailingPE": 13.406114,
 "forwardPE": 13.555583,
 "priceToBook": 10.802252,
-"dividendYield": 7.22,
+"dividendYield": 7.49,
 "px": 614.0
 },
 "PLTR": {
@@ -1953,10 +1953,10 @@
 "marketCap": 286932893696,
 "sharesOutstanding": 1558655629,
 "impliedSharesOutstanding": 1558655629,
-"trailingPE": 27.232246,
+"trailingPE": 26.874453,
 "forwardPE": 20.358847,
 "priceToBook": -36.152786,
-"dividendYield": 3.43,
+"dividendYield": 3.48,
 "px": 184.09
 },
 "POS.VI": {
@@ -1967,10 +1967,10 @@
 "marketCap": 1317785216,
 "sharesOutstanding": 39278250,
 "impliedSharesOutstanding": 39278250,
-"trailingPE": 11.109271,
-"forwardPE": 9.618692,
-"priceToBook": 1.7149721,
-"dividendYield": 3.25,
+"trailingPE": 9.809941,
+"forwardPE": 9.61318,
+"priceToBook": 1.6377038,
+"dividendYield": 3.13,
 "px": 33.55
 },
 "POST.VI": {
@@ -1984,7 +1984,7 @@
 "trailingPE": 18.208092,
 "forwardPE": 15.897047,
 "priceToBook": 3.5698094,
-"dividendYield": 5.71,
+"dividendYield": 5.81,
 "px": 31.5
 },
 "PRX.AS": {
@@ -1998,7 +1998,7 @@
 "trailingPE": 6.694013,
 "forwardPE": 7.2105165,
 "priceToBook": 1.353772,
-"dividendYield": 0.87,
+"dividendYield": 0.93,
 "px": 30.19
 },
 "QCOM": {
@@ -2009,10 +2009,10 @@
 "marketCap": 160435798016,
 "sharesOutstanding": 1070000000,
 "impliedSharesOutstanding": 1070000000,
-"trailingPE": 12.760851,
+"trailingPE": 11.806299,
 "forwardPE": 12.308627,
 "priceToBook": 5.2872105,
-"dividendYield": 2.27,
+"dividendYield": 2.45,
 "px": 149.94
 },
 "QIA.DE": {
@@ -2040,7 +2040,7 @@
 "trailingPE": 39.211662,
 "forwardPE": 32.703022,
 "priceToBook": 16.285433,
-"dividendYield": 0.97,
+"dividendYield": 1.0,
 "px": 363.1
 },
 "RBI.VI": {
@@ -2054,7 +2054,7 @@
 "trailingPE": 9.648241,
 "forwardPE": 8.661641,
 "priceToBook": 0.92930204,
-"dividendYield": 2.69,
+"dividendYield": 2.78,
 "px": 57.6
 },
 "RHM.DE": {
@@ -2068,7 +2068,7 @@
 "trailingPE": 24.398312,
 "forwardPE": 13.950486,
 "priceToBook": 6.0580645,
-"dividendYield": 1.58,
+"dividendYield": 1.66,
 "px": 693.4
 },
 "RI.PA": {
@@ -2082,7 +2082,7 @@
 "trailingPE": 14.93501,
 "forwardPE": 12.0212755,
 "priceToBook": 1.1567564,
-"dividendYield": 6.63,
+"dividendYield": 6.6,
 "px": 71.24
 },
 "RMS.PA": {
@@ -2093,10 +2093,10 @@
 "marketCap": 128190955520,
 "sharesOutstanding": 104602982,
 "impliedSharesOutstanding": 104602982,
-"trailingPE": 28.5,
+"trailingPE": 28.45368,
 "forwardPE": 25.572063,
 "priceToBook": 6.747679,
-"dividendYield": 1.42,
+"dividendYield": 1.47,
 "px": 1225.5
 },
 "RO.SW": {
@@ -2110,7 +2110,7 @@
 "trailingPE": 26.262232,
 "forwardPE": 18.229303,
 "priceToBook": 9.811854,
-"dividendYield": 2.42,
+"dividendYield": 2.43,
 "px": 402.6
 },
 "RWE.DE": {
@@ -2124,7 +2124,7 @@
 "trailingPE": 58.63158,
 "forwardPE": 16.240108,
 "priceToBook": 1.0429344,
-"dividendYield": 2.1,
+"dividendYield": 2.15,
 "px": 55.7
 },
 "SAF.PA": {
@@ -2138,7 +2138,7 @@
 "trailingPE": 31.439312,
 "forwardPE": 23.405048,
 "priceToBook": 8.361663,
-"dividendYield": 1.11,
+"dividendYield": 1.14,
 "px": 292.7
 },
 "SAN.MC": {
@@ -2150,9 +2150,9 @@
 "sharesOutstanding": 14405887701,
 "impliedSharesOutstanding": 14405887701,
 "trailingPE": 11.340659,
-"forwardPE": 8.29722,
+"forwardPE": 8.272743,
 "priceToBook": 1.3118088,
-"dividendYield": 2.41,
+"dividendYield": 2.46,
 "px": 10.32
 },
 "SAN.PA": {
@@ -2163,10 +2163,10 @@
 "marketCap": 101955485696,
 "sharesOutstanding": 1200606331,
 "impliedSharesOutstanding": 1200606331,
-"trailingPE": 24.543352,
-"forwardPE": 8.92282,
+"trailingPE": 24.193731,
+"forwardPE": 8.912557,
 "priceToBook": 1.3982513,
-"dividendYield": 4.92,
+"dividendYield": 4.85,
 "px": 84.92
 },
 "SAP.DE": {
@@ -2180,7 +2180,7 @@
 "trailingPE": 26.581764,
 "forwardPE": 21.644936,
 "priceToBook": 4.5971713,
-"dividendYield": 1.34,
+"dividendYield": 1.36,
 "px": 183.68
 },
 "SBO.VI": {
@@ -2194,7 +2194,7 @@
 "trailingPE": 84.090904,
 "forwardPE": 9.033614,
 "priceToBook": 1.0242877,
-"dividendYield": 2.67,
+"dividendYield": 2.7,
 "px": 27.75
 },
 "SBUX": {
@@ -2205,10 +2205,10 @@
 "marketCap": 117578506240,
 "sharesOutstanding": 1140100000,
 "impliedSharesOutstanding": 1140100000,
-"trailingPE": 47.307335,
+"trailingPE": 46.665157,
 "forwardPE": 27.685236,
 "priceToBook": -15.330755,
-"dividendYield": 2.41,
+"dividendYield": 2.44,
 "px": 103.13
 },
 "SCMN.SW": {
@@ -2222,7 +2222,7 @@
 "trailingPE": 28.602882,
 "forwardPE": 23.983028,
 "priceToBook": 3.0652213,
-"dividendYield": 3.69,
+"dividendYield": 3.64,
 "px": 714.5
 },
 "SGO.PA": {
@@ -2233,10 +2233,10 @@
 "marketCap": 34699841536,
 "sharesOutstanding": 487220483,
 "impliedSharesOutstanding": 487220483,
-"trailingPE": 13.213359,
+"trailingPE": 13.539924,
 "forwardPE": 10.836489,
 "priceToBook": 1.3721486,
-"dividendYield": 3.15,
+"dividendYield": 3.23,
 "px": 71.22
 },
 "SHL.DE": {
@@ -2247,10 +2247,10 @@
 "marketCap": 48080785408,
 "sharesOutstanding": 1119198976,
 "impliedSharesOutstanding": 1119198976,
-"trailingPE": 21.807106,
+"trailingPE": 22.259068,
 "forwardPE": 16.32771,
 "priceToBook": 2.4038944,
-"dividendYield": 2.28,
+"dividendYield": 2.33,
 "px": 42.96
 },
 "SHW": {
@@ -2278,7 +2278,7 @@
 "trailingPE": 23.732527,
 "forwardPE": 16.816128,
 "priceToBook": 2.8357143,
-"dividendYield": 2.0,
+"dividendYield": 2.1,
 "px": 254.65
 },
 "SIKA.SW": {
@@ -2292,7 +2292,7 @@
 "trailingPE": 28.016975,
 "forwardPE": 21.902336,
 "priceToBook": 4.2744803,
-"dividendYield": 1.99,
+"dividendYield": 2.04,
 "px": 181.55
 },
 "SLHN.SW": {
@@ -2304,9 +2304,9 @@
 "sharesOutstanding": 27945498,
 "impliedSharesOutstanding": 27945498,
 "trailingPE": 20.662022,
-"forwardPE": 18.464949,
+"forwardPE": 18.484898,
 "priceToBook": 4.1993446,
-"dividendYield": 3.81,
+"dividendYield": 3.85,
 "px": 948.8
 },
 "SOON.SW": {
@@ -2318,9 +2318,9 @@
 "sharesOutstanding": 59541624,
 "impliedSharesOutstanding": 59541624,
 "trailingPE": 28.97716,
-"forwardPE": 22.844063,
+"forwardPE": 22.820944,
 "priceToBook": 6.230915,
-"dividendYield": 1.6,
+"dividendYield": 1.61,
 "px": 291.8
 },
 "SREN.SW": {
@@ -2334,7 +2334,7 @@
 "trailingPE": 11.511896,
 "forwardPE": 11.737555,
 "priceToBook": 2.18388,
-"dividendYield": 4.23,
+"dividendYield": 4.17,
 "px": 150.0
 },
 "SRT3.DE": {
@@ -2345,10 +2345,10 @@
 "marketCap": 19887058944,
 "sharesOutstanding": 34813621,
 "impliedSharesOutstanding": 69052290,
-"trailingPE": 92.30769,
+"trailingPE": 91.13924,
 "forwardPE": 44.46661,
 "priceToBook": 7.347126,
-"dividendYield": 0.25,
+"dividendYield": 0.26,
 "px": 288.0
 },
 "STLAM.MI": {
@@ -2373,10 +2373,10 @@
 "marketCap": 11982952448,
 "sharesOutstanding": 115442693,
 "impliedSharesOutstanding": 115442696,
-"trailingPE": 12.736197,
+"trailingPE": 12.490974,
 "forwardPE": 12.102261,
 "priceToBook": 2.1920934,
-"dividendYield": 2.78,
+"dividendYield": 2.79,
 "px": 103.8
 },
 "SU.PA": {
@@ -2390,7 +2390,7 @@
 "trailingPE": 27.229568,
 "forwardPE": 17.989868,
 "priceToBook": 5.207687,
-"dividendYield": 1.79,
+"dividendYield": 1.85,
 "px": 226.55
 },
 "SY1.DE": {
@@ -2401,10 +2401,10 @@
 "marketCap": 12966269952,
 "sharesOutstanding": 137180179,
 "impliedSharesOutstanding": 137180179,
-"trailingPE": 53.401127,
+"trailingPE": 54.011425,
 "forwardPE": 21.241213,
 "priceToBook": 3.4727018,
-"dividendYield": 1.31,
+"dividendYield": 1.32,
 "px": 94.52
 },
 "TKA.VI": {
@@ -2412,9 +2412,9 @@
 "longName": "Telekom Austria AG",
 "sector": "Communication Services",
 "currency": "EUR",
-"marketCap": null,
-"sharesOutstanding": null,
-"impliedSharesOutstanding": null,
+"marketCap": 5744333824,
+"sharesOutstanding": 664084841,
+"impliedSharesOutstanding": 664084841,
 "trailingPE": 8.737373,
 "forwardPE": 7.956437,
 "priceToBook": 1.0292717,
@@ -2432,7 +2432,7 @@
 "trailingPE": 35.313293,
 "forwardPE": 24.09878,
 "priceToBook": 4.5301323,
-"dividendYield": 0.27,
+"dividendYield": 0.28,
 "px": 669.54
 },
 "TMUS": {
@@ -2446,7 +2446,7 @@
 "trailingPE": 15.969143,
 "forwardPE": 11.616415,
 "priceToBook": 3.125826,
-"dividendYield": 2.88,
+"dividendYield": 2.83,
 "px": 165.6
 },
 "TRV": {
@@ -2460,7 +2460,7 @@
 "trailingPE": 10.340258,
 "forwardPE": 12.640019,
 "priceToBook": 2.7789242,
-"dividendYield": 1.28,
+"dividendYield": 1.27,
 "px": 393.24
 },
 "TSLA": {
@@ -2485,10 +2485,10 @@
 "marketCap": 171281006592,
 "sharesOutstanding": 2190574255,
 "impliedSharesOutstanding": 2190574255,
-"trailingPE": 9.070766,
+"trailingPE": 8.825057,
 "forwardPE": 7.4566483,
 "priceToBook": 1.460717,
-"dividendYield": 4.55,
+"dividendYield": 4.6,
 "px": 78.19
 },
 "TXN": {
@@ -2502,7 +2502,7 @@
 "trailingPE": 34.20882,
 "forwardPE": 22.673466,
 "priceToBook": 12.565508,
-"dividendYield": 2.13,
+"dividendYield": 2.31,
 "px": 263.75
 },
 "UBSG.SW": {
@@ -2513,10 +2513,10 @@
 "marketCap": 112028565504,
 "sharesOutstanding": 3030255878,
 "impliedSharesOutstanding": 3030255878,
-"trailingPE": 15.935346,
+"trailingPE": 15.340249,
 "forwardPE": 10.283499,
 "priceToBook": 1.5337185,
-"dividendYield": 2.25,
+"dividendYield": 2.34,
 "px": 36.97
 },
 "UCG.MI": {
@@ -2527,10 +2527,10 @@
 "marketCap": 117285150720,
 "sharesOutstanding": 1498277375,
 "impliedSharesOutstanding": 1498277375,
-"trailingPE": 10.4095745,
-"forwardPE": 8.855484,
+"trailingPE": 10.179454,
+"forwardPE": 8.851689,
 "priceToBook": 1.5781304,
-"dividendYield": 7.48,
+"dividendYield": 7.67,
 "px": 78.28
 },
 "UNH": {
@@ -2544,7 +2544,7 @@
 "trailingPE": 19.397831,
 "forwardPE": 14.477794,
 "priceToBook": 3.1041632,
-"dividendYield": 2.81,
+"dividendYield": 2.73,
 "px": 339.85
 },
 "UQA.VI": {
@@ -2557,8 +2557,8 @@
 "impliedSharesOutstanding": 306965262,
 "trailingPE": 12.630137,
 "forwardPE": 11.2166815,
-"priceToBook": 1.72821,
-"dividendYield": 3.96,
+"priceToBook": 1.8475103,
+"dividendYield": 3.9,
 "px": 18.44
 },
 "V": {
@@ -2580,13 +2580,13 @@
 "longName": "VERBUND AG",
 "sector": "Utilities",
 "currency": "EUR",
-"marketCap": null,
-"sharesOutstanding": null,
-"impliedSharesOutstanding": null,
-"trailingPE": 24.551971,
+"marketCap": 23797975040,
+"sharesOutstanding": 170233686,
+"impliedSharesOutstanding": 347415686,
+"trailingPE": 24.729242,
 "forwardPE": 16.304129,
 "priceToBook": 2.4705162,
-"dividendYield": 2.9,
+"dividendYield": 2.92,
 "px": 68.5
 },
 "VIG.VI": {
@@ -2594,13 +2594,13 @@
 "longName": "Vienna Insurance Group AG",
 "sector": "Financial Services",
 "currency": "EUR",
-"marketCap": null,
-"sharesOutstanding": null,
-"impliedSharesOutstanding": null,
+"marketCap": 9408000000,
+"sharesOutstanding": 128000000,
+"impliedSharesOutstanding": 128000000,
 "trailingPE": 6.818182,
 "forwardPE": 9.25758,
 "priceToBook": 1.3179364,
-"dividendYield": 2.31,
+"dividendYield": 2.35,
 "px": 73.5
 },
 "VNA.DE": {
@@ -2614,7 +2614,7 @@
 "trailingPE": 9.383333,
 "forwardPE": 9.977434,
 "priceToBook": 0.5234125,
-"dividendYield": 7.29,
+"dividendYield": 7.4,
 "px": 16.89
 },
 "VOE.VI": {
@@ -2628,7 +2628,7 @@
 "trailingPE": 10.962963,
 "forwardPE": 6.6354594,
 "priceToBook": 0.71425444,
-"dividendYield": 2.22,
+"dividendYield": 2.3,
 "px": 32.56
 },
 "VOW3.DE": {
@@ -2642,7 +2642,7 @@
 "trailingPE": 29.677727,
 "forwardPE": 3.2704554,
 "priceToBook": 0.18387362,
-"dividendYield": 8.14,
+"dividendYield": 8.4,
 "px": 62.62
 },
 "VRTX": {
@@ -2670,7 +2670,7 @@
 "trailingPE": 11.857142,
 "forwardPE": 8.759614,
 "priceToBook": 1.817613,
-"dividendYield": 6.19,
+"dividendYield": 6.09,
 "px": 46.48
 },
 "WFC": {
@@ -2684,7 +2684,7 @@
 "trailingPE": 11.088858,
 "forwardPE": 9.830695,
 "priceToBook": 1.4873813,
-"dividendYield": 2.48,
+"dividendYield": 2.54,
 "px": 78.62
 },
 "WIE.VI": {
@@ -2695,10 +2695,10 @@
 "marketCap": 1654408192,
 "sharesOutstanding": 109201866,
 "impliedSharesOutstanding": 109201866,
-"trailingPE": 26.578947,
+"trailingPE": 27.05357,
 "forwardPE": 13.648648,
 "priceToBook": 0.6338912,
-"dividendYield": 6.12,
+"dividendYield": 6.27,
 "px": 15.15
 },
 "WKL.AS": {
@@ -2712,7 +2712,7 @@
 "trailingPE": 14.680342,
 "forwardPE": 13.855412,
 "priceToBook": 20.394205,
-"dividendYield": 3.01,
+"dividendYield": 3.03,
 "px": 85.88
 },
 "WMT": {
@@ -2720,13 +2720,13 @@
 "longName": "Walmart Inc.",
 "sector": "Consumer Defensive",
 "currency": "USD",
-"marketCap": 1018236174336,
-"sharesOutstanding": 7958079155,
-"impliedSharesOutstanding": 7958079155,
+"marketCap": 1015122821120,
+"sharesOutstanding": 7933746241,
+"impliedSharesOutstanding": 7933746241,
 "trailingPE": 46.358696,
 "forwardPE": 39.63386,
 "priceToBook": 10.344409,
-"dividendYield": 0.78,
+"dividendYield": 0.77,
 "px": 127.95
 },
 "XOM": {
@@ -2740,7 +2740,7 @@
 "trailingPE": 16.459877,
 "forwardPE": 12.814332,
 "priceToBook": 2.4554539,
-"dividendYield": 2.69,
+"dividendYield": 2.68,
 "px": 159.99
 },
 "ZAL.DE": {
@@ -2765,10 +2765,10 @@
 "marketCap": 94610497536,
 "sharesOutstanding": 149369269,
 "impliedSharesOutstanding": 149369269,
-"trailingPE": 16.207779,
-"forwardPE": 14.661698,
+"trailingPE": 16.162287,
+"forwardPE": 14.661514,
 "priceToBook": 3.6114845,
-"dividendYield": 4.72,
+"dividendYield": 4.74,
 "px": 633.4
 }
 }
